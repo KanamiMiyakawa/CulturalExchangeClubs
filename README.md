@@ -36,9 +36,9 @@ PostgreSQL
 ### カタログ設計・テーブル定義
 https://docs.google.com/spreadsheets/d/11eluuCeg5k4JAjQgzYvo40QRuyTxnY8U9rNCpN-9wyM/edit?usp=sharing
 ### ER図
-https://drive.google.com/file/d/11nVrJr90whg0hjzZeKEhYAPqkRGA_vp7/view?usp=sharing
+https://docs.google.com/presentation/d/1Eiddxr_dBZR8TY2_y5PCtZx599b6kyAeJNIEKaMo5QE/edit?usp=sharing
 ### 画面遷移図
-https://drive.google.com/file/d/1v8iBK1jg0eVJJbOrL1BksWQxt05RNZ2x/view?usp=sharing
+https://docs.google.com/presentation/d/1Jz8oObH5ubA2wDL1bvhyjnbUclzm5MsA9BRwIt5O0gA/edit?usp=sharing
 ### ワイヤーフレーム
 https://docs.google.com/spreadsheets/d/14cne6lTpEx5Xq9UEWc3DybaPvamztQaa3jEkLzOUYHI/edit?usp=sharing
 ### 使用予定gem

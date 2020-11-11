@@ -48,3 +48,9 @@ https://docs.google.com/spreadsheets/d/14cne6lTpEx5Xq9UEWc3DybaPvamztQaa3jEkLzOU
 ### 使用予定API
 - GoogleMapsAPI
 - GoogleCloudTranslationAPI
+### 課題要件
+- 就業Termから２つの技術
+  - devise
+  - AWS
+- カリキュラム外から１つの技術
+  - ransack

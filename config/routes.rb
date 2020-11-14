@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   devise_scope :user do
-    get "user/:id", :to => "users/registrations#show"  #showアクション追加
+    get "users/:id", :to => "users/registrations#show"  #showアクション追加
     get "signup", :to => "users/registrations#new"  #URIを短縮
     get "login", :to => "users/sessions#new"
     get "logout", :to => "users/sessions#destroy"

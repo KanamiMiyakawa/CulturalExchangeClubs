@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: "pages#devtop"
-  resources :users, only: [:show]
+  get "profile/:id", to: "pages#profile"
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'

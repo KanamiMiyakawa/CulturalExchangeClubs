@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  group: one
+  organizer: false
+  main: false
+  pending: false
+
+two:
+  user: two
+  group: two
+  organizer: false
+  main: false
+  pending: false

@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show]
+  before_action :set_group, only: [:show, :edit, :update, :destroy]
 
   def new
     @group = Group.new
@@ -15,6 +15,20 @@ class GroupsController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
+  end
+
+  def update
+    if @group.update(group_params)
+      redirect_to @group, notice: 'グループを更新しました'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
   end
 
   private

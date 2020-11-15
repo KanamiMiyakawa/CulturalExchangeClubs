@@ -16,4 +16,4 @@
 </table>
 
 <%= link_to '編集', edit_group_path(@group) %> |
-<%= link_to '削除', group_path(@group), method: :delete %>
+<%= link_to '削除', group_path(@group), method: :delete, data: { confirm: 'Are you sure?' } %>

@@ -15,5 +15,24 @@
   </tr>
 </table>
 
+<h2>メンバー情報</h2>
+
+<table>
+  <tr>
+    <th>名前</th>
+    <th>オーガナイザー</th>
+    <th>メイン</th>
+    <th>保留</th>
+  </tr>
+  <% @members.each do |member| %>
+    <tr>
+      <td><%= member.user.name %></td>
+      <td><%= member.organizer %></td>
+      <td><%= member.main %></td>
+      <td><%= member.pending %></td>
+    </tr>
+  <% end %>
+</table>
+
 <%= link_to '編集', edit_group_path(@group) %> |
 <%= link_to '削除', group_path(@group), method: :delete, data: { confirm: 'Are you sure?' } %>

@@ -16,6 +16,7 @@ class GroupsController < ApplicationController
   end
 
   def show
+    @members = @group.members.includes(:user)
   end
 
   def edit

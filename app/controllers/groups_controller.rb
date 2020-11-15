@@ -8,6 +8,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     if @group.save
+      current_user.members.create!(group_id:@group.id, organizer: true, main: true)
       redirect_to @group, notice: 'グループを作成しました！'
     else
       render :new

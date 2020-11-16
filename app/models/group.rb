@@ -1,11 +1,10 @@
 class Group < ApplicationRecord
+  #一般ユーザ
   has_many :members, dependent: :destroy
   has_many :users, through: :members
-
-  after_create :add_organizer_to_users
-
-  def add_organizer_to_users
-    user = self.users.first
-    user.update!(organizer:true) unless user.organizer
-  end
+  #オーガナイザー
+  has_many :organizers, dependent: :destroy
+  has_many :organized_users, through: :organizers, source: :user
+  #オーナー
+  belongs_to :owner, class_name: 'User'
 end

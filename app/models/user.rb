@@ -6,6 +6,12 @@ class User < ApplicationRecord
   geocoded_by :address, latitude: :lat, longitude: :lon
   after_validation :geocode, if: :address_changed?
 
+  #一般ユーザ
   has_many :members, dependent: :destroy
   has_many :groups, through: :members
+  #オーガナイザー
+  has_many :organizers, dependent: :destroy
+  has_many :organizing_groups, through: :organizers, source: :group
+  #オーナー
+  has_many :own_groups, dependent: :destroy, foreign_key: :owner_id, class_name: 'Group'
 end

@@ -6,9 +6,10 @@ class GroupsController < ApplicationController
   end
 
   def create
-    @group = Group.new(group_params)
+    @group = current_user.own_groups.build(group_params)
     if @group.save
-      current_user.members.create!(group_id:@group.id, organizer: true, main: true)
+      current_user.members.create!(group_id:@group.id)
+      current_user.organizers.create!(group_id:@group.id)
       redirect_to @group, notice: 'グループを作成しました！'
     else
       render :new

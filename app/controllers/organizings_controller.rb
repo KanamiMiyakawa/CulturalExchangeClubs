@@ -1,0 +1,2 @@
+class OrganizingsController < ApplicationController
+end

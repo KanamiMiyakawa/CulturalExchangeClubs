@@ -11,6 +11,13 @@
 
   <body>
     <% if user_signed_in? %>
+
+      <% if current_user.organizing_groups.present? %>
+        <%= link_to 'オーガナイザー画面', organizings_path %>
+      <% else %>
+        <%= link_to 'グループ作成', new_group_path %>
+      <% end %>
+      
       <%= link_to 'ユーザー詳細', "/profile/#{current_user.id}" %>
       <%= link_to 'プロフィール変更', edit_user_registration_path %>
       <%= link_to 'ログアウト', logout_path, method: :delete %>

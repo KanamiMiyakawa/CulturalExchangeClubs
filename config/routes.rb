@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         member do
           patch :addorg
           delete :delorg
+          patch :giveowner
         end
       end
     end

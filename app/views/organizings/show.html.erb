@@ -22,6 +22,6 @@
 <p>ここからグループごとに表示</p>
 <% @groups.each do |group| %>
   <h3><%= group.name %></h3>
-  <p>グループ管理画面へのリンク</p>
+  <p><%= link_to 'グループ管理画面へ', organizings_group_path(group.id) %></p>
   <p>予定中のイベント表示</p>
 <% end %>

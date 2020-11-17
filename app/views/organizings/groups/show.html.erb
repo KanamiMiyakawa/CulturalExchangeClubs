@@ -1,1 +1,25 @@
 <h2>グループ管理画面</h2>
+
+<h3><%= @group.name %></h3>
+
+<h3>オーナー</h3>
+<p><%= @owner.name %></p>
+
+<h3>オーガナイザー</h3>
+<table>
+  <% @organizers.each do |organizer| %>
+    <tr>
+      <td><%= organizer.name %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h3>メンバー</h3>
+<table>
+  <% @members.each do |member| %>
+    <tr>
+      <td><%= member.name %></td>
+      <td><%= link_to 'オーガナイザー付与', addorg_organizings_group_path(id:@group.id, user_id:member.id), method: :patch %></td>
+    </tr>
+  <% end %>
+</table>

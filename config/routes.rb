@@ -17,7 +17,11 @@ Rails.application.routes.draw do
   resource :organizings, only: [:show] do
     scope module: :organizings do
       resources :members, only: [:update, :destroy]
-      resources :groups, only: [:show]
+      resources :groups, only: [:show] do
+        member do
+          patch :addorg
+        end
+      end
     end
   end
 

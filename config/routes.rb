@@ -7,16 +7,18 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   devise_scope :user do
-    get "signup", to: "users/registrations#new"  #URIを短縮
+    get "signup", to: "users/registrations#new"
     get "login", to: "users/sessions#new"
     delete "logout", to: "users/sessions#destroy"
   end
 
   resources :groups
-  resources :organizings, only: [:index] do
-    collection do
-      post '/members/:id', to: 'organizings#permit', as: 'permit'
+
+  resource :organizings, only: [:show] do
+    scope module: :organizings do
+      resources :members, only: [:update]
     end
   end
+
   resources :members, only: [:create, :destroy]
 end

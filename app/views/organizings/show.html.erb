@@ -14,7 +14,7 @@
       <td><%= member.user.name %></td>
       <td><%= member.group.name %></td>
       <td><%= member.created_at %></td>
-      <td><%= link_to '許可', permit_organizings_path(member.id), method: :post %></td>
+      <td><%= link_to '許可', organizings_member_path(member.id), method: :patch %></td>
     </tr>
   <% end %>
 </table>

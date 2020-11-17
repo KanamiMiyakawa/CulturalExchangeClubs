@@ -24,6 +24,9 @@
     <tr>
       <td><%= member.name %></td>
       <td><%= link_to 'オーガナイザー付与', addorg_organizings_group_path(id:@group.id, user_id:member.id), method: :patch %></td>
+      <% if @owner == current_user %>
+        <td><%= link_to 'オーナー変更', giveowner_organizings_group_path(id:@group.id, user_id:member.id), method: :patch %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>

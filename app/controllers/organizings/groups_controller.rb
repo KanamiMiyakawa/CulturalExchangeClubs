@@ -18,6 +18,9 @@ class Organizings::GroupsController < ApplicationController
   end
 
   def giveowner
+    if Organizer.find_by(group_id:@group.id, user_id:params[:user_id]).nil?
+      @group.organizers.create!(user_id:params[:user_id])
+    end
     @group.update!(owner_id:params[:user_id])
     redirect_to organizings_group_path(@group), notice: 'オーナーを変更しました'
   end

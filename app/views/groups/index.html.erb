@@ -1,0 +1,14 @@
+<h2>グループ一覧（実装するか未定）</h2>
+
+<table>
+  <tr>
+    <th>グループ名</th>
+    <th></th>
+  </tr>
+  <% @groups.each do |group| %>
+    <tr>
+      <td><%= group.name %></td>
+      <td><%= link_to '詳細', group_path(group.id) %></td>
+    </tr>
+  <% end %>
+</table>

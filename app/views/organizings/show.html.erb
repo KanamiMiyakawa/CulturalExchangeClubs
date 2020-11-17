@@ -8,6 +8,7 @@
     <th>リクエストグループ</th>
     <th>リクエスト日時</th>
     <th></th>
+    <th></th>
   </tr>
   <% @pending_members.each do |member| %>
     <tr>
@@ -15,6 +16,7 @@
       <td><%= member.group.name %></td>
       <td><%= member.created_at %></td>
       <td><%= link_to '許可', organizings_member_path(member.id), method: :patch %></td>
+      <td><%= link_to '許可しない', organizings_member_path(member.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </table>

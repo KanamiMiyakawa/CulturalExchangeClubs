@@ -30,7 +30,7 @@
 <% if @member_self.nil? %>
   <p><%= link_to 'グループに加入リクエストを送る', members_path(group_id: @group.id), method: :post %></p>
 <% elsif @group.owner != current_user %>
-  <p><%= link_to 'グループから脱退する', member_path(id:@member_self, group_id: @group.id), method: :delete %></p>
+  <p><%= link_to 'グループから脱退する', member_path(id:@member_self, group_id: @group.id), method: :delete, data: { confirm: 'Are you sure?' } %></p>
 <% end %>
 
 <h2>メンバー情報</h2>

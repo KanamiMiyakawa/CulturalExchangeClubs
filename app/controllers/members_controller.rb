@@ -10,7 +10,10 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    Member.find(params[:id]).destroy!
+    member = Member.find(params[:id])
+    organizer = Organizer.find_by(user_id:member.user_id, group_id:member.group_id)
+    organizer.destroy! if organizer.present?
+    member.destroy!
     redirect_to group_path(params[:group_id]), notice: 'グループから脱退しました'
   end
 end

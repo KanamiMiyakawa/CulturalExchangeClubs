@@ -25,19 +25,7 @@
   </tr>
 </table>
 
-<p>自己ステータス:
-  <% if @group.owner == current_user %>
-    オーナー
-  <% elsif @organizers.include?(current_user) %>
-    オーガナイザー
-  <% elsif @pending_users.pluck(:user_id).include?(current_user.id) %>
-    保留中
-  <% elsif @members.pluck(:user_id).include?(current_user.id) %>
-    メンバー
-  <% else %>
-    未加入
-  <% end %>
-</p>
+<p>自己ステータス:<%= chk_member_status(current_user.id) %></p>
 
 <% if @member_self.nil? %>
   <p><%= link_to 'グループに加入リクエストを送る', members_path(group_id: @group.id), method: :post %></p>
@@ -50,14 +38,14 @@
 <table>
   <tr>
     <th>名前</th>
-    <th>オーガナイザー</th>
-    <th>メイン</th>
-    <th>保留</th>
+    <th>ステータス</th>
+    <th>加入日</th>
   </tr>
   <% @members.each do |member| %>
     <tr>
       <td><%= member.user.name %></td>
-      <td><%= member.pending %></td>
+      <td><%= chk_member_status(member.user_id) %></td>
+      <td><%= member.created_at %></td>
     </tr>
   <% end %>
 </table>

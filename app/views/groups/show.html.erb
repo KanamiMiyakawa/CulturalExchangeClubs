@@ -13,7 +13,37 @@
     <th>詳細：</th>
     <td><%= simple_format(@group.detail) %></td>
   </tr>
+  <tr>
+    <th>加入許可：</th>
+    <td>
+      <% if @group.permission %>
+        許可制
+      <% else %>
+        自由参加
+      <% end %>
+    </td>
+  </tr>
 </table>
+
+<p>自己ステータス:
+  <% if @group.owner == current_user %>
+    オーナー
+  <% elsif @organizers.include?(current_user) %>
+    オーガナイザー
+  <% elsif @pending_users.pluck(:user_id).include?(current_user.id) %>
+    保留中
+  <% elsif @members.pluck(:user_id).include?(current_user.id) %>
+    メンバー
+  <% else %>
+    未加入
+  <% end %>
+</p>
+
+<% if @member_self.nil? %>
+  <p><%= link_to 'グループに加入リクエストを送る', members_path(group_id: @group.id), method: :post %></p>
+<% elsif @group.owner != current_user %>
+  <p><%= link_to 'グループから脱退する', member_path(id:@member_self, group_id: @group.id), method: :delete %></p>
+<% end %>
 
 <h2>メンバー情報</h2>
 

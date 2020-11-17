@@ -22,6 +22,11 @@ class GroupsController < ApplicationController
 
   def show
     @members = @group.members.includes(:user)
+    if @members.pluck(:user_id).include?(current_user.id)
+      @member_self = Member.find_by(user_id:current_user.id, group_id:@group.id)
+    end
+    @pending_users = @members.where(pending:true)
+    @organizers = @group.organized_users
   end
 
   def edit

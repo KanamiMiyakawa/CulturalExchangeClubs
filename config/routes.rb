@@ -14,4 +14,5 @@ Rails.application.routes.draw do
 
   resources :groups
   resources :organizings, only: [:index]
+  resources :members, only: [:create, :destroy]
 end

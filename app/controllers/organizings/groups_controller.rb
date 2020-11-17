@@ -8,8 +8,7 @@ class Organizings::GroupsController < ApplicationController
   end
 
   def addorg
-    user = User.find(params[:user_id])
-    user.organizers.create!(group_id:@group.id)
+    @group.organizers.create!(user_id:params[:user_id])
     redirect_to organizings_group_path(@group), notice: 'オーガナイザー権限を付与しました'
   end
 

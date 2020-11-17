@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :groups, only: [:show] do
         member do
           patch :addorg
+          delete :delorg
         end
       end
     end

@@ -2,6 +2,23 @@
 
 <p>ここに参加リクエストなどを表示</p>
 
+<table>
+  <tr>
+    <th>名前</th>
+    <th>リクエストグループ</th>
+    <th>リクエスト日時</th>
+    <th></th>
+  </tr>
+  <% @pending_members.each do |member| %>
+    <tr>
+      <td><%= member.user.name %></td>
+      <td><%= member.group.name %></td>
+      <td><%= member.created_at %></td>
+      <td><%= link_to '許可', permit_organizings_path(member.id), method: :post %></td>
+    </tr>
+  <% end %>
+</table>
+
 <p>ここからグループごとに表示</p>
 <% @groups.each do |group| %>
   <h3><%= group.name %></h3>

@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   end
 
   resources :groups
-  resources :organizings, only: [:index]
+  resources :organizings, only: [:index] do
+    collection do
+      post '/members/:id', to: 'organizings#permit', as: 'permit'
+    end
+  end
   resources :members, only: [:create, :destroy]
 end

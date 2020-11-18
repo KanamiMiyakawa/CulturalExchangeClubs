@@ -21,9 +21,14 @@
   <% end %>
 </table>
 
+<br>
 <p>ここからグループごとに表示</p>
 <% @groups.each do |group| %>
   <h3><%= group.name %></h3>
-  <p><%= link_to 'グループ管理画面へ', organizings_group_path(group.id) %></p>
+  <p>
+    <%= link_to '編集', edit_organizings_group_path(group) %> |
+    <%= link_to '削除', organizings_group_path(group), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </p>
+  <p><%= link_to 'メンバー管理画面へ', organizings_group_path(group.id) %></p>
   <p>予定中のイベント表示</p>
 <% end %>

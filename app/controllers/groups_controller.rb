@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_group, only: [:show]
 
   def index
     @groups = Group.all
@@ -27,22 +27,6 @@ class GroupsController < ApplicationController
     end
     @pending_users = @members.where(pending:true)
     @organizers = @group.organized_users
-  end
-
-  def edit
-  end
-
-  def update
-    if @group.update(group_params)
-      redirect_to @group, notice: 'グループを更新しました'
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    @group.destroy
-    redirect_to "/", notice: 'グループを削除しました'
   end
 
   private

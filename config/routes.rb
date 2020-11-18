@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     delete "logout", to: "users/sessions#destroy"
   end
 
-  resources :groups
+  resources :groups, only: [:index, :new, :create, :show]
 
   resource :organizings, only: [:show, :create, :destroy] do
     scope module: :organizings do
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
           delete :deny
         end
       end
-      resources :groups, only: [:show] do
+      resources :groups, only: [:show, :edit, :update, :destroy] do
         member do
           patch :giveowner
         end

@@ -10,23 +10,47 @@
     <td><%= @user.name %></td>
   </tr>
   <tr>
-    <th>メールアドレス：</th>
-    <td><%= @user.email %></td>
-  </tr>
-  <tr>
     <th>自己紹介：</th>
     <td><%= @user.introduction %></td>
   </tr>
   <tr>
-    <th>住所：</th>
-    <td><%= @user.address %></td>
-  </tr>
-  <tr>
-    <th>緯度：</th>
-    <td><%= @user.lat %></td>
-  </tr>
-  <tr>
-    <th>経度：</th>
-    <td><%= @user.lon %></td>
+    <th>利用開始日：</th>
+    <td><%= @user.created_at %></td>
   </tr>
 </table>
+
+<% if @user == current_user %>
+  <table>
+    <tr>
+      <th>メールアドレス：</th>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <th>住所：</th>
+      <td><%= @user.address %></td>
+    </tr>
+    <tr>
+      <th>緯度：</th>
+      <td><%= @user.lat %></td>
+    </tr>
+    <tr>
+      <th>経度：</th>
+      <td><%= @user.lon %></td>
+    </tr>
+  </table>
+
+  <h3>所属グループ</h3>
+    <table>
+      <% @members.each do |member| %>
+        <tr>
+          <th>グループ名:</th>
+          <td><%= member.group.name %></td>
+        </tr>
+        <tr>
+          <th>参加日時：</th>
+          <td><%= member.created_at %></td>
+        </tr>
+      <% end %>
+    </table>
+
+<% end %>

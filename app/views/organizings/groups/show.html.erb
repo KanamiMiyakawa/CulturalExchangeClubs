@@ -3,13 +3,13 @@
 <h3><%= @group.name %></h3>
 
 <h3>オーナー</h3>
-<p><%= @owner.name %></p>
+<p><%= link_to "#{@owner.name}", "/profile/#{@owner.id}" %></p>
 
 <h3>オーガナイザー</h3>
 <table>
   <% @organizers.each do |organizer| %>
     <tr>
-      <td><%= organizer.user.name %></td>
+      <td><%= link_to "#{organizer.user.name}", "/profile/#{organizer.user.id}" %></td>
       <% if @owner == current_user %>
         <td><%= link_to 'オーガナイザー権限削除', organizings_path(id:organizer.id), method: :delete %></td>
         <td><%= link_to 'オーナー変更', giveowner_organizings_group_path(id:@group.id, user_id:organizer.user.id), method: :patch %></td>
@@ -22,7 +22,7 @@
 <table>
   <% @members.each do |member| %>
     <tr>
-      <td><%= member.user.name %></td>
+      <td><%= link_to "#{member.user.name}", "/profile/#{member.user_id}" %></td>
       <td><%= link_to 'オーガナイザー権限付与', organizings_path(group_id:@group.id, user_id:member.user.id), method: :post %></td>
       <% if @owner == current_user %>
         <td><%= link_to 'オーナー変更', giveowner_organizings_group_path(id:@group.id, user_id:member.user.id), method: :patch %></td>

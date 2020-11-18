@@ -43,7 +43,7 @@
   </tr>
   <% @members.each do |member| %>
     <tr>
-      <td><%= member.user.name %></td>
+      <td><%= link_to "#{member.user.name}", "/profile/#{member.user_id}" %></td>
       <td><%= chk_member_status(member.user_id) %></td>
       <td><%= member.created_at %></td>
     </tr>

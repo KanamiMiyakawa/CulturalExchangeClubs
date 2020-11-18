@@ -12,7 +12,7 @@
   </tr>
   <% @pending_members.each do |member| %>
     <tr>
-      <td><%= member.user.name %></td>
+      <td><%= link_to "#{member.user.name}", "/profile/#{member.user_id}" %></td>
       <td><%= member.group.name %></td>
       <td><%= member.created_at %></td>
       <td><%= link_to '許可', organizings_member_path(member.id), method: :patch %></td>

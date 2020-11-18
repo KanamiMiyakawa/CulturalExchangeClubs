@@ -1,5 +1,9 @@
 class Organizings::GroupsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :group_organizer_only, only:[:show]
+
   before_action :set_group, only: [:show, :edit, :update, :destroy, :giveowner]
+  before_action :group_owner_only, only:[:edit, :update, :destroy, :giveowner]
 
   def show
     @owner = @group.owner
@@ -40,4 +44,17 @@ class Organizings::GroupsController < ApplicationController
   def group_params
     params.require(:group).permit(:name, :detail, :permission)
   end
+
+  def group_organizer_only
+    if current_user.organizers.find_by(group_id:params[:id]).blank?
+      redirect_to "/", notice: "オーガナイザーのみアクセスできます"
+    end
+  end
+
+  def group_owner_only
+    unless current_user == @group.owner
+      redirect_to "/", notice: "オーナーのみアクセスできます"
+    end
+  end
+
 end

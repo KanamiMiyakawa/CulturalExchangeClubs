@@ -1,6 +1,8 @@
 class GroupsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_group, only: [:show]
 
+  #開発中の暫定
   def index
     @groups = Group.all
   end

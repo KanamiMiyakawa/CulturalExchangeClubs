@@ -11,7 +11,7 @@
     <tr>
       <td><%= link_to "#{organizer.user.name}", "/profile/#{organizer.user.id}" %></td>
       <% if @owner == current_user %>
-        <td><%= link_to 'オーガナイザー権限削除', organizings_path(id:organizer.id), method: :delete %></td>
+        <td><%= link_to 'オーガナイザー権限削除', organizings_path(id:organizer.id, group_id:organizer.group_id), method: :delete %></td>
         <td><%= link_to 'オーナー変更', giveowner_organizings_group_path(id:@group.id, user_id:organizer.user.id), method: :patch %></td>
       <% end %>
     </tr>

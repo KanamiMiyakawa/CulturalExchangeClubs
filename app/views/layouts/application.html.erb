@@ -12,7 +12,7 @@
   <body>
     <% if user_signed_in? %>
       <%= current_user.name %>
-      <% if current_user.organizing_groups.present? %>
+      <% if current_user.organizers.present? %>
         <%= link_to 'オーガナイザー画面', organizings_path %>
       <% else %>
         <%= link_to 'グループ作成', new_group_path %>

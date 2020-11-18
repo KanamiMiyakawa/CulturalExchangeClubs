@@ -11,6 +11,13 @@ class Organizings::MembersController < ApplicationController
     redirect_to organizings_path, notice: 'グループ参加を却下しました'
   end
 
+  def accept_all_members
+    params[:ids].each do |id|
+      Member.find(id.to_i).update!(pending:false)
+    end
+    redirect_to organizings_path, notice: 'グループ参加をすべて許可しました'
+  end
+
   def destroy
     group = @member.group
     @member.destroy!

@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   resource :organizings, only: [:show, :create, :destroy] do
     scope module: :organizings do
       resources :members, only: [:update, :destroy] do
+        collection do
+          patch :accept_all_members
+        end
         member do
           delete :deny
         end

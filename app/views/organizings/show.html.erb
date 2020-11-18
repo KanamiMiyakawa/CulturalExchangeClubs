@@ -2,26 +2,31 @@
 
 <p>ここに参加リクエストなどを表示</p>
 
-<table>
-  <tr>
-    <th>名前</th>
-    <th>リクエストグループ</th>
-    <th>リクエスト日時</th>
-    <th></th>
-    <th></th>
-  </tr>
-  <% @pending_members.each do |member| %>
+<% if @pending_members.present? %>
+  <h3><%= link_to "グループ参加リクエストをすべて許可", accept_all_members_organizings_members_path(ids:@pending_members.pluck(:id)), method: :patch %></h3>
+  <table>
     <tr>
-      <td><%= link_to "#{member.user.name}", "/profile/#{member.user_id}" %></td>
-      <td><%= member.group.name %></td>
-      <td><%= member.created_at %></td>
-      <td><%= link_to '許可', organizings_member_path(member.id), method: :patch %></td>
-      <td><%= link_to '許可しない', deny_organizings_member_path(member.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <th>名前</th>
+      <th>リクエストグループ</th>
+      <th>リクエスト日時</th>
+      <th></th>
+      <th></th>
     </tr>
-  <% end %>
-</table>
-
+    <% @pending_members.each do |member| %>
+      <tr>
+        <td><%= link_to "#{member.user.name}", "/profile/#{member.user_id}" %></td>
+        <td><%= member.group.name %></td>
+        <td><%= member.created_at %></td>
+        <td><%= link_to '許可', organizings_member_path(member.id), method: :patch %></td>
+        <td><%= link_to '許可しない', deny_organizings_member_path(member.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
 <br>
+
+<h3><%= link_to "新規グループ作成", new_group_path %></h3>
+
 <p>ここからグループごとに表示</p>
 <% @groups.each do |group| %>
   <h3><%= group.name %></h3>

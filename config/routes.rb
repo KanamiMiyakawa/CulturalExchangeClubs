@@ -14,13 +14,15 @@ Rails.application.routes.draw do
 
   resources :groups
 
-  resource :organizings, only: [:show] do
+  resource :organizings, only: [:show, :create, :destroy] do
     scope module: :organizings do
-      resources :members, only: [:update, :destroy]
+      resources :members, only: [:update, :destroy] do
+        member do
+          delete :deny
+        end
+      end
       resources :groups, only: [:show] do
         member do
-          patch :addorg
-          delete :delorg
           patch :giveowner
         end
       end

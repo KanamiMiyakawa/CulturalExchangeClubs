@@ -9,10 +9,10 @@
 <table>
   <% @organizers.each do |organizer| %>
     <tr>
-      <td><%= organizer.name %></td>
+      <td><%= organizer.user.name %></td>
       <% if @owner == current_user %>
-        <td><%= link_to 'オーガナイザー削除', delorg_organizings_group_path(id:@group.id, user_id:organizer.id), method: :delete %></td>
-        <td><%= link_to 'オーナー変更', giveowner_organizings_group_path(id:@group.id, user_id:organizer.id), method: :patch %></td>
+        <td><%= link_to 'オーガナイザー権限削除', organizings_path(id:organizer.id), method: :delete %></td>
+        <td><%= link_to 'オーナー変更', giveowner_organizings_group_path(id:@group.id, user_id:organizer.user.id), method: :patch %></td>
       <% end %>
     </tr>
   <% end %>
@@ -22,10 +22,11 @@
 <table>
   <% @members.each do |member| %>
     <tr>
-      <td><%= member.name %></td>
-      <td><%= link_to 'オーガナイザー付与', addorg_organizings_group_path(id:@group.id, user_id:member.id), method: :patch %></td>
+      <td><%= member.user.name %></td>
+      <td><%= link_to 'オーガナイザー権限付与', organizings_path(group_id:@group.id, user_id:member.user.id), method: :post %></td>
       <% if @owner == current_user %>
-        <td><%= link_to 'オーナー変更', giveowner_organizings_group_path(id:@group.id, user_id:member.id), method: :patch %></td>
+        <td><%= link_to 'オーナー変更', giveowner_organizings_group_path(id:@group.id, user_id:member.user.id), method: :patch %></td>
+        <td><%= link_to 'メンバー削除', organizings_member_path(member.id), method: :delete %></td>
       <% end %>
     </tr>
   <% end %>

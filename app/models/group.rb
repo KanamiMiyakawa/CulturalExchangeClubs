@@ -7,4 +7,6 @@ class Group < ApplicationRecord
   has_many :organized_users, through: :organizers, source: :user
   #オーナー
   belongs_to :owner, class_name: 'User'
+  #イベント
+  has_many :events, dependent: :destroy
 end

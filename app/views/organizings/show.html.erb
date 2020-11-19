@@ -40,5 +40,24 @@
   <p><%= link_to 'メンバー管理画面へ', organizing_group_path(group) %></p>
   <p><%= link_to '新規イベント作成', new_organizing_group_event_path(group_id:group.id) %></p>
   <p>予定中のイベント表示</p>
+  <% if group.events.present? %>
+    <table>
+      <tr>
+        <th>名前</th>
+        <th>日時</th>
+        <th></th>
+      </tr>
+      <% group.events.each do |event| %>
+        <tr>
+          <td><%= event.name %></td>
+          <td><%= event.schedule %></td>
+          <td>
+            <%= link_to '編集', edit_organizing_group_event_path(id: event.id, group_id: group.id) %> |
+            <%= link_to '削除', organizing_group_event_path(id: event.id, group_id: group.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
   <br>
 <% end %>

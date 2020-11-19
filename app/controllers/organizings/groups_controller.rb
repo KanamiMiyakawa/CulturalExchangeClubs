@@ -2,8 +2,8 @@ class Organizings::GroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :group_organizer_only, only:[:show]
 
-  before_action :set_group, only: [:show, :edit, :update, :destroy, :giveowner]
-  before_action :group_owner_only, only:[:edit, :update, :destroy, :giveowner]
+  before_action :set_group, only: [:show, :edit, :update, :destroy, :give_owner]
+  before_action :group_owner_only, only:[:edit, :update, :destroy, :give_owner]
 
   def show
     @owner = @group.owner
@@ -27,7 +27,7 @@ class Organizings::GroupsController < ApplicationController
     redirect_to organizings_path, notice: 'グループを削除しました'
   end
 
-  def giveowner
+  def give_owner
     if Organizer.find_by(group_id:@group.id, user_id:params[:user_id]).nil?
       @group.organizers.create!(user_id:params[:user_id])
     end

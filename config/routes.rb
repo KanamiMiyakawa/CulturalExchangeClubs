@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       end
       resources :groups, only: [:show, :edit, :update, :destroy] do
         member do
-          patch :giveowner
+          patch :give_owner
         end
       end
     end

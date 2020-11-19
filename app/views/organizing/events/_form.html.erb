@@ -1,0 +1,88 @@
+<%= form_with(model: event, local: true, url: organizing_group_events_path) do |form| %>
+  <% if event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="form_table">
+    <div class="field">
+      <tr>
+        <th><%= form.label :name %></th>
+        <td><%= form.text_field :name %></td>
+      </tr>
+    </div>
+    <div class="field">
+      <tr>
+        <th><%= form.label :schedule %></th>
+        <td><%= form.datetime_field :schedule %></td>
+      </tr>
+    </div>
+    <div class="field">
+      <tr>
+        <th><%= form.label :content %></th>
+        <td><%= form.text_area :content %></td>
+      </tr>
+    </div>
+    <div class="field">
+      <tr>
+        <th>オンラインでイベント</th>
+        <td>
+          <%= form.label :online, "Yes", value: "true"  %>
+          <%= form.radio_button :online, true %>
+        </td>
+        <td>
+          <%= form.label :online, "No", value: "false"  %>
+          <%= form.radio_button :online, false %>
+        </td>
+      </tr>
+    </div>
+    <div class="field">
+      <tr>
+        <td>
+          <%= form.label :permission, "参加に許可が必要", value: "true"  %>
+          <%= form.radio_button :permission, true %>
+        </td>
+        <td>
+          <%= form.label :permission, "自由に参加", value: "false"  %>
+          <%= form.radio_button :permission, false %>
+        </td>
+      </tr>
+    </div>
+    <div class="field">
+      <tr>
+        <th>グループ以外からも参加可能</th>
+        <td>
+          <%= form.label :guest_allowed, "Yes", value: "true"  %>
+          <%= form.radio_button :guest_allowed, true %>
+        </td>
+        <td>
+          <%= form.label :guest_allowed, "No", value: "false"  %>
+          <%= form.radio_button :guest_allowed, false %>
+        </td>
+      </tr>
+    </div>
+    <div class="field">
+      <tr>
+        <th><%= form.label :address %></th>
+        <td><%= form.text_field :address %></td>
+      </tr>
+    </div>
+    <div class="field">
+      <tr>
+        <th><%= form.label :place %></th>
+        <td><%= form.text_field :place %></td>
+      </tr>
+    </div>
+  </table>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

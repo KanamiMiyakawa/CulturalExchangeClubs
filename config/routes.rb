@@ -32,7 +32,7 @@ Rails.application.routes.draw do
         member do
           patch :give_owner
         end
-        resources :events
+        resources :events, only: [:new, :create, :edit, :update, :destroy]
       end
 
     end

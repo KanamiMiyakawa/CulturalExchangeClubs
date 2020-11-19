@@ -1,7 +1,7 @@
 class Organizing::EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_organizer
-  before_action :event_params, only: [:create]
+  before_action :set_event, only: [:edit, :update, :destroy]
 
   def new
     @event = Event.new
@@ -16,10 +16,30 @@ class Organizing::EventsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @event.update(event_params)
+      redirect_to event_path(@event), notice: 'イベントを更新しました！'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @event.destroy!
+    redirect_to organizing_path, notice: 'グループを削除しました'
+  end
+
   private
 
   def set_group
     @group = Group.find(params[:group_id])
+  end
+
+  def set_event
+    @event = Event.find(params[:id])
   end
 
   def set_organizer

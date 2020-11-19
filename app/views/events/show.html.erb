@@ -1,2 +1,73 @@
 <h2>イベント詳細ページ</h2>
-<p><%= @event.name %></p>
+
+<% if @organizers.include?(current_user) %>
+  <p>
+    <%= link_to '編集', edit_organizing_group_event_path(id: @event, group_id: @group.id) %> |
+    <%= link_to '削除', organizing_group_event_path(id: @event, group_id: @group.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </p>
+<% end %>
+
+<table>
+  <tr>
+    <th>ID：</th>
+    <td><%= @event.id %></td>
+  </tr>
+  <tr>
+    <th>名前：</th>
+    <td><%= @event.name %></td>
+  </tr>
+  <tr>
+    <th>日時：</th>
+    <td><%= @event.schedule %></td>
+  </tr>
+  <tr>
+    <th>オーガナイザー：</th>
+    <td><%= @organizer.name %></td>
+  </tr>
+  <tr>
+    <th>グループ：</th>
+    <td><%= @group.name %></td>
+  </tr>
+  <tr>
+    <th>詳細：</th>
+    <td><%= simple_format(@event.content) %></td>
+  </tr>
+  <tr>
+    <th>オンラインイベント：</th>
+    <td>
+      <% if @event.online? %>
+        オンラインイベントです
+      <% else %>
+        オンラインじゃないです
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>加入許可：</th>
+    <td>
+      <% if @event.permission? %>
+        許可制
+      <% else %>
+        自由参加
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>非グループメンバーの参加：</th>
+    <td>
+      <% if @event.guest_allowed? %>
+        あり
+      <% else %>
+        なし
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>住所：</th>
+    <td><%= @event.address %></td>
+  </tr>
+  <tr>
+    <th>場所名：</th>
+    <td><%= @event.place %></td>
+  </tr>
+</table>

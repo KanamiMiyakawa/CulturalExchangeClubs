@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_16_105117) do
+ActiveRecord::Schema.define(version: 2020_11_19_022053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 2020_11_16_105117) do
     t.datetime "updated_at", null: false
     t.bigint "owner_id"
     t.index ["owner_id"], name: "index_groups_on_owner_id"
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "code"
+    t.string "en_name"
+    t.string "ja_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "members", force: :cascade do |t|

@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  schedule: 2020-11-19 02:42:10
+  organizer: one
+  group: one
+  content: MyText
+  online: false
+  permission: false
+  guest_allowed: false
+  address: MyString
+  lat: 1.5
+  lon: 1.5
+  place: MyString
+
+two:
+  name: MyString
+  schedule: 2020-11-19 02:42:10
+  organizer: two
+  group: two
+  content: MyText
+  online: false
+  permission: false
+  guest_allowed: false
+  address: MyString
+  lat: 1.5
+  lon: 1.5
+  place: MyString

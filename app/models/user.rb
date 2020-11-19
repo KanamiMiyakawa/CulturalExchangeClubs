@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
+
   geocoded_by :address, latitude: :lat, longitude: :lon
   after_validation :geocode, if: :address_changed?
 

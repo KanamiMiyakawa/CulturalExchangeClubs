@@ -1,0 +1,191 @@
+code,en_name,ja_name
+aa,Afar,アファル語
+ab,Abkhazian,アブハズ語
+ae,Avestan,アヴェスター語
+af,Afrikaans,アフリカーンス語
+ak,Akan,アカン語
+am,Amharic,アムハラ語
+an,Aragonese,アラゴン語
+ar,Arabic,アラビア語
+as,Assamese,アッサム語
+av,Avaric,アヴァル語
+ay,Aymara,アイマラ語
+az,Azerbaijani,アゼルバイジャン語
+ba,Bashkir,バシキール語
+be,Belarusian,ベラルーシ語
+bg,Bulgarian,ブルガリア語
+bh,Bihari,ビハール語
+bi,Bislama,ビスラマ語
+bm,Bambara,バンバラ語
+bn,Bengali,ベンガル語
+bo,Tibetan,チベット語
+br,Breton,ブルトン語
+bs,Bosnian,ボスニア語
+ca,Catalan; Valencian,"カタルーニャ語、
+バレンシア語"
+ce,Chechen,チェチェン語
+ch,Chamorro,チャモロ語
+co,Corsican,コルシカ語
+cr,Cree,クリー語
+cs,Czech,チェコ語
+cu,Church Slavic; Old Slavonic,"古代教会スラヴ語、
+教会スラヴ語"
+cv,Chuvash,チュヴァシ語
+cy,Welsh,ウェールズ語
+da,Danish,デンマーク語
+de,German,ドイツ語
+dv,Divehi,ディベヒ語
+dz,Dzongkha,ゾンカ語
+ee,Ewe,エウェ語
+el,"Greek, Modern",ギリシア語
+en,English,英語
+eo,Esperanto,エスペラント
+es,Spanish; Castilian,スペイン語
+et,Estonian,エストニア語
+eu,Basque,バスク語
+fa,Persian,ペルシア語
+ff,Fulah,フラニ語
+fi,Finnish,フィンランド語
+fj,Fijian,フィジー語
+fo,Faroese,フェロー語
+fr,French,フランス語
+fy,Western Frisian,西フリジア語
+ga,Irish,アイルランド語
+gd,Gaelic,スコットランド・ゲール語
+gl,Galician,ガリシア語
+gn,Guarani,グアラニー語
+gu,Gujarati,グジャラート語
+gv,Manx,マン島語
+ha,Hausa,ハウサ語
+he,Hebrew,ヘブライ語
+hi,Hindi,ヒンディー語
+ho,Hiri Motu,ヒリモツ語
+hr,Croatian,クロアチア語
+ht,Haitian; Haitian Creole,ハイチ語
+hu,Hungarian,ハンガリー語
+hy,Armenian,アルメニア語
+hz,Herero,ヘレロ語
+ia,Interlingua,インターリングア
+id,Indonesian,インドネシア語
+ie,Interlingue; Occidental,インターリング
+ig,Igbo,イボ語
+ii,Sichuan Yi; Nuosu,四川彝語
+ik,Inupiaq,イヌピアック語
+io,Ido,イド語
+is,Icelandic,アイスランド語
+it,Italian,イタリア語
+iu,Inuktitut,イヌクティトゥット語
+ja,Japanese,日本語
+jv,Javanese,ジャワ語
+ka,Georgian,グルジア語
+kg,Kongo,コンゴ語
+ki,Kikuyu; Gikuyu,キクユ語
+kj,Kuanyama,クワニャマ語
+kk,Kazakh,カザフ語
+kl,Kalaallisut,グリーンランド語
+km,Central Khmer,クメール語
+kn,Kannada,カンナダ語
+ko,Korean,韓国語
+kr,Kanuri,カヌリ語
+ks,Kashmiri,カシミール語
+ku,Kurdish,クルド語
+kv,Komi,コミ語
+kw,Cornish,コーンウォール語
+ky,Kirghiz; Kyrgyz,キルギス語
+la,Latin,ラテン語
+lb,Luxembourgish,ルクセンブルク語
+lg,Ganda,ルガンダ語
+li,Limburgan,リンブルフ語
+ln,Lingala,リンガラ語
+lo,Lao,ラーオ語
+lt,Lithuanian,リトアニア語
+lu,Luba-Katanga,ルバ・カタンガ語
+lv,Latvian,ラトビア語
+mg,Malagasy,マダガスカル語
+mh,Marshallese,マーシャル語
+mi,Maori,マオリ語
+mk,Macedonian,マケドニア語
+ml,Malayalam,マラヤーラム語
+mn,Mongolian,モンゴル語
+mr,Marathi,マラーティー語
+ms,Malay,マレー語
+mt,Maltese,マルタ語
+my,Burmese,ビルマ語
+na,Nauru,ナウル語
+nb,Norwegian Bokmål,"ノルウェー語
+(ブークモール)"
+nd,North Ndebele,北ンデベレ語
+ne,Nepali,ネパール語
+ng,Ndonga,ンドンガ語
+nl,Dutch; Flemish,オランダ語
+nn,Norwegian Nynorsk,"ノルウェー語
+(ニーノシュク)"
+no,Norwegian,ノルウェー語
+nr,South Ndebele,南ンデベレ語
+nv,Navajo,ナバホ語
+ny,Chichewa,チェワ語
+oc,Occitan,オック語
+oj,Ojibwa,オジブウェー語
+om,Oromo,オロモ語
+or,Oriya,オリヤー語
+os,Ossetian,オセット語
+pa,Panjabi,パンジャーブ語
+pi,Pali,パーリ語
+pl,Polish,ポーランド語
+ps,Pushto,パシュトー語
+pt,Portuguese,ポルトガル語
+qu,Quechua,ケチュア語
+rm,Romansh,ロマンシュ語
+rn,Rundi,ルンディ語
+ro,Romanian; Moldavian,"ルーマニア語、
+モルドバ語"
+ru,Russian,ロシア語
+rw,Kinyarwanda,ルワンダ語
+sa,Sanskrit,サンスクリット
+sc,Sardinian,サルデーニャ語
+sd,Sindhi,シンド語
+se,Northern Sami,北部サーミ語
+sg,Sango,サンゴ語
+si,Sinhala,シンハラ語
+sk,Slovak,スロバキア語
+sl,Slovenian,スロベニア語
+sm,Samoan,サモア語
+sn,Shona,ショナ語
+so,Somali,ソマリ語
+sq,Albanian,アルバニア語
+sr,Serbian,セルビア語
+ss,Swati,スワジ語
+st,Sotho,ソト語
+su,Sundanese,スンダ語
+sv,Swedish,スウェーデン語
+sw,Swahili,スワヒリ語
+ta,Tamil,タミル語
+te,Telugu,テルグ語
+tg,Tajik,タジク語
+th,Thai,タイ語
+ti,Tigrinya,ティグリニャ語
+tk,Turkmen,トルクメン語
+tl,Tagalog,タガログ語
+tn,Tswana,ツワナ語
+to,Tonga,トンガ語
+tr,Turkish,トルコ語
+ts,Tsonga,ツォンガ語
+tt,Tatar,タタール語
+tw,Twi,トウィ語
+ty,Tahitian,タヒチ語
+ug,Uighur,ウイグル語
+uk,Ukrainian,ウクライナ語
+ur,Urdu,ウルドゥー語
+uz,Uzbek,ウズベク語
+ve,Venda,ヴェンダ語
+vi,Vietnamese,ベトナム語
+vo,Volapük,ヴォラピュク
+wa,Walloon,ワロン語
+wo,Wolof,ウォロフ語
+xh,Xhosa,コサ語
+yi,Yiddish,イディッシュ語
+yo,Yoruba,ヨルバ語
+za,Zhuang,チワン語
+zh-CN,Chinese(Mandarin),中国語(標準語)
+zh-YUE,Chinese(Cantonese),中国語(広東語)
+zu,Zulu,ズールー語

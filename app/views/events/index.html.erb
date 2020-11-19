@@ -1,0 +1,24 @@
+<h2>イベント一覧</h2>
+
+<% @events.each do |event| %>
+
+  <table>
+    <tr>
+      <th>イベント名：</th>
+      <td><%= link_to "#{event.name}", event_path(event) %></td>
+    </tr>
+    <tr>
+      <th>グループ名：</th>
+      <td><%= event.group.name %></td>
+    </tr>
+    <tr>
+      <th>日時：</th>
+      <td><%= event.schedule %></td>
+    </tr>
+    <tr>
+      <th>場所：</th>
+      <td><%= event.address %></td>
+    </tr>
+  </table>
+  <br>
+<% end %>

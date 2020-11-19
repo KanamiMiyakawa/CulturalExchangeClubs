@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_19_022053) do
+ActiveRecord::Schema.define(version: 2020_11_19_024209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "schedule", null: false
+    t.bigint "organizer_id"
+    t.bigint "group_id"
+    t.text "content", null: false
+    t.boolean "online", default: false
+    t.boolean "permission", default: false
+    t.boolean "guest_allowed", default: false
+    t.string "address", default: ""
+    t.float "lat"
+    t.float "lon"
+    t.string "place", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content"], name: "index_events_on_content"
+    t.index ["group_id"], name: "index_events_on_group_id"
+    t.index ["name"], name: "index_events_on_name"
+    t.index ["organizer_id"], name: "index_events_on_organizer_id"
+    t.index ["schedule"], name: "index_events_on_schedule"
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string "name", null: false
@@ -74,6 +96,8 @@ ActiveRecord::Schema.define(version: 2020_11_19_022053) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "events", "groups"
+  add_foreign_key "events", "organizers"
   add_foreign_key "groups", "users", column: "owner_id"
   add_foreign_key "members", "groups"
   add_foreign_key "members", "users"

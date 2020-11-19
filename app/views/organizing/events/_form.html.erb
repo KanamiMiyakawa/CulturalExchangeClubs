@@ -32,6 +32,17 @@
     </div>
     <div class="field">
       <tr>
+        <th>オーガナイザー選択</th>
+        <% @organizers.each do |organizer| %>
+          <td>
+            <%= form.label :organizer_id, "#{organizer.user.name}", value: "#{organizer.id}"  %>
+            <%= form.radio_button :organizer_id, "#{organizer.id}" %>
+          </td>
+        <% end %>
+      </tr>
+    </div>
+    <div class="field">
+      <tr>
         <th>オンラインでイベント</th>
         <td>
           <%= form.label :online, "Yes", value: "true"  %>

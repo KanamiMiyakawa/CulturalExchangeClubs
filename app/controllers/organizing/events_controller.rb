@@ -1,6 +1,8 @@
 class Organizing::EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_organizer
+  before_action :set_group, only: [:new, :create, :edit, :update]
+  before_action :set_organizers, only: [:new, :create, :edit, :update]
   before_action :set_event, only: [:edit, :update, :destroy]
 
   def new
@@ -8,7 +10,7 @@ class Organizing::EventsController < ApplicationController
   end
 
   def create
-    @event = @organizer.events.build(event_params)
+    @event = @group.events.build(event_params)
     if @event.save
       redirect_to event_path(@event), notice: 'イベントを作成しました！'
     else
@@ -42,6 +44,10 @@ class Organizing::EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+  def set_organizers
+    @organizers = @group.organizers
+  end
+
   def set_organizer
     @organizer = Organizer.find_by(user_id:current_user.id, group_id:params[:group_id])
   end
@@ -53,6 +59,6 @@ class Organizing::EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :schedule, :content, :online, :premission, :guest_allowed, :address, :place).merge(group_id: params[:group_id])
+    params.require(:event).permit(:name, :schedule, :content, :online, :premission, :guest_allowed, :address, :place, :organizer_id)
   end
 end

@@ -14,8 +14,11 @@ Rails.application.routes.draw do
 
   resources :groups, only: [:index, :new, :create, :show]
 
-  resource :organizings, only: [:show, :create, :destroy] do
-    scope module: :organizings do
+  resources :members, only: [:create, :destroy]
+
+  resource :organizing, only: [:show, :create, :destroy] do
+    scope module: :organizing do
+
       resources :members, only: [:update, :destroy] do
         collection do
           patch :accept_all_members
@@ -24,13 +27,15 @@ Rails.application.routes.draw do
           delete :deny
         end
       end
+
       resources :groups, only: [:show, :edit, :update, :destroy] do
         member do
           patch :give_owner
         end
+        resources :events, only: [:new]
       end
+
     end
   end
 
-  resources :members, only: [:create, :destroy]
 end

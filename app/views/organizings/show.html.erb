@@ -3,7 +3,7 @@
 <p>ここに参加リクエストなどを表示</p>
 
 <% if @pending_members.present? %>
-  <h3><%= link_to "グループ参加リクエストをすべて許可", accept_all_members_organizings_members_path, method: :patch %></h3>
+  <h3><%= link_to "グループ参加リクエストをすべて許可", accept_all_members_organizing_members_path, method: :patch %></h3>
   <table>
     <tr>
       <th>名前</th>
@@ -17,8 +17,8 @@
         <td><%= link_to "#{member.user.name}", "/profile/#{member.user_id}" %></td>
         <td><%= member.group.name %></td>
         <td><%= member.created_at %></td>
-        <td><%= link_to '許可', organizings_member_path(member.id), method: :patch %></td>
-        <td><%= link_to '許可しない', deny_organizings_member_path(member.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '許可', organizing_member_path(member.id), method: :patch %></td>
+        <td><%= link_to '許可しない', deny_organizing_member_path(member.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </table>
@@ -33,10 +33,10 @@
   <% if current_user == group.owner %>
     <p>あなたがオーナーです</p>
     <p>
-      <%= link_to '編集', edit_organizings_group_path(group) %> |
-      <%= link_to '削除', organizings_group_path(group), method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to '編集', edit_organizing_group_path(group) %> |
+      <%= link_to '削除', organizing_group_path(group), method: :delete, data: { confirm: 'Are you sure?' } %>
     </p>
   <% end %>
-  <p><%= link_to 'メンバー管理画面へ', organizings_group_path(group) %></p>
+  <p><%= link_to 'メンバー管理画面へ', organizing_group_path(group) %></p>
   <p>予定中のイベント表示</p>
 <% end %>

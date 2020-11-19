@@ -12,12 +12,12 @@ class OrganizingsController < ApplicationController
   def create
     group = Group.find(params[:group_id])
     group.organizers.create!(user_id:params[:user_id])
-    redirect_to organizings_group_path(group.id), notice: 'オーガナイザー権限を付与しました'
+    redirect_to organizing_group_path(group.id), notice: 'オーガナイザー権限を付与しました'
   end
 
   def destroy
     Organizer.find(params[:id]).destroy!
-    redirect_to organizings_group_path(params[:group_id]), notice: 'オーガナイザー権限を削除しました'
+    redirect_to organizing_group_path(params[:group_id]), notice: 'オーガナイザー権限を削除しました'
   end
 
   private

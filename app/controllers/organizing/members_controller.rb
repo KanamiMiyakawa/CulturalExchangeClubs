@@ -1,4 +1,4 @@
-class Organizings::MembersController < ApplicationController
+class Organizing::MembersController < ApplicationController
   before_action :authenticate_user!
   before_action :any_organizer, only: [:accept_all_members]
 
@@ -8,23 +8,23 @@ class Organizings::MembersController < ApplicationController
 
   def update
     @member.update!(pending:false)
-    redirect_to organizings_path, notice: 'グループ参加を許可しました'
+    redirect_to organizing_path, notice: 'グループ参加を許可しました'
   end
 
   def deny
     @member.destroy!
-    redirect_to organizings_path, notice: 'グループ参加を却下しました'
+    redirect_to organizing_path, notice: 'グループ参加を却下しました'
   end
 
   def accept_all_members
     Member.where(group_id: current_user.organizing_groups.pluck(:id), pending:true).update_all(pending:false)
-    redirect_to organizings_path, notice: 'グループ参加をすべて許可しました'
+    redirect_to organizing_path, notice: 'グループ参加をすべて許可しました'
   end
 
   def destroy
     group = @member.group
     @member.destroy!
-    redirect_to organizings_group_path(group.id), notice: 'メンバーを削除しました'
+    redirect_to organizing_group_path(group.id), notice: 'メンバーを削除しました'
   end
 
   private

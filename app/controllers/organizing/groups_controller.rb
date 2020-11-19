@@ -1,4 +1,4 @@
-class Organizings::GroupsController < ApplicationController
+class Organizing::GroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :group_organizer_only, only:[:show]
 
@@ -16,7 +16,7 @@ class Organizings::GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
-      redirect_to organizings_path, notice: 'グループを更新しました'
+      redirect_to organizing_path, notice: 'グループを更新しました'
     else
       render :edit
     end
@@ -24,7 +24,7 @@ class Organizings::GroupsController < ApplicationController
 
   def destroy
     @group.destroy!
-    redirect_to organizings_path, notice: 'グループを削除しました'
+    redirect_to organizing_path, notice: 'グループを削除しました'
   end
 
   def give_owner
@@ -32,7 +32,7 @@ class Organizings::GroupsController < ApplicationController
       @group.organizers.create!(user_id:params[:user_id])
     end
     @group.update!(owner_id:params[:user_id])
-    redirect_to organizings_group_path(@group), notice: 'オーナーを変更しました'
+    redirect_to organizing_group_path(@group), notice: 'オーナーを変更しました'
   end
 
   private

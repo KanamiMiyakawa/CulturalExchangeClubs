@@ -1,7 +1,8 @@
 class EventsController < ApplicationController
 
   def index
-    @events = Event.where('schedule >= ?', Time.zone.now).order(schedule: "ASC")
+    @events = Event.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(20)
+    @index_date = 0
   end
 
   def show

@@ -2,6 +2,11 @@
 
 <% @events.each do |event| %>
 
+  <% if event.schedule.to_date > @index_date %>
+    <% @index_date = event.schedule.to_date %>
+    <p><%= l @index_date, format: :index %></p>
+  <% end %>
+
   <table>
     <tr>
       <th>イベント名：</th>
@@ -13,7 +18,7 @@
     </tr>
     <tr>
       <th>日時：</th>
-      <td><%= event.schedule %></td>
+      <td><%= l event.schedule, format: :long %></td>
     </tr>
     <tr>
       <th>場所：</th>

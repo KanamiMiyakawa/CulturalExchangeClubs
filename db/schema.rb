@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_19_024209) do
+ActiveRecord::Schema.define(version: 2020_11_20_155318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "event_languages", force: :cascade do |t|
+    t.bigint "event_id"
+    t.bigint "language_id"
+    t.integer "max"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_languages_on_event_id"
+    t.index ["language_id"], name: "index_event_languages_on_language_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.string "name", null: false
@@ -96,6 +106,8 @@ ActiveRecord::Schema.define(version: 2020_11_19_024209) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "event_languages", "events"
+  add_foreign_key "event_languages", "languages"
   add_foreign_key "events", "groups"
   add_foreign_key "events", "organizers"
   add_foreign_key "groups", "users", column: "owner_id"

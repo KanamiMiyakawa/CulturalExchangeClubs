@@ -1,4 +1,5 @@
 code,en_name,ja_name
+xx,Any language is OK!,どの言語でもOK！
 aa,Afar,アファル語
 ab,Abkhazian,アブハズ語
 ae,Avestan,アヴェスター語
@@ -21,15 +22,13 @@ bn,Bengali,ベンガル語
 bo,Tibetan,チベット語
 br,Breton,ブルトン語
 bs,Bosnian,ボスニア語
-ca,Catalan; Valencian,"カタルーニャ語、
-バレンシア語"
+ca,Catalan; Valencian,カタルーニャ語、バレンシア語
 ce,Chechen,チェチェン語
 ch,Chamorro,チャモロ語
 co,Corsican,コルシカ語
 cr,Cree,クリー語
 cs,Czech,チェコ語
-cu,Church Slavic; Old Slavonic,"古代教会スラヴ語、
-教会スラヴ語"
+cu,Church Slavic; Old Slavonic,古代教会スラヴ語、教会スラヴ語
 cv,Chuvash,チュヴァシ語
 cy,Welsh,ウェールズ語
 da,Danish,デンマーク語
@@ -112,14 +111,12 @@ ms,Malay,マレー語
 mt,Maltese,マルタ語
 my,Burmese,ビルマ語
 na,Nauru,ナウル語
-nb,Norwegian Bokmål,"ノルウェー語
-(ブークモール)"
+nb,Norwegian Bokmål,ノルウェー語(ブークモール)
 nd,North Ndebele,北ンデベレ語
 ne,Nepali,ネパール語
 ng,Ndonga,ンドンガ語
 nl,Dutch; Flemish,オランダ語
-nn,Norwegian Nynorsk,"ノルウェー語
-(ニーノシュク)"
+nn,Norwegian Nynorsk,ノルウェー語(ニーノシュク)
 no,Norwegian,ノルウェー語
 nr,South Ndebele,南ンデベレ語
 nv,Navajo,ナバホ語
@@ -137,8 +134,7 @@ pt,Portuguese,ポルトガル語
 qu,Quechua,ケチュア語
 rm,Romansh,ロマンシュ語
 rn,Rundi,ルンディ語
-ro,Romanian; Moldavian,"ルーマニア語、
-モルドバ語"
+ro,Romanian; Moldavian,ルーマニア語、モルドバ語
 ru,Russian,ロシア語
 rw,Kinyarwanda,ルワンダ語
 sa,Sanskrit,サンスクリット

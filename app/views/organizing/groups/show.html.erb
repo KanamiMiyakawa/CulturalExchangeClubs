@@ -12,7 +12,7 @@
       <td><%= link_to "#{organizer.user.name}", "/profile/#{organizer.user.id}" %></td>
       <% if @owner == current_user %>
         <td><%= link_to 'オーガナイザー権限削除', organizing_path(id:organizer.id, group_id:organizer.group_id), method: :delete, data: { confirm: 'このオーガナイザーが企画中のイベントが削除されますがよろしいですか？' } %></td>
-        <td><%= link_to 'オーナー変更', give_owner_organizing_group_path(id:@group.id, user_id:organizer.user.id), method: :patch %></td>
+        <td><%= link_to 'オーナー変更', give_owner_organizing_group_path(id:@group.id, user_id:organizer.user.id), method: :patch, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
     </tr>
   <% end %>
@@ -23,10 +23,10 @@
   <% @members.each do |member| %>
     <tr>
       <td><%= link_to "#{member.user.name}", "/profile/#{member.user_id}" %></td>
-      <td><%= link_to 'オーガナイザー権限付与', organizing_path(group_id:@group.id, user_id:member.user.id), method: :post %></td>
+      <td><%= link_to 'オーガナイザー権限付与', organizing_path(group_id:@group.id, user_id:member.user.id), method: :post, data: { confirm: 'Are you sure?' } %></td>
       <% if @owner == current_user %>
-        <td><%= link_to 'オーナー変更', give_owner_organizing_group_path(id:@group.id, user_id:member.user.id), method: :patch %></td>
-        <td><%= link_to 'メンバー削除', organizing_member_path(member.id), method: :delete %></td>
+        <td><%= link_to 'オーナー変更', give_owner_organizing_group_path(id:@group.id, user_id:member.user.id), method: :patch, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'メンバー削除', organizing_member_path(member.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
     </tr>
   <% end %>

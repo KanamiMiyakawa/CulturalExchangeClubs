@@ -39,7 +39,7 @@
   <% end %>
   <p><%= link_to 'メンバー管理画面へ', organizing_group_path(group) %></p>
   <p><%= link_to '新規イベント作成', new_organizing_group_event_path(group_id:group.id) %></p>
-  <p>予定中のイベント表示</p>
+  <p>予定中のイベント表示 | <%= link_to '過去のイベント', old_events_organizing_group_path(group) %></p>
   <% if group.events.present? %>
     <table>
       <tr>
@@ -47,7 +47,7 @@
         <th>日時</th>
         <th></th>
       </tr>
-      <% group.events.each do |event| %>
+      <% group.events.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").each do |event| %>
         <tr>
           <td><%= event.name %></td>
           <td><%= event.schedule %></td>

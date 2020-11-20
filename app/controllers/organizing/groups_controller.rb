@@ -1,8 +1,8 @@
 class Organizing::GroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :group_organizer_only, only:[:show]
+  before_action :group_organizer_only, only:[:show, :old_events]
 
-  before_action :set_group, only: [:show, :edit, :update, :destroy, :give_owner]
+  before_action :set_group, only: [:show, :edit, :update, :destroy, :give_owner, :old_events]
   before_action :group_owner_only, only:[:edit, :update, :destroy, :give_owner]
 
   def show
@@ -33,6 +33,11 @@ class Organizing::GroupsController < ApplicationController
     end
     @group.update!(owner_id:params[:user_id])
     redirect_to organizing_group_path(@group), notice: 'オーナーを変更しました'
+  end
+
+  def old_events
+    @events = @group.events.where('schedule < ?', Time.zone.now).order(schedule: "DESC")
+    @index_date = Time.zone.today
   end
 
   private

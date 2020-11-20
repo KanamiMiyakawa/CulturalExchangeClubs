@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       resources :groups, only: [:show, :edit, :update, :destroy] do
         member do
           patch :give_owner
+          get :old_events
         end
         resources :events, only: [:new, :create, :edit, :update, :destroy]
       end

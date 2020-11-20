@@ -1,9 +1,9 @@
 class Organizing::EventsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_organizer
   before_action :set_group, only: [:new, :create, :edit, :update]
   before_action :set_organizers, only: [:new, :create, :edit, :update]
   before_action :set_event, only: [:edit, :update, :destroy]
+  before_action :group_organizer_only
 
   def new
     @event = Event.new
@@ -48,13 +48,9 @@ class Organizing::EventsController < ApplicationController
     @organizers = @group.organizers
   end
 
-  def set_organizer
-    @organizer = Organizer.find_by(user_id:current_user.id, group_id:params[:group_id])
-  end
-
   def group_organizer_only
-    if @organizer.nil?
-      #リダイレクト処理
+    if Organizer.find_by(group_id:params[:group_id], user_id:current_user.id).blank?
+      redirect_to organizing_path, notice: 'そのグループのオーガナイザーのみアクセスできます'
     end
   end
 

@@ -7,6 +7,12 @@
   </p>
 <% end %>
 
+<h3>参加可能な言語</h3>
+<% @event_languages.each do |event_language| %>
+  <p><%= event_language.language.ja_name %>：<%= event_language.max %>人</p>
+<% end %>
+
+
 <table>
   <tr>
     <th>ID：</th>

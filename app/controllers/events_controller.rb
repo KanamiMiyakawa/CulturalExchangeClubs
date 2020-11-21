@@ -10,5 +10,6 @@ class EventsController < ApplicationController
     @group = @event.group
     @organizer = @event.organizer.user
     @organizers = @group.organized_users
+    @event_languages = @event.event_languages
   end
 end

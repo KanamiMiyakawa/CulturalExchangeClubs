@@ -25,5 +25,11 @@
       <td><%= event.address %></td>
     </tr>
   </table>
+
+  <h3>参加可能な言語</h3>
+  <% event.event_languages.each do |event_language| %>
+    <p><%= event_language.language.ja_name %>：<%= event_language.max %>人</p>
+  <% end %>
+
   <br>
 <% end %>

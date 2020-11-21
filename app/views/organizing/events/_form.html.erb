@@ -93,6 +93,25 @@
     </div>
   </table>
 
+  <hr>
+
+  <%= form.fields_for :event_languages do |language| %>
+
+    <% @language_number = @language_number + 1 %>
+    <h3><%= "参加者の言語 #{@language_number}" %></h3>
+
+    <div class="field">
+      <%= language.label :language_id %><br>
+      <%= language.select :language_id, @languages.map { |lang| [lang.ja_name, lang.id]} %>
+    </div>
+    <div class="field">
+      <%= language.label :max %><br>
+      <%= language.number_field :max %>
+    </div>
+    <br>
+
+  <% end %>
+
   <div class="actions">
     <%= form.submit %>
   </div>

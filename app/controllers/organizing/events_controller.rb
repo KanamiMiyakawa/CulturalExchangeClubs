@@ -7,6 +7,9 @@ class Organizing::EventsController < ApplicationController
 
   def new
     @event = Event.new
+    2.times { @event.event_languages.build }
+    @languages = Language.all
+    @language_number = 0
   end
 
   def create
@@ -19,6 +22,8 @@ class Organizing::EventsController < ApplicationController
   end
 
   def edit
+    @languages = Language.all
+    @language_number = 0
   end
 
   def update
@@ -55,6 +60,7 @@ class Organizing::EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :schedule, :content, :online, :premission, :guest_allowed, :address, :place, :organizer_id)
+    params.require(:event).permit(:name, :schedule, :content, :online, :premission, :guest_allowed, :address, :place, :organizer_id,
+        event_languages_attributes: [:id, :event_id, :language_id, :max])
   end
 end

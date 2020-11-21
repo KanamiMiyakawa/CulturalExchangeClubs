@@ -5,4 +5,6 @@ class Event < ApplicationRecord
   belongs_to :organizer
   belongs_to :group
   has_many :event_languages
+  accepts_nested_attributes_for :event_languages, allow_destroy: true, reject_if: :all_blank
+  has_many :languages, through: :event_languages
 end

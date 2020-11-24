@@ -112,6 +112,10 @@
 
   <% end %>
 
+  <p class='add_form'>ここをjsで変更</p>
+
+  <%= link_to "言語を追加", add_form_organizing_group_events_path, method: :post, remote: true, class:"add_form_button" %>
+
   <div class="actions">
     <%= form.submit %>
   </div>

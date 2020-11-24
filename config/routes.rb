@@ -33,7 +33,11 @@ Rails.application.routes.draw do
           patch :give_owner
           get :old_events
         end
-        resources :events, only: [:new, :create, :edit, :update, :destroy]
+        resources :events, only: [:new, :create, :edit, :update, :destroy] do
+          collection do
+            post :add_form
+          end
+        end
       end
 
     end

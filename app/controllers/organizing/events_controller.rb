@@ -39,6 +39,9 @@ class Organizing::EventsController < ApplicationController
     redirect_to organizing_path, notice: 'グループを削除しました'
   end
 
+  def add_form
+  end
+
   private
 
   def set_group

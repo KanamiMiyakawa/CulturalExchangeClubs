@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'participants/create'
+  get 'participants/destroy'
   root to: "pages#devtop"
   get "profile/:id", to: "pages#profile"
 
@@ -44,5 +46,6 @@ Rails.application.routes.draw do
   end
 
   resources :events, only: [:index, :show]
+  resources :participants, only: [:create, :destroy]
 
 end

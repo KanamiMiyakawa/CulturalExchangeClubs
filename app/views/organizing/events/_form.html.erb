@@ -95,26 +95,27 @@
 
   <hr>
 
-  <%= form.fields_for :event_languages do |language| %>
+  <div class="languages-form">
+    <%= form.fields_for :event_languages do |language| %>
 
-    <% @language_number = @language_number + 1 %>
-    <h3><%= "参加者の言語 #{@language_number}" %></h3>
+      <h3><%= "参加者の言語 #{language.index + 1}" %></h3>
 
-    <div class="field">
-      <%= language.label :language_id %><br>
-      <%= language.select :language_id, @languages.map { |lang| [lang.ja_name, lang.id]} %>
-    </div>
-    <div class="field">
-      <%= language.label :max %><br>
-      <%= language.number_field :max %>
-    </div>
-    <br>
+      <div class="field">
+        <%= language.label :language_id %><br>
+        <%= language.select :language_id, @languages.map { |lang| [lang.ja_name, lang.id]} %>
+      </div>
+      <div class="field">
+        <%= language.label :max %><br>
+        <%= language.number_field :max %>
+      </div>
+      <br>
 
-  <% end %>
+    <% end %>
+  </div>
+  
+  <p class="form-change-test">変更テスト</p>
 
-  <p class='add_form'>ここをjsで変更</p>
-
-  <%= link_to "言語を追加", add_form_organizing_group_events_path, method: :post, remote: true, class:"add_form_button" %>
+  <p class="add-form-btn">言語を追加</p>
 
   <div class="actions">
     <%= form.submit %>

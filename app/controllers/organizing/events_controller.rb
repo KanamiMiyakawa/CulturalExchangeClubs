@@ -9,7 +9,6 @@ class Organizing::EventsController < ApplicationController
     @event = Event.new
     2.times { @event.event_languages.build }
     @languages = Language.all
-    @language_number = 0
   end
 
   def create
@@ -23,7 +22,6 @@ class Organizing::EventsController < ApplicationController
 
   def edit
     @languages = Language.all
-    @language_number = 0
   end
 
   def update
@@ -37,9 +35,6 @@ class Organizing::EventsController < ApplicationController
   def destroy
     @event.destroy!
     redirect_to organizing_path, notice: 'グループを削除しました'
-  end
-
-  def add_form
   end
 
   private

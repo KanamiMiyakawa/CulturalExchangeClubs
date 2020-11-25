@@ -5,6 +5,6 @@ class Event < ApplicationRecord
   belongs_to :organizer
   belongs_to :group
   has_many :event_languages
-  accepts_nested_attributes_for :event_languages, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :event_languages, allow_destroy: true, reject_if: proc { |attributes| attributes['max'].blank? }
   has_many :languages, through: :event_languages
 end

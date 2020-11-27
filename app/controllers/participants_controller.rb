@@ -1,14 +1,10 @@
 class ParticipantsController < ApplicationController
   def create
-    if params[:guest] == "false" && !Event.find(params[:event_id]).group.users.include?(current_user)
+    group = Event.find(params[:event_id]).group
+    if params[:guest] == "false" && !group.users.include?(current_user)
       @participant = current_user.participants.build(participant_params)
       if @participant.save
-        group = Event.find(params[:event_id]).group
-        if group.permission
-          current_user.members.create!(group_id:group.id, pending: true)
-        else
-          current_user.members.create!(group_id:group.id)
-        end
+        current_user.members.create!(group_id:group.id)
         redirect_to event_path(params[:event_id]), notice: "イベントとグループに参加リクエストを送りました！\n現在のステータスをご確認ください"
       else
         redirect_to event_path(params[:event_id]), notice: "参加リクエストが送れませんでした"

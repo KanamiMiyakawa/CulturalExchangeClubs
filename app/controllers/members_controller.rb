@@ -1,13 +1,8 @@
 class MembersController < ApplicationController
   before_action :authenticate_user!
   def create
-    group = Group.find(params[:group_id])
-    if group.permission
-      current_user.members.create!(group_id:group.id, pending: true)
-    else
-      current_user.members.create!(group_id:group.id)
-    end
-    redirect_to group_path(group.id), notice: 'グループ加入リクエストを送信しました'
+    current_user.members.create!(group_id:params[:group_id])
+    redirect_to group_path(params[:group_id]), notice: 'グループ加入リクエストを送信しました'
   end
 
   def destroy

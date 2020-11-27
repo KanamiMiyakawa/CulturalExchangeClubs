@@ -47,12 +47,23 @@
     <%= form.hidden_field :event_id, value: @event.id %>
     <%= form.label :language_id %>
     <%= form.select :language_id, @languages_select_list %>
+    <br>
+
+    <% if @event.group.users.include?(current_user) %>
+      <%= form.hidden_field :guest, value: false %>
+    <% else %>
+      <% if @event.guest_allowed? %>
+        <%= form.label :guest, "ゲストとして参加", value: true %>
+        <%= form.radio_button :guest, true %>
+      <% end %>
+      <%= form.label :guest, "グループに登録して参加", value: false  %>
+      <%= form.radio_button :guest, false, checked: true %>
+    <% end %>
 
     <%= form.submit %>
   <% end %>
 
 <% end %>
-
 
 <table>
   <tr>

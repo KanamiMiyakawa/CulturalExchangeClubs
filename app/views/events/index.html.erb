@@ -27,8 +27,26 @@
   </table>
 
   <h3>参加可能な言語</h3>
+
+  <% @languages_select_list = [] %>
+
   <% event.event_languages.each do |event_language| %>
-    <p><%= event_language.language.ja_name %>：<%= event_language.max %>人</p>
+    <p><%= event_language.language.ja_name %>：<%= event_language.max %>人　※あと<%= rest = event_language.max - event.participants.where(language_id: event_language.language_id).count %>人参加できます</p>
+
+    <% @languages_select_list.push([event_language.language.ja_name,event_language.language_id]) if rest != 0 %>
+
+  <% end %>
+  
+  <% if event.permission? %>
+    <p>※このイベントはオーガナイザーの許可のあとで参加が確定します</p>
+  <% end %>
+
+  <%= form_with(url: participants_path, local: true) do |form| %>
+    <%= form.hidden_field :event_id, value: event.id %>
+    <%= form.label :language_id %>
+    <%= form.select :language_id, @languages_select_list %>
+
+    <%= form.submit %>
   <% end %>
 
   <br>

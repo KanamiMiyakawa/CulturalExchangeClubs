@@ -2,6 +2,7 @@ class Event < ApplicationRecord
   geocoded_by :address, latitude: :lat, longitude: :lon
   after_validation :geocode, if: :address_changed?
 
+  #イベントが所属するグループ
   belongs_to :organizer
   belongs_to :group
 
@@ -13,4 +14,6 @@ class Event < ApplicationRecord
   #イベント参加者
   has_many :participants, dependent: :destroy
   has_many :users, through: :participants
+  #イベント自体の管理者
+  belongs_to :user
 end

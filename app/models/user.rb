@@ -10,7 +10,7 @@ class User < ApplicationRecord
   #一般ユーザ
   has_many :members, dependent: :destroy
   has_many :groups, through: :members
-  #オーガナイザー
+  #グループのオーガナイザー権限
   has_many :organizers, dependent: :destroy
   has_many :organizing_groups, through: :organizers, source: :group
   #オーナー
@@ -19,4 +19,6 @@ class User < ApplicationRecord
   #参加者
   has_many :participants, dependent: :destroy
   has_many :events, through: :participants
+  #イベントのオーガナイザー
+  has_many :organizing_events, dependent: :destroy, foreign_key: :user_id, class_name: 'Event'
 end

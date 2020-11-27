@@ -12,6 +12,7 @@ class Organizing::EventsController < ApplicationController
   end
 
   def create
+    binding.pry
     @event = @group.events.build(event_params)
     if @event.save
       redirect_to event_path(@event), notice: 'イベントを作成しました！'
@@ -59,6 +60,6 @@ class Organizing::EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:name, :schedule, :content, :online, :permission, :guest_allowed, :address, :place, :organizer_id,
-        event_languages_attributes: [:id, :event_id, :language_id, :max])
+        event_languages_attributes: [:id, :event_id, :language_id, :max]).merge(user_id:Organizer.find(params[:event][:organizer_id]).user_id)
   end
 end

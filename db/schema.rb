@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_25_084006) do
+ActiveRecord::Schema.define(version: 2020_11_27_120806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,11 +40,13 @@ ActiveRecord::Schema.define(version: 2020_11_25_084006) do
     t.string "place", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["content"], name: "index_events_on_content"
     t.index ["group_id"], name: "index_events_on_group_id"
     t.index ["name"], name: "index_events_on_name"
     t.index ["organizer_id"], name: "index_events_on_organizer_id"
     t.index ["schedule"], name: "index_events_on_schedule"
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -123,6 +125,7 @@ ActiveRecord::Schema.define(version: 2020_11_25_084006) do
   add_foreign_key "event_languages", "languages"
   add_foreign_key "events", "groups"
   add_foreign_key "events", "organizers"
+  add_foreign_key "events", "users"
   add_foreign_key "groups", "users", column: "owner_id"
   add_foreign_key "members", "groups"
   add_foreign_key "members", "users"

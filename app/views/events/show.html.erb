@@ -7,26 +7,51 @@
   </p>
 <% end %>
 
-<% @languages_select_list = [] %>
+<p>ここからの参加者ステータスや参加フォームは画面右側にまとめる</p>
 
 <h3>参加可能な言語</h3>
+
+<% @languages_select_list = [] %>
+
 <% @event_languages.each do |event_language| %>
-  <p><%= event_language.language.ja_name %>：<%= event_language.max %>人　※あと<%= rest = event_language.max - @event.participants.where(language_id: event_language.language_id).count %>人参加できます</p>
-  <% @languages_select_list.push([event_language.language.ja_name,event_language.language_id]) if rest != 0 %>
+  <p>
+    <%= event_language.language.ja_name %>：定員<%= event_language.max %>人
+    <% rest = event_language.max - @event.participants.where(language_id: event_language.language_id).count %>
+    <% if rest > 0 %>
+    　※あと<%= rest %>人参加できます
+      <% @languages_select_list.push([event_language.language.ja_name,event_language.language_id]) %>
+    <% else %>
+      現在空きがありません
+    <% end %>
+  </p>
 <% end %>
 
-<% if @event.permission? %>
-  <p>※このイベントはオーガナイザーの許可のあとで参加が確定します</p>
+<% if @event.users.include?(current_user) %>
+
+  <% if Participant.find_by(event_id:@event.id, user_id:current_user.id).pending? %>
+    <p>現在、オーガナイザーの参加許可を待っています！</p>
+  <% else %>
+    <p>あなたは参加予定です！</p>
+  <% end %>
+
+<% else %>
+
+  <% if @event.permission? %>
+    <p>※このイベントはオーガナイザーの許可のあとで参加が確定します</p>
+  <% end %>
+  <% if @event.guest_allowed? %>
+    <p>※このイベントはグループメンバー以外も参加可能です</p>
+  <% end %>
+
+  <%= form_with(url: participants_path, local: true) do |form| %>
+    <%= form.hidden_field :event_id, value: @event.id %>
+    <%= form.label :language_id %>
+    <%= form.select :language_id, @languages_select_list %>
+
+    <%= form.submit %>
+  <% end %>
+
 <% end %>
-
-<%= form_with(url: participants_path, local: true) do |form| %>
-  <%= form.hidden_field :event_id, value: @event.id %>
-  <%= form.label :language_id %>
-  <%= form.select :language_id, @languages_select_list %>
-
-  <%= form.submit %>
-<% end %>
-
 
 
 <table>

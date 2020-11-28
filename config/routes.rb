@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'participants/create'
-  get 'participants/destroy'
   root to: "pages#devtop"
   get "profile/:id", to: "pages#profile"
 
@@ -15,11 +13,23 @@ Rails.application.routes.draw do
   end
 
   resources :groups, only: [:index, :new, :create, :show]
-
   resources :members, only: [:create, :destroy]
+  resources :events, only: [:index, :show]
+  resources :participants, only: [:create, :destroy]
 
   resource :organizing, only: [:show, :create, :destroy] do
     scope module: :organizing do
+      resources :groups, only: [:show, :edit, :update, :destroy] do
+        member do
+          patch :give_owner
+          get :old_events
+        end
+        resources :events, only: [:new, :create, :edit, :update, :destroy] do
+          collection do
+            post :add_form
+          end
+        end
+      end
 
       resources :members, only: [:update, :destroy] do
         collection do
@@ -30,15 +40,12 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :groups, only: [:show, :edit, :update, :destroy] do
-        member do
-          patch :give_owner
-          get :old_events
+      resources :participants, only: [:update] do
+        collection do
+          patch :accept_all_participants
         end
-        resources :events, only: [:new, :create, :edit, :update, :destroy] do
-          collection do
-            post :add_form
-          end
+        member do
+          delete :deny
         end
       end
 

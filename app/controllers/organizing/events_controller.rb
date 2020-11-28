@@ -12,7 +12,6 @@ class Organizing::EventsController < ApplicationController
   end
 
   def create
-    binding.pry
     @event = @group.events.build(event_params)
     if @event.save
       redirect_to event_path(@event), notice: 'イベントを作成しました！'

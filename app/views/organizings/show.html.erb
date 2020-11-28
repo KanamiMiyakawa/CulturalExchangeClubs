@@ -1,9 +1,7 @@
 <h2>オーガナイザー管理画面</h2>
 
-<p>ここに参加リクエストなどを表示</p>
-
 <% if @pending_members.present? %>
-  <h3><%= link_to "グループ参加リクエストをすべて許可", accept_all_members_organizing_members_path, method: :patch %></h3>
+  <h3><%= link_to "すべてのグループ参加リクエストを許可", accept_all_members_organizing_members_path, method: :patch %></h3>
   <table>
     <tr>
       <th>名前</th>
@@ -19,6 +17,28 @@
         <td><%= member.created_at %></td>
         <td><%= link_to '許可', organizing_member_path(member.id), method: :patch %></td>
         <td><%= link_to '許可しない', deny_organizing_member_path(member.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+<br>
+<% if @pending_participants.present? %>
+  <h3><%= link_to "すべてのイベント参加リクエストを許可", accept_all_participants_organizing_participants_path, method: :patch %></h3>
+  <table>
+    <tr>
+      <th>名前</th>
+      <th>リクエストイベント</th>
+      <th>リクエスト日時</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% @pending_participants.each do |participant| %>
+      <tr>
+        <td><%= link_to "#{participant.user.name}", "/profile/#{participant.user_id}" %></td>
+        <td><%= participant.event.name %></td>
+        <td><%= participant.created_at %></td>
+        <td><%= link_to '許可', organizing_participant_path(participant.id), method: :patch %></td>
+        <td><%= link_to '許可しない', deny_organizing_participant_path(participant.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </table>

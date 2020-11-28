@@ -18,7 +18,7 @@ class Organizing::MembersController < ApplicationController
 
   def accept_all_members
     Member.where(group_id: current_user.organizing_groups.pluck(:id), pending:true).update_all(pending:false)
-    redirect_to organizing_path, notice: 'グループ参加をすべて許可しました'
+    redirect_to organizing_path, notice: 'すべてのグループ参加リクエストを許可'
   end
 
   def destroy

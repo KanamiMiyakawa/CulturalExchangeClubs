@@ -37,7 +37,7 @@
         <td><%= link_to "#{participant.user.name}", "/profile/#{participant.user_id}" %></td>
         <td><%= participant.event.name %></td>
         <td><%= participant.created_at %></td>
-        <% if !participant.event.guest_allowed? && Member.find_by(user_id: participant.user_id, group_id: participant.event.group_id, pending: true) %>
+        <% if !participant.event.guest_allowed? && Member.find_by(user_id: participant.user_id, group_id: participant.group_id, pending: true) %>
           <td></td>
           <td>先にグループ参加リクエストを許可してください</td>
         <% else %>

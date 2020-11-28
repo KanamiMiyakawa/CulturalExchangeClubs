@@ -16,7 +16,11 @@ class Organizing::ParticipantsController < ApplicationController
   end
 
   def accept_all_participants
-    Participant.where(event_id: current_user.organizing_events.pluck(:id), pending: true).update_all(pending:false)
+    participants = Participant.where(event_id: current_user.organizing_events.pluck(:id), pending: true)
+    participants.each do |participant|
+      next if !participant.event.guest_allowed? && Member.find_by(user_id: participant.user_id, group_id: participant.event.group_id, pending: true)
+      participant.update!(pending:false)
+    end
     redirect_to organizing_path, notice: 'すべてのイベント参加を許可しました'
   end
 

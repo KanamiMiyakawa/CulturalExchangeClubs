@@ -25,6 +25,6 @@ class ParticipantsController < ApplicationController
   private
 
   def participant_params
-    params.permit(:event_id, :language_id, :guest)
+    params.permit(:event_id, :language_id, :guest).merge(group_id: Event.find(params[:event_id]).group_id)
   end
 end

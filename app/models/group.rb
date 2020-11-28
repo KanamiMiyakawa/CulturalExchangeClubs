@@ -9,4 +9,6 @@ class Group < ApplicationRecord
   belongs_to :owner, class_name: 'User'
   #イベント
   has_many :events, dependent: :destroy
+  #イベント参加者
+  has_many :participants, dependent: :destroy
 end

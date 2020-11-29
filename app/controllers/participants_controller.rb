@@ -20,6 +20,13 @@ class ParticipantsController < ApplicationController
   end
 
   def destroy
+    participant = Participant.find(params[:id])
+    if participant.user != current_user
+      redirect_to events_path, notice: "当該ユーザのみ情報を編集できます"
+    else
+      participant.destroy!
+      redirect_to "/profile/#{current_user.id}", notice: "イベント参加を削除しました"
+    end
   end
 
   private

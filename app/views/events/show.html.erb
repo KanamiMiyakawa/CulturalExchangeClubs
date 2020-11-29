@@ -10,7 +10,7 @@
 <p>ここからの参加者ステータスや参加フォームは画面右側にまとめる</p>
 
 <p>グループステータス:
-  <% if current_user = @group.owner %>
+  <% if current_user == @group.owner %>
     オーナー
   <% elsif @organizers.include?(current_user) %>
     オーガナイザー
@@ -41,11 +41,13 @@
 
 <% if @event.users.include?(current_user) %>
 
-  <% if Participant.find_by(event_id:@event.id, user_id:current_user.id).pending? %>
+  <% participant = Participant.find_by(event_id:@event.id, user_id:current_user.id) %>
+  <% if participant.pending? %>
     <p>現在、オーガナイザーの参加許可を待っています！</p>
   <% else %>
     <p>あなたは参加予定です！</p>
   <% end %>
+  <p><%= link_to 'イベント参加を取りやめる', participant_path(participant.id), method: :delete, data: { confirm: 'Are you sure?' } %></p>
 
 <% else %>
 

@@ -53,4 +53,31 @@
       <% end %>
     </table>
 
+  <h3>今後の参加予定のイベント</h3>
+  <% @events.each do |event| %>
+    <% if event.schedule.to_date > @index_date %>
+      <% @index_date = event.schedule.to_date %>
+      <p><%= l @index_date, format: :index %></p>
+    <% end %>
+
+    <table>
+      <tr>
+        <th>イベント名：</th>
+        <td><%= link_to "#{event.name}", event_path(event) %></td>
+      </tr>
+      <tr>
+        <th>グループ名：</th>
+        <td><%= event.group.name %></td>
+      </tr>
+      <tr>
+        <th>日時：</th>
+        <td><%= l event.schedule, format: :long %></td>
+      </tr>
+      <tr>
+        <th>場所：</th>
+        <td><%= event.address %></td>
+      </tr>
+    </table>
+
+  <% end %>
 <% end %>

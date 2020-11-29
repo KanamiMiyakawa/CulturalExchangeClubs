@@ -12,13 +12,16 @@ Rails.application.routes.draw do
     delete "logout", to: "users/sessions#destroy"
   end
 
+  #一般ユーザ用
   resources :groups, only: [:index, :new, :create, :show]
   resources :members, only: [:create, :destroy]
   resources :events, only: [:index, :show]
   resources :participants, only: [:create, :destroy]
 
+  #オーガナイザー用
   resource :organizing, only: [:show, :create, :destroy] do
     scope module: :organizing do
+      
       resources :groups, only: [:show, :edit, :update, :destroy] do
         member do
           patch :give_owner
@@ -48,11 +51,7 @@ Rails.application.routes.draw do
           delete :deny
         end
       end
-
     end
   end
-
-  resources :events, only: [:index, :show]
-  resources :participants, only: [:create, :destroy]
 
 end

@@ -9,17 +9,30 @@
 
 <p>ここからの参加者ステータスや参加フォームは画面右側にまとめる</p>
 
+<p>グループステータス:
+  <% if current_user = @group.owner %>
+    オーナー
+  <% elsif @organizers.include?(current_user) %>
+    オーガナイザー
+  <% elsif @group.users.include?(current_user) %>
+    メンバー
+  <% else %>
+    ゲスト
+  <% end %>
+</p>
+
 <h3>参加可能な言語</h3>
 
 <% @languages_select_list = [] %>
 
 <% @event_languages.each do |event_language| %>
   <p>
-    <%= event_language.language.ja_name %>：定員<%= event_language.max %>人
-    <% rest = event_language.max - @event.participants.where(language_id: event_language.language_id).count %>
+    <% language_name = event_language.language.ja_name %>
+    <%= language_name %>：定員<%= event_language.max %>人
+    <% rest = event_language.max - event_language.participants.count %>
     <% if rest > 0 %>
     　※あと<%= rest %>人参加できます
-      <% @languages_select_list.push([event_language.language.ja_name,event_language.language_id]) %>
+      <% @languages_select_list.push([language_name,event_language.id]) %>
     <% else %>
       現在空きがありません
     <% end %>
@@ -45,8 +58,9 @@
 
   <%= form_with(url: participants_path, local: true) do |form| %>
     <%= form.hidden_field :event_id, value: @event.id %>
-    <%= form.label :language_id %>
-    <%= form.select :language_id, @languages_select_list %>
+    <%= form.hidden_field :group_id, value: @event.group_id %>
+    <%= form.label :event_language_id %>
+    <%= form.select :event_language_id, @languages_select_list %>
     <br>
 
     <% if @event.group.users.include?(current_user) %>
@@ -129,3 +143,13 @@
     <td><%= @event.place %></td>
   </tr>
 </table>
+
+<br>
+<h3>現在の参加者</h3>
+
+<% @event_languages.each do |event_language| %>
+  <p><%= event_language.language.ja_name %></p>
+  <% event_language.participants.each do |participant| %>
+    <p><%= participant.user.name %></p>
+  <% end %>
+<% end %>

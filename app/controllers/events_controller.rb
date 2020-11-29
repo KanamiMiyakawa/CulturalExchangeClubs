@@ -8,7 +8,7 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @group = @event.group
-    @organizer = @event.organizer.user
+    @organizer = @event.user
     @organizers = @group.organized_users
     @event_languages = @event.event_languages
   end

@@ -32,11 +32,12 @@
 
   <% event.event_languages.each do |event_language| %>
     <p>
-      <%= event_language.language.ja_name %>：定員<%= event_language.max %>人
-      <% rest = event_language.max - event.participants.where(language_id: event_language.language_id).count %>
+      <% language_name = event_language.language.ja_name %>
+      <%= language_name %>：定員<%= event_language.max %>人
+      <% rest = event_language.max - event_language.participants.count %>
       <% if rest > 0 %>
       　※あと<%= rest %>人参加できます
-        <% @languages_select_list.push([event_language.language.ja_name,event_language.language_id]) %>
+        <% @languages_select_list.push([language_name,event_language.id]) %>
       <% else %>
         現在空きがありません
       <% end %>
@@ -62,8 +63,9 @@
 
     <%= form_with(url: participants_path, local: true) do |form| %>
       <%= form.hidden_field :event_id, value: event.id %>
-      <%= form.label :language_id %>
-      <%= form.select :language_id, @languages_select_list %>
+      <%= form.hidden_field :group_id, value: event.group_id %>
+      <%= form.label :event_language_id %>
+      <%= form.select :event_language_id, @languages_select_list %>
       <br>
 
       <% if event.group.users.include?(current_user) %>

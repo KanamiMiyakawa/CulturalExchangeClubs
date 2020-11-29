@@ -14,7 +14,8 @@ class Participant < ApplicationRecord
   end
 
   def check_the_rest
-    if EventLanguage.find_by(event_id:self.event_id, language_id:self.language_id).max - self.event.participants.where(language_id: self.language_id).count == 0
+    event_language = self.event_language
+    if event_language.max - event_language.participants.count == 0
       errors.add :base, 'イベントが満席になりました'
       throw :abort
     end

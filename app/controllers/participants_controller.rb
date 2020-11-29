@@ -1,6 +1,6 @@
 class ParticipantsController < ApplicationController
   def create
-    group = Event.find(params[:event_id]).group
+    group = Group.find(params[:group_id])
     if params[:guest] == "false" && !group.users.include?(current_user)
       @participant = current_user.participants.build(participant_params)
       if @participant.save
@@ -25,6 +25,6 @@ class ParticipantsController < ApplicationController
   private
 
   def participant_params
-    params.permit(:event_id, :language_id, :guest).merge(group_id: Event.find(params[:event_id]).group_id)
+    params.permit(:event_id, :group_id, :event_language_id, :guest)
   end
 end

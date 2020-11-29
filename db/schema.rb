@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_28_093100) do
+ActiveRecord::Schema.define(version: 2020_11_29_071154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,15 +89,15 @@ ActiveRecord::Schema.define(version: 2020_11_28_093100) do
   create_table "participants", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "event_id"
-    t.bigint "language_id"
     t.boolean "pending"
     t.boolean "guest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "group_id"
+    t.bigint "event_language_id"
     t.index ["event_id"], name: "index_participants_on_event_id"
+    t.index ["event_language_id"], name: "index_participants_on_event_language_id"
     t.index ["group_id"], name: "index_participants_on_group_id"
-    t.index ["language_id"], name: "index_participants_on_language_id"
     t.index ["user_id"], name: "index_participants_on_user_id"
   end
 
@@ -133,8 +133,8 @@ ActiveRecord::Schema.define(version: 2020_11_28_093100) do
   add_foreign_key "members", "users"
   add_foreign_key "organizers", "groups"
   add_foreign_key "organizers", "users"
+  add_foreign_key "participants", "event_languages"
   add_foreign_key "participants", "events"
   add_foreign_key "participants", "groups"
-  add_foreign_key "participants", "languages"
   add_foreign_key "participants", "users"
 end

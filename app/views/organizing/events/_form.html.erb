@@ -99,19 +99,6 @@
 
     <%= form.fields_for :event_languages do |language| %>
 
-
-      <% if language.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(language.errors.count, "error") %> prohibited this language from being saved:</h2>
-
-          <ul>
-          <% language.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
-
       <h3><%= "参加者の言語 #{language.index + 1}" %></h3>
 
       <div class="field">

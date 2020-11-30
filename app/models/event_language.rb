@@ -10,14 +10,14 @@ class EventLanguage < ApplicationRecord
 
   def participants_exist
     if self.participants.present?
-      errors.add :base, 'すでにユーザが登録している言語は変更できません、言語かイベント自体を削除してください'
+      self.event.errors.add :base, 'すでにユーザが登録している言語は変更できません、言語かイベント自体を削除してください'
       throw :abort
     end
   end
 
   def max_smaller_than_participants
     if self.max < self.participants.count
-      errors.add :base, '現在の登録人数より少ない最大登録者数は設定できません'
+      self.event.errors.add :base, '現在の登録人数より少ない最大登録者数は設定できません'
       throw :abort
     end
   end

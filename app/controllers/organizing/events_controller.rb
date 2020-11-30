@@ -33,7 +33,7 @@ class Organizing::EventsController < ApplicationController
 
   def destroy
     @event.destroy!
-    redirect_to organizing_path, notice: 'グループを削除しました'
+    redirect_to organizing_path, notice: 'イベントを削除しました'
   end
 
   def delete_language

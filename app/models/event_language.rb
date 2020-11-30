@@ -8,6 +8,8 @@ class EventLanguage < ApplicationRecord
   #参加者
   has_many :participants, dependent: :destroy
 
+  private
+
   def participants_exist
     if self.participants.present?
       self.event.errors.add :base, 'すでにユーザが登録している言語は変更できません、言語かイベント自体を削除してください'

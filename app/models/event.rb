@@ -2,6 +2,8 @@ class Event < ApplicationRecord
   geocoded_by :address, latitude: :lat, longitude: :lon
   after_validation :geocode, if: :address_changed?
 
+  before_update :change_participants_not_pending, if: [:permission_changed?, Proc.new { |event| event.permission == false}]
+
   #イベントが所属するグループ
   belongs_to :organizer
   belongs_to :group
@@ -16,4 +18,10 @@ class Event < ApplicationRecord
   has_many :users, through: :participants
   #イベント自体の管理者
   belongs_to :user
+
+  private
+
+  def change_participants_not_pending
+    self.participants.update_all(pending:false)
+  end
 end

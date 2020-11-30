@@ -106,13 +106,13 @@
       </div>
       <div class="field">
         <%= language.label :max %><br>
-        <%= language.number_field :max %>
+        <%= language.number_field :max, min: 1 %>
       </div>
       <br>
 
     <% end %>
   </div>
-  
+
   <p class="form-change-test">変更テスト</p>
 
   <p class="add-form-btn">言語を追加</p>

@@ -63,7 +63,7 @@
     </p>
   <% end %>
   <p><%= link_to 'メンバー管理画面へ', organizing_group_path(group) %></p>
-  <p><%= link_to '新規イベント作成', new_organizing_group_event_path(group_id:group.id), data: {"turbolinks" => false} %></p>
+  <p><%= link_to '新規イベント作成', new_organizing_group_event_path(group_id:group.id) %></p>
   <p>予定中のイベント表示 | <%= link_to '過去のイベント', old_events_organizing_group_path(group) %></p>
   <% if group.events.present? %>
     <table>

@@ -1,7 +1,9 @@
 $(function(){
+  document.addEventListener("turbolinks:load", function() {
 
   function buildField(index){
-      const html = `<h3>参加者の言語 ${index+1}</h3>
+      const html = `<div class="language-form">
+                    <h3>参加者の言語 ${index+1}</h3>
                     <div class="field">
                       <label for="event_event_languages_attributes_${index}_language_id">Language</label>
                       <br>
@@ -198,15 +200,18 @@ $(function(){
                       <label for="event_event_languages_attributes_${index}_max">Max</label>
                       <br>
                       <input type="number" name="event[event_languages_attributes][${index}][max]" id="event_event_languages_attributes_${index}_max">
-                    </div>`;
+                    </div>
+                    </div>
+                    <br>`;
       return html;
   }
 
-  let fileIndex = 2;
+  let fileIndex = $(".language-form").length;
 
   $(".add-form-btn").on("click", function() {
     $(".form-change-test").text("変更しました");
     $(".languages-form").append(buildField(fileIndex));
     fileIndex += 1;
   })
+})
 })

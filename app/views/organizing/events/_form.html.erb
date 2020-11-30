@@ -99,17 +99,21 @@
 
     <%= form.fields_for :event_languages do |language| %>
 
-      <h3><%= "参加者の言語 #{language.index + 1}" %></h3>
+      <div class="language-form">
+        <h3><%= "参加者の言語 #{language.index + 1}" %></h3>
 
-      <div class="field">
-        <%= language.label :language_id %><br>
-        <%= language.select :language_id, @languages.map { |lang| [lang.ja_name, lang.id]} %>
+        <div class="field">
+          <%= language.label :language_id %><br>
+          <%= language.select :language_id, @languages.map { |lang| [lang.ja_name, lang.id]} %>
+        </div>
+        <div class="field">
+          <%= language.label :max %><br>
+          <%= language.number_field :max, min: 1 %>
+        </div>
+        <% if language.object.id.present? %>
+          <p><%= link_to 'この言語を削除', delete_language_organizing_group_events_path(lang_id:language.object.id), method: :delete, data: { confirm: 'この言語に登録している参加者も削除されますが、よろしいですか？' } %></p>
+        <% end %>
       </div>
-      <div class="field">
-        <%= language.label :max %><br>
-        <%= language.number_field :max, min: 1 %>
-      </div>
-      <p><%= link_to 'この言語を削除', delete_language_organizing_group_events_path(lang_id:language.object.id), method: :delete, data: { confirm: 'この言語に登録している参加者も削除されますが、よろしいですか？' } %></p>
       <br>
 
     <% end %>

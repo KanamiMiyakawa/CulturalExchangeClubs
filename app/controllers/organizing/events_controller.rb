@@ -36,6 +36,13 @@ class Organizing::EventsController < ApplicationController
     redirect_to organizing_path, notice: 'グループを削除しました'
   end
 
+  def delete_language
+    event_language = EventLanguage.find(params[:lang_id])
+    event = event_language.event
+    event_language.destroy!
+    redirect_to event_path(event), notice: '言語を削除しました'
+  end
+
   private
 
   def set_languages

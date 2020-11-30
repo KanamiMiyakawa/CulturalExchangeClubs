@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   #オーガナイザー用
   resource :organizing, only: [:show, :create, :destroy] do
     scope module: :organizing do
-      
+
       resources :groups, only: [:show, :edit, :update, :destroy] do
         member do
           patch :give_owner
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
         end
         resources :events, only: [:new, :create, :edit, :update, :destroy] do
           collection do
-            post :add_form
+            delete :delete_language
           end
         end
       end

@@ -16,6 +16,7 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'geocoder'
 gem 'dotenv-rails'
+gem 'bootstrap', '~> 4.3.1'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

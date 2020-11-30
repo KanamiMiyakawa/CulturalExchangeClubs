@@ -1,4 +1,6 @@
 class Group < ApplicationRecord
+  before_update :change_members_not_pending, if: [:permission_changed?, Proc.new { |group| group.permission == false}]
+
   #一般ユーザ
   has_many :members, dependent: :destroy
   has_many :users, through: :members
@@ -11,4 +13,10 @@ class Group < ApplicationRecord
   has_many :events, dependent: :destroy
   #イベント参加者
   has_many :participants, dependent: :destroy
+
+  private
+
+  def change_members_not_pending
+    self.members.update_all(pending:false)
+  end
 end

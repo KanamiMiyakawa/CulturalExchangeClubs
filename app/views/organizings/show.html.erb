@@ -74,7 +74,7 @@
       </tr>
       <% group.events.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").each do |event| %>
         <tr>
-          <td><%= event.name %></td>
+          <td><%= link_to "#{event.name}", event_path(event) %></td>
           <td><%= event.schedule %></td>
           <td>
             <%= link_to '編集', edit_organizing_group_event_path(id: event.id, group_id: group.id) %> |

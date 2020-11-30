@@ -1,5 +1,6 @@
 class Organizing::EventsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_languages, only: [:new, :create, :edit, :update]
   before_action :set_group, only: [:new, :create, :edit, :update]
   before_action :set_organizers, only: [:new, :create, :edit, :update]
   before_action :set_event, only: [:edit, :update, :destroy]
@@ -8,7 +9,6 @@ class Organizing::EventsController < ApplicationController
   def new
     @event = Event.new
     2.times { @event.event_languages.build }
-    @languages = Language.all
   end
 
   def create
@@ -21,7 +21,6 @@ class Organizing::EventsController < ApplicationController
   end
 
   def edit
-    @languages = Language.all
   end
 
   def update
@@ -39,16 +38,20 @@ class Organizing::EventsController < ApplicationController
 
   private
 
+  def set_languages
+    @languages = Language.all
+  end
+
   def set_group
     @group = Group.find(params[:group_id])
   end
 
-  def set_event
-    @event = Event.find(params[:id])
-  end
-
   def set_organizers
     @organizers = @group.organizers
+  end
+
+  def set_event
+    @event = Event.find(params[:id])
   end
 
   def group_organizer_only

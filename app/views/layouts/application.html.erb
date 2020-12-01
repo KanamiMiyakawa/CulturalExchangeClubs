@@ -10,22 +10,51 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <%= current_user.name %>
-      <% if current_user.organizers.present? %>
-        <%= link_to 'オーガナイザー画面', organizing_path %>
-      <% else %>
-        <%= link_to 'グループ作成', new_group_path %>
-      <% end %>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffcb91;">
 
-      <%= link_to 'ユーザー詳細', "/profile/#{current_user.id}" %>
-      <%= link_to 'プロフィール変更', edit_user_registration_path %>
-      <%= link_to 'ログアウト', logout_path, method: :delete %>
-    <% else %>
-      <%= link_to 'サインアップ', signup_path %>
-      <%= link_to 'ログイン', login_path %>
-    <% end %>
-    <%= link_to 'イベント一覧', events_path %>
+      <div class="container">
+        <a class="navbar-brand font-weight-bold" id="header-brand" href="/events">Cultural Exchange Clubs</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarToggler">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item font-weight-bold">
+              <%= link_to 'イベント一覧', events_path, class: "nav-link" %>
+            </li>
+
+          <% if user_signed_in? %>
+            <% if current_user.organizers.present? %>
+              <li class="nav-item font-weight-bold">
+                <%= link_to 'オーガナイザー画面', organizing_path, class: "nav-link" %>
+              </li>
+            <% else %>
+              <li class="nav-item font-weight-bold">
+                <%= link_to 'グループ作成', new_group_path, class: "nav-link" %>
+              </li>
+            <% end %>
+            <li class="nav-item font-weight-bold">
+              <%= link_to "#{current_user.name}", "/profile/#{current_user.id}", class: "nav-link" %>
+            </li>
+            <li class="nav-item font-weight-bold">
+              <%= link_to 'ログアウト', logout_path, method: :delete, class: "nav-link" %>
+            </li>
+          <% else %>
+            <li class="nav-item font-weight-bold">
+              <%= link_to 'サインアップ', signup_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item font-weight-bold">
+              <%= link_to 'ログイン', login_path, class: "nav-link" %>
+            </li>
+          <% end %>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

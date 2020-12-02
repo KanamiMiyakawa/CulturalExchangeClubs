@@ -15,6 +15,9 @@
   margin-bottom: 2rem;
   padding: 3rem 2rem;
 }
+.user-new-content label, em, i {
+  font-weight: bold;
+}
 .user-new-content input {
   margin-bottom: 1rem;
   width: 100%;
@@ -36,7 +39,32 @@
   width: 10%;
 }
 
-//edit
-.delete-user-form {
-
+//show
+.user-show-table th {
+  width: 40%;
+}
+.user-show-table td {
+  width: 60%;
+}
+.event-side-container {
+  background-color: white;
+  border: double 5px #93933a;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px black;
+  margin-top: 2rem;
+  padding: 1.5rem 2rem;
+}
+.group-side-container {
+  background-color: white;
+  border: double 5px #618e61;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px black;
+  margin-top: 0.5rem;
+  padding: 1.5rem 2rem;
+}
+.group-side-container ul {
+  list-style: none;
+}
+.group-side-container li {
+  line-height: 2rem;
 }

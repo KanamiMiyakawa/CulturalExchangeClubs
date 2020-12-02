@@ -11,7 +11,12 @@ ja:
         name: "名前"
         email: "メールアドレス"
         introduction: "自己紹介"
-        address: "住所（イベントの検索に使用します！）"
+        address: "住所（イベント検索に使用します！）"
+        created_at: "利用開始日"
+  pages:
+    profile:
+      title: ユーザー詳細
+      edit_btn: プロフィール変更
   date:
     abbr_day_names:
     - 日

@@ -1,87 +1,141 @@
-<h2>ユーザー詳細ページ</h2>
+<div class="user-wrapper mt-4 mb-4">
 
-<table>
-  <tr>
-    <th>ID：</th>
-    <td><%= @user.id %></td>
-  </tr>
-  <tr>
-    <th>名前：</th>
-    <td><%= @user.name %></td>
-  </tr>
-  <tr>
-    <th>自己紹介：</th>
-    <td><%= @user.introduction %></td>
-  </tr>
-  <tr>
-    <th>利用開始日：</th>
-    <td><%= @user.created_at %></td>
-  </tr>
-</table>
+  <div class="container">
+    <div class="row">
 
-<% if @user == current_user %>
-  <table>
-    <tr>
-      <th>メールアドレス：</th>
-      <td><%= @user.email %></td>
-    </tr>
-    <tr>
-      <th>住所：</th>
-      <td><%= @user.address %></td>
-    </tr>
-    <tr>
-      <th>緯度：</th>
-      <td><%= @user.lat %></td>
-    </tr>
-    <tr>
-      <th>経度：</th>
-      <td><%= @user.lon %></td>
-    </tr>
-  </table>
+      <div class="col-md-8 user-container">
+        <div class="user-new-content">
 
-  <%= link_to 'プロフィール変更', edit_user_registration_path %>
+          <div class="row">
+            <div class="col-lg-10 offset-lg-1">
 
-  <h3>所属グループ</h3>
-    <table>
-      <% @members.each do |member| %>
-        <tr>
-          <th>グループ名:</th>
-          <td><%= member.group.name %></td>
-        </tr>
-        <tr>
-          <th>参加日時：</th>
-          <td><%= member.created_at %></td>
-        </tr>
-      <% end %>
-    </table>
+              <h2><%= t('.title') %></h2>
 
-  <h3>今後の参加予定のイベント</h3>
-  <% @events.each do |event| %>
-    <% if event.schedule.to_date > @index_date %>
-      <% @index_date = event.schedule.to_date %>
-      <p><%= l @index_date, format: :index %></p>
-    <% end %>
+              <table class="table user-show-table">
+                <tr>
+                  <th><%= t('activerecord.attributes.user.name') %></th>
+                  <td><%= @user.name %></td>
+                </tr>
+                <tr>
+                  <th><%= t('activerecord.attributes.user.introduction') %></th>
+                  <td><%= @user.introduction %></td>
+                </tr>
+                <tr>
+                  <th><%= t('activerecord.attributes.user.created_at') %></th>
+                  <td><%= l @user.created_at, format: :long %></td>
+                </tr>
 
-    <table>
-      <tr>
-        <th>イベント名：</th>
-        <td><%= link_to "#{event.name}", event_path(event) %></td>
-      </tr>
-      <tr>
-        <th>グループ名：</th>
-        <td><%= event.group.name %></td>
-      </tr>
-      <tr>
-        <th>日時：</th>
-        <td><%= l event.schedule, format: :long %></td>
-      </tr>
-      <tr>
-        <th>場所：</th>
-        <td><%= event.address %></td>
-      </tr>
-    </table>
-    <% participant = Participant.find_by(user_id:current_user.id, event_id:event.id) %>
-    <p><%= link_to 'イベント参加を取りやめる', participant_path(participant.id), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+                <% if @user == current_user %>
+                  <tr>
+                    <th><%= t('activerecord.attributes.user.email') %></th>
+                    <td><%= @user.email %></td>
+                  </tr>
+                  <tr>
+                    <th><%= t('activerecord.attributes.user.address') %></th>
+                    <td><%= @user.address %></td>
+                  </tr>
+                <% end %>
+              </table>
 
-  <% end %>
-<% end %>
+              <% if @user == current_user %>
+                <div class="text-center mb-4">
+                  <%= link_to t('.edit_btn'), edit_user_registration_path, class: "btn btn-success" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="event-side-container">
+          <% if @user == current_user %>
+            <%if @events.present? %>
+              <h3>参加予定のイベント</h3>
+
+              <% @events.each do |event| %>
+                <% if event.schedule.to_date > @index_date %>
+                  <% @index_date = event.schedule.to_date %>
+                  <p><%= l @index_date, format: :index %></p>
+                <% end %>
+
+                <table>
+                  <tr>
+                    <th>イベント名：</th>
+                    <td><%= link_to "#{event.name}", event_path(event) %></td>
+                  </tr>
+                  <tr>
+                    <th>グループ名：</th>
+                    <td><%= event.group.name %></td>
+                  </tr>
+                  <tr>
+                    <th>日時：</th>
+                    <td><%= l event.schedule, format: :long %></td>
+                  </tr>
+                  <tr>
+                    <th>場所：</th>
+                    <td><%= event.address %></td>
+                  </tr>
+                </table>
+                <% participant = Participant.find_by(user_id:current_user.id, event_id:event.id) %>
+                <p><%= link_to 'イベント参加を取りやめる', participant_path(participant.id), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+              <% end %>
+            <% end %>
+
+            <% if @events.present? && @organizing_events.present? %>
+              <div class="border-dashed"></div>
+            <% end %>
+
+            <% if @organizing_events.present? %>
+              <h3>企画中のイベント</h3>
+
+              <% @organizing_events.each do |event| %>
+                <% if event.schedule.to_date > @index_date %>
+                  <% @index_date = event.schedule.to_date %>
+                  <p><%= l @index_date, format: :index %></p>
+                <% end %>
+
+                <table>
+                  <tr>
+                    <th>イベント名：</th>
+                    <td><%= link_to "#{event.name}", event_path(event) %></td>
+                  </tr>
+                  <tr>
+                    <th>グループ名：</th>
+                    <td><%= event.group.name %></td>
+                  </tr>
+                  <tr>
+                    <th>日時：</th>
+                    <td><%= l event.schedule, format: :long %></td>
+                  </tr>
+                  <tr>
+                    <th>場所：</th>
+                    <td><%= event.address %></td>
+                  </tr>
+                </table>
+                <p><%= link_to 'このイベントを編集する', edit_organizing_group_event_path(group_id: event.group.id, id: event.id) %></p>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="group-side-container">
+          <h3>所属グループ</h3>
+          <% if @user == current_user %>
+            <% if @groups.present? %>
+              <ul>
+                <% @groups.each do |group| %>
+                  <li><%= link_to group.name, group_path(group) %></li>
+                <% end %>
+              </ul>
+            <% else %>
+              <p>所属しているグループはありません</p>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

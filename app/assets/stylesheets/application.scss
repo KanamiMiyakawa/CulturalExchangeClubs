@@ -15,9 +15,13 @@
 #header-brand {
  color: #0d0a06;
 }
-
 .cursive {
   font-family: cursive;
+}
+.border-dashed {
+  border-bottom: 2px dashed #5ed098;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
 @import "bootstrap-custom";

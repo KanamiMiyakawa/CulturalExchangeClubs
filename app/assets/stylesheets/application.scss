@@ -11,4 +11,14 @@
  * It is generally better to create a new file per style scope.
  *
  */
+
+#header-brand {
+ color: #0d0a06;
+}
+
+.cursive {
+  font-family: cursive;
+}
+
 @import "bootstrap-custom";
+@import "users";

@@ -10,10 +10,10 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffcb91;">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #90ffb5;">
 
       <div class="container">
-        <a class="navbar-brand font-weight-bold" id="header-brand" href="/events">Cultural Exchange Clubs</a>
+        <a class="navbar-brand font-weight-bold font-italic cursive" id="header-brand" href="/events">Cultural Exchange Clubs</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -54,10 +54,13 @@
       </div>
     </nav>
 
+    <% if notice || alert %>
+      <div class="container">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
 
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>

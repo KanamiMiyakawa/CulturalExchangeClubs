@@ -1,44 +1,60 @@
-<h2><%= t('.sign_up') %></h2>
+<div class="user-wrapper mt-4">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2 user-container">
+        <div class="user-new-content">
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
+          <h2 class="cursive text-center mb-4"><%= t('.sign_up') %></h2>
+
+          <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                <%= render "devise/shared/error_messages", resource: resource %>
+
+                <div class="field">
+                  <%= f.label :name %><br />
+                  <%= f.text_field :name, placeholder: "Name",autofocus: true %>
+                </div>
+
+                <div class="field">
+                  <%= f.label :email %><br />
+                  <%= f.email_field :email, placeholder: "Email", autocomplete: "email" %>
+                </div>
+
+                <div class="field">
+                  <%= f.label :introduction %><br />
+                  <%= f.text_area :introduction, value: "Hello!" %>
+                </div>
+
+                <div class="field">
+                  <%= f.label :address %><br />
+                  <%= f.text_field :address, placeholder: "Adress" %>
+                </div>
+
+                <div class="field">
+                  <%= f.label :password %>
+                  <% if @minimum_password_length %>
+                  <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
+                  <% end %><br />
+                  <%= f.password_field :password, placeholder: "Password", autocomplete: "new-password" %>
+                </div>
+
+                <div class="field">
+                  <%= f.label :password_confirmation %><br />
+                  <%= f.password_field :password_confirmation, placeholder: "Password Confirmation", autocomplete: "new-password" %>
+                </div>
+
+                <div class="actions">
+                  <%= f.submit t('.sign_up'), class: "btn btn-warning mt-2" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :introduction %><br />
-    <%= f.text_area :introduction, value: "Hello!" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit t('.sign_up') %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

@@ -1,3 +1,33 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.user-wrapper {
+  background-color: #ff7539;
+}
+
+.user-container {
+  background-color: white;
+  border: double 5px #aa6c64;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px black;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 3rem 2rem;
+}
+
+.user-new-content input {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.user-new-content textarea {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.user-new-content .actions {
+  text-align: center;
+}
+.user-new-content .btn {
+  width: 50%;
+}

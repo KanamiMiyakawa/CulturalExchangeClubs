@@ -145,6 +145,8 @@ ja:
         one: "%{model}にエラーが発生しました"
         other: "%{model}に%{count}個のエラーが発生しました"
   helpers:
+    btn:
+      back: 戻る
     select:
       prompt: 選択してください
     submit:

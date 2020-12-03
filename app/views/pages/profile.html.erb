@@ -56,17 +56,19 @@
               <% @events.each do |event| %>
                 <% if event.schedule.to_date > @index_date %>
                   <% @index_date = event.schedule.to_date %>
-                  <p><%= l @index_date, format: :index %></p>
+                  <p class="index-date"><%= l @index_date, format: :index %></p>
                 <% end %>
 
-                <table>
+                <table class="table table-sm table-primary">
+                  <% participant = Participant.find_by(user_id:current_user.id, event_id:event.id) %>
+                  <caption><%= link_to 'イベント参加を取りやめる', participant_path(participant.id), method: :delete, data: { confirm: 'Are you sure?' } %></caption>
                   <tr>
                     <th>イベント名：</th>
                     <td><%= link_to "#{event.name}", event_path(event) %></td>
                   </tr>
                   <tr>
                     <th>グループ名：</th>
-                    <td><%= event.group.name %></td>
+                    <td><%= link_to "#{event.group.name}", group_path(event.group) %></td>
                   </tr>
                   <tr>
                     <th>日時：</th>
@@ -77,8 +79,6 @@
                     <td><%= event.address %></td>
                   </tr>
                 </table>
-                <% participant = Participant.find_by(user_id:current_user.id, event_id:event.id) %>
-                <p><%= link_to 'イベント参加を取りやめる', participant_path(participant.id), method: :delete, data: { confirm: 'Are you sure?' } %></p>
               <% end %>
             <% end %>
 
@@ -92,17 +92,18 @@
               <% @organizing_events.each do |event| %>
                 <% if event.schedule.to_date > @index_date %>
                   <% @index_date = event.schedule.to_date %>
-                  <p><%= l @index_date, format: :index %></p>
+                  <p class="index-date"><%= l @index_date, format: :index %></p>
                 <% end %>
 
-                <table>
+                <table class="table table-sm table-warning">
+                  <caption><%= link_to 'このイベントを編集する', edit_organizing_group_event_path(group_id: event.group.id, id: event.id) %></caption>
                   <tr>
                     <th>イベント名：</th>
                     <td><%= link_to "#{event.name}", event_path(event) %></td>
                   </tr>
                   <tr>
                     <th>グループ名：</th>
-                    <td><%= event.group.name %></td>
+                    <td><%= link_to "#{event.group.name}", group_path(event.group) %></td>
                   </tr>
                   <tr>
                     <th>日時：</th>
@@ -113,7 +114,6 @@
                     <td><%= event.address %></td>
                   </tr>
                 </table>
-                <p><%= link_to 'このイベントを編集する', edit_organizing_group_event_path(group_id: event.group.id, id: event.id) %></p>
               <% end %>
             <% end %>
           <% end %>

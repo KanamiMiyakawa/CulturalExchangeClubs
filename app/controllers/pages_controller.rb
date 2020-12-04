@@ -9,8 +9,8 @@ class PagesController < ApplicationController
     @user = User.find(params[:id])
     if @user == current_user
       @groups = @user.groups
-      @events = @user.events.where('schedule >= ?', Time.zone.now).order(schedule: "ASC")
-      @organizing_events = @user.organizing_events.where('schedule >= ?', Time.zone.now).order(schedule: "ASC")
+      @events = @user.events.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(3)
+      @organizing_events = @user.organizing_events.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(3)
       @index_date = 0
     end
   end

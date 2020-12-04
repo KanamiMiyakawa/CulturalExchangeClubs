@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   end
 
   #一般ユーザ用
-  resources :groups, only: [:index, :new, :create, :show]
+  resources :groups, only: [:index, :new, :create, :show] do
+    member do
+      get :old_events
+    end
+  end
   resources :members, only: [:create, :destroy]
   resources :events, only: [:index, :show]
   resources :participants, only: [:create, :destroy]
@@ -25,7 +29,6 @@ Rails.application.routes.draw do
       resources :groups, only: [:show, :edit, :update, :destroy] do
         member do
           patch :give_owner
-          get :old_events
         end
         resources :events, only: [:new, :create, :edit, :update, :destroy] do
           collection do

@@ -7,12 +7,7 @@
   background-color: #ff7539;
 }
 .user-container {
-  background-color: white;
-  border: double 5px #aa6c64;
-  border-radius: 10px;
-  box-shadow: 2px 2px 4px black;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  border-color: #aa6c64;
   padding: 3rem 2rem;
 }
 .user-new-content label, em, i {
@@ -47,18 +42,12 @@
   width: 60%;
 }
 .event-side-container {
-  background-color: white;
-  border: double 5px #93933a;
-  border-radius: 10px;
-  box-shadow: 2px 2px 4px black;
-  margin-top: 2rem;
+  border-color: #93933a;
   padding: 1.5rem 2rem;
+  margin-top: 2rem;
 }
 .group-side-container {
-  background-color: white;
-  border: double 5px #618e61;
-  border-radius: 10px;
-  box-shadow: 2px 2px 4px black;
+  border-color: #20718d;
   margin-top: 0.5rem;
   padding: 1.5rem 2rem;
 }

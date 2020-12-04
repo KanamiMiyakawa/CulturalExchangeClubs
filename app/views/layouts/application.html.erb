@@ -54,12 +54,20 @@
       </div>
     </nav>
 
-    <% if notice || alert %>
-      <div class="container">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-      </div>
-    <% end %>
+    <div class="alert-space">
+      <% if notice || alert %>
+        <div class="alert-wrapper mt-2 mb-2">
+          <div class="container">
+            <% if notice %>
+              <p class="notice text-center">Notice! <%= notice %></p>
+            <% end %>
+            <% if alert %>
+              <p class="alert text-center">Alert! <%= alert %></p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
 
     <%= yield %>
   </body>

@@ -1,51 +1,109 @@
-<h2>グループ詳細</h2>
+<div class="group-wrapper mb-4">
+  <div class="container">
+    <div class="row">
 
-<table>
-  <tr>
-    <th>ID：</th>
-    <td><%= @group.id %></td>
-  </tr>
-  <tr>
-    <th>名前：</th>
-    <td><%= @group.name %></td>
-  </tr>
-  <tr>
-    <th>詳細：</th>
-    <td><%= simple_format(@group.detail) %></td>
-  </tr>
-  <tr>
-    <th>加入許可：</th>
-    <td>
-      <% if @group.permission %>
-        許可制
-      <% else %>
-        自由参加
-      <% end %>
-    </td>
-  </tr>
-</table>
+      <div class="col-md-8 main-container group-container">
+        <div class="group-show-content">
+          <div class="row">
+            <div class="col-lg-10 offset-lg-1">
 
-<p>自己ステータス:<%= chk_member_status(current_user.id) %></p>
+              <h2 class="mb-3"><%= t('.title') %></h2>
 
-<% if @member_self.nil? %>
-  <p><%= link_to 'グループに加入リクエストを送る', members_path(group_id: @group.id), method: :post %></p>
-<% elsif @group.owner != current_user %>
-  <p><%= link_to 'グループから脱退する', member_path(id:@member_self, group_id: @group.id), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-<% end %>
+              <table class="table">
+                <tr>
+                  <th><%= t('activerecord.attributes.group.name') %></th>
+                  <td><%= @group.name %></td>
+                </tr>
+                <tr>
+                  <th><%= t('activerecord.attributes.group.detail') %></th>
+                  <td><%= simple_format(@group.detail) %></td>
+                </tr>
+                <tr>
+                  <th><%= t('activerecord.attributes.group.permission') %></th>
+                  <td>
+                    <% if @group.permission %>
+                      <%= t('.permission_true') %>
+                    <% else %>
+                      <%= t('.permission_false') %>
+                    <% end %>
+                  </td>
+                </tr>
+                <tr>
+                  <th><%= t('.count_member') %></th>
+                  <td><%= @group.members.count %></td>
+                </tr>
+                <tr>
+                  <th><%= t('activerecord.attributes.group.created_at') %></th>
+                  <td><%= l @group.created_at, format: :long %></td>
+                </tr>
+              </table>
 
-<h2>メンバー情報</h2>
+              <div class="border-dashed"></div>
 
-<table>
-  <tr>
-    <th>名前</th>
-    <th>ステータス</th>
-    <th>加入日</th>
-  </tr>
-  <% @members.each do |member| %>
-    <tr>
-      <td><%= link_to "#{member.user.name}", "/profile/#{member.user_id}" %></td>
-      <td><%= chk_member_status(member.user_id) %></td>
-      <td><%= member.created_at %></td>
-    </tr>
-  <% end %>
-</table>
+              <h2 class="mb-3"><%= t('.member_title') %></h2>
+
+              <table class="table table-striped">
+                <tr>
+                  <th><%= t('activerecord.attributes.member.name') %></th>
+                  <th><%= t('.status') %></th>
+                  <th><%= t('activerecord.attributes.member.created_at') %></th>
+                </tr>
+                <% @members.each do |member| %>
+                  <tr>
+                    <td><%= link_to "#{member.user.name}", "/profile/#{member.user_id}" %></td>
+                    <td><%= chk_member_status(member.user_id) %></td>
+                    <td><%= l member.created_at, format: :long %></td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-4">
+        <div class="side-container status-side-container">
+          <h3><%= t('.your_status') %></h3>
+          <p class="text-center group-status"><%= chk_member_status(current_user.id) %></p>
+          <% if @member_self.nil? %>
+            <p><%= link_to t('helpers.request.send'), members_path(group_id: @group.id), method: :post %></p>
+          <% elsif @group.owner != current_user %>
+            <p><%= link_to t('helpers.request.withdraw'), member_path(id:@member_self, group_id: @group.id), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          <% end %>
+        </div>
+
+        <div class="side-container group-event-side-container">
+          <h3><%= @group.name %><br><%= t('helpers.event.coming') %></h3>
+          <% if @events.present? %>
+            <% @events.each do |event| %>
+              <% if event.schedule.to_date > @index_date %>
+                <% @index_date = event.schedule.to_date %>
+                <p class="index-date"><%= l @index_date, format: :index %></p>
+              <% end %>
+
+              <table class="table table-sm table-primary">
+                <tr>
+                  <th><%= t('activerecord.attributes.event.name') %></th>
+                  <td><%= link_to "#{event.name}", event_path(event) %></td>
+                </tr>
+                <tr>
+                  <th><%= t('activerecord.attributes.event.schedule') %></th>
+                  <td><%= l event.schedule, format: :long %></td>
+                </tr>
+                <tr>
+                  <th><%= t('activerecord.attributes.event.address') %></th>
+                  <td><%= event.address %></td>
+                </tr>
+              </table>
+            <% end %>
+          <% else %>
+            <p><%= t('helpers.event.nothing') %></p>
+          <% end %>
+          <p><%= link_to t('helpers.event.old'), old_events_group_path(@group) %></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

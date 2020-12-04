@@ -13,10 +13,43 @@ ja:
         introduction: "自己紹介"
         address: "住所（イベント検索に使用します！）"
         created_at: "利用開始日"
+      event:
+        name: イベント名
+        schedule: 日付
+        address: 場所
+      group:
+        name: グループ名
+        detail: グループについて
+        permission: 加入許可
+        created_at: 設立日
+      member:
+        name: 名前
+        created_at: 加入日
   pages:
     profile:
       title: ユーザー詳細
       edit_btn: プロフィール変更
+      coming_events: 参加予定のイベント
+      delete_participant: イベント参加を取りやめる
+      event_name: イベント名
+      group_name: グループ名
+      date: 日時
+      address: 場所
+      organizing_events: 企画中のイベント
+      edit_event: このイベントを編集する
+      groups: 所属グループ
+      no_events: 予定しているイベントはありません
+      no_groups: 所属しているグループはありません
+  groups:
+    show:
+      title: グループ詳細
+      permission_true: オーガナイザーの許可が必要です
+      permission_false: 自由に参加できます
+      count_member: メンバー数
+      member_title: メンバー情報
+      name: 名前
+      status: ステータス
+      your_status: あなたのステータス
   date:
     abbr_day_names:
     - 日
@@ -158,6 +191,13 @@ ja:
       create: 登録する
       submit: 保存する
       update: 更新する
+    request:
+      send: 参加リクエストを送る
+      withdraw: このグループから脱退する
+    event:
+      coming: 直近のイベント
+      nothing: 予定されているイベントはありません
+      old: 過去のイベント
   number:
     currency:
       format:

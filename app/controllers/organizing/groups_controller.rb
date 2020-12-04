@@ -1,8 +1,8 @@
 class Organizing::GroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :group_organizer_only, only:[:show, :old_events]
+  before_action :group_organizer_only, only:[:show]
 
-  before_action :set_group, only: [:show, :edit, :update, :destroy, :give_owner, :old_events]
+  before_action :set_group, only: [:show, :edit, :update, :destroy, :give_owner]
   before_action :group_owner_only, only:[:edit, :update, :destroy, :give_owner]
 
   def show

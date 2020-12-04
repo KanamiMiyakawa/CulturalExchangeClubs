@@ -15,6 +15,20 @@
 #header-brand {
  color: #0d0a06;
 }
+.alert-space {
+  min-height: 1.5rem
+}
+.alert-wrapper {
+  background-color: #ff4f00;
+  border-top: double 4px white;
+  border-bottom: double 4px white;
+  padding: 0.25rem 0;
+}
+.alert, .notice {
+  color: #efffff;
+  font-weight: bold;
+  margin-bottom: 0;
+}
 .cursive {
   font-family: cursive;
 }
@@ -26,6 +40,23 @@
 .index-date {
   font-weight: bold;
 }
+.main-container {
+  background-color: white;
+  border-style: double;
+  border-width: 5px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px black;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.side-container {
+  background-color: white;
+  border-style: double;
+  border-width: 5px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px black;
+}
 
 @import "bootstrap-custom";
 @import "users";
+@import "groups";

@@ -6,11 +6,11 @@ module GroupsHelper
     when *@organizers.pluck(:user_id)
       "オーガナイザー"
     when *@pending_users.pluck(:user_id)
-      "保留中"
+      "参加保留中"
     when *@members.pluck(:user_id)
       "メンバー"
     else
-      "未加入"
+      "未加入(ゲスト)"
     end
   end
 end

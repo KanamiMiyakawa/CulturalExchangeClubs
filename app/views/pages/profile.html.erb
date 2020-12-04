@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
 
-      <div class="col-md-8 user-container">
+      <div class="col-md-8 main-container user-container">
         <div class="user-new-content">
 
           <div class="row">
@@ -48,10 +48,10 @@
       </div>
 
       <div class="col-md-4">
-        <div class="event-side-container">
+        <div class="side-container event-side-container">
           <% if @user == current_user %>
+            <h3><%= t('.coming_events') %></h3>
             <%if @events.present? %>
-              <h3>参加予定のイベント</h3>
 
               <% @events.each do |event| %>
                 <% if event.schedule.to_date > @index_date %>
@@ -61,25 +61,27 @@
 
                 <table class="table table-sm table-primary">
                   <% participant = Participant.find_by(user_id:current_user.id, event_id:event.id) %>
-                  <caption><%= link_to 'イベント参加を取りやめる', participant_path(participant.id), method: :delete, data: { confirm: 'Are you sure?' } %></caption>
+                  <caption><%= link_to "#{t('.delete_participant')}", participant_path(participant.id), method: :delete, data: { confirm: 'Are you sure?' } %></caption>
                   <tr>
-                    <th>イベント名：</th>
+                    <th><%= t('.event_name') %></th>
                     <td><%= link_to "#{event.name}", event_path(event) %></td>
                   </tr>
                   <tr>
-                    <th>グループ名：</th>
+                    <th><%= t('.group_name') %></th>
                     <td><%= link_to "#{event.group.name}", group_path(event.group) %></td>
                   </tr>
                   <tr>
-                    <th>日時：</th>
+                    <th><%= t('.date') %></th>
                     <td><%= l event.schedule, format: :long %></td>
                   </tr>
                   <tr>
-                    <th>場所：</th>
+                    <th><%= t('.address') %></th>
                     <td><%= event.address %></td>
                   </tr>
                 </table>
               <% end %>
+            <% else %>
+              <p><%= t('.no_events') %></p>
             <% end %>
 
             <% if @events.present? && @organizing_events.present? %>
@@ -87,7 +89,7 @@
             <% end %>
 
             <% if @organizing_events.present? %>
-              <h3>企画中のイベント</h3>
+              <h3><%= t('.organizing_events') %></h3>
 
               <% @organizing_events.each do |event| %>
                 <% if event.schedule.to_date > @index_date %>
@@ -96,21 +98,21 @@
                 <% end %>
 
                 <table class="table table-sm table-warning">
-                  <caption><%= link_to 'このイベントを編集する', edit_organizing_group_event_path(group_id: event.group.id, id: event.id) %></caption>
+                  <caption><%= link_to "#{t('.edit_event')}", edit_organizing_group_event_path(group_id: event.group.id, id: event.id) %></caption>
                   <tr>
-                    <th>イベント名：</th>
+                    <th><%= t('.event_name') %></th>
                     <td><%= link_to "#{event.name}", event_path(event) %></td>
                   </tr>
                   <tr>
-                    <th>グループ名：</th>
+                    <th><%= t('.group_name') %></th>
                     <td><%= link_to "#{event.group.name}", group_path(event.group) %></td>
                   </tr>
                   <tr>
-                    <th>日時：</th>
+                    <th><%= t('.date') %></th>
                     <td><%= l event.schedule, format: :long %></td>
                   </tr>
                   <tr>
-                    <th>場所：</th>
+                    <th><%= t('.address') %></th>
                     <td><%= event.address %></td>
                   </tr>
                 </table>
@@ -119,8 +121,8 @@
           <% end %>
         </div>
 
-        <div class="group-side-container">
-          <h3>所属グループ</h3>
+        <div class="side-container group-side-container">
+          <h3><%= t('.groups') %></h3>
           <% if @user == current_user %>
             <% if @groups.present? %>
               <ul>
@@ -129,7 +131,7 @@
                 <% end %>
               </ul>
             <% else %>
-              <p>所属しているグループはありません</p>
+              <p><%= t('.no_groups') %></p>
             <% end %>
           <% end %>
         </div>

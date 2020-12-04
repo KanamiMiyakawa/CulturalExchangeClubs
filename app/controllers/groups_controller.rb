@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_group, only: [:show]
+  before_action :set_group, only: [:show, :old_events]
 
   #開発中の暫定
   def index
@@ -29,6 +29,13 @@ class GroupsController < ApplicationController
     end
     @pending_users = @members.where(pending:true)
     @organizers = @group.organized_users
+    @events = @group.events.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(3)
+    @index_date = 0
+  end
+
+  def old_events
+    @events = @group.events.where('schedule < ?', Time.zone.now).order(schedule: "DESC")
+    @index_date = 0
   end
 
   private

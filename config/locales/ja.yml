@@ -60,6 +60,19 @@ ja:
       your_status: あなたのステータス
     old_events:
       title: の過去のイベント
+  events:
+    index:
+      title: イベント一覧
+      online: オンライン
+      max: 人まで参加可能
+      rest: 残席
+      no_rest: 現在空きがありません
+      pending: オーガナイザーの参加許可を待っています！
+      accepted: あなたはこのイベントに参加予定です！
+      delete_participant: イベント参加を取りやめる
+      organizer: あなたはオーガナイザーです！
+      guest: ゲストとして参加
+      mamber: グループに登録して参加
   date:
     abbr_day_names:
     - 日
@@ -211,6 +224,8 @@ ja:
       old: 過去のイベント
     group:
       your_status: あなたのステータス
+    confirm:
+      delete: 本当に削除してよろしいですか？
   number:
     currency:
       format:

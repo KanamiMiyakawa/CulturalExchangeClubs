@@ -4,7 +4,7 @@
 
       <div class="col-md-8 event-container">
 
-        <h2>イベント一覧</h2>
+        <h2><%= t('.title') %></h2>
 
         <% @events.each do |event| %>
 
@@ -31,7 +31,7 @@
                   <tr>
                     <td>
                       <% if event.online? %>
-                        オンライン
+                        <%= t('.online') %>
                       <% else %>
                         <%= event.address %>
                       <% end %>
@@ -55,11 +55,11 @@
                       </th>
                       <td>
                         <% if rest > 0 %>
-                          <span class="index-max"><%= event_language.max %>人まで参加可能<span>/
-                          <span class="index-rest">残席<%= rest %></span>
+                          <span class="index-max"><%= "#{event_language.max}"+t('.max') %><span>/
+                          <span class="index-rest"><%= t('.rest')+"#{rest}" %></span>
                           <% @languages_select_list.push([language_name,event_language.id]) %>
                         <% else %>
-                          <span class="index-rest">現在空きがありません</span>
+                          <span class="index-rest"><%= t('.no_rest') %></span>
                         <% end %>
                       </td>
                     </tr>
@@ -71,15 +71,15 @@
                   <% participant = Participant.find_by(event_id:event.id, user_id:current_user.id) %>
                   <p class="index-status alert alert-warning">
                     <% if participant.pending? %>
-                      オーガナイザーの参加許可を待っています！
+                      <%= t('.pending') %>
                     <% else %>
-                      あなたはこのイベントに参加予定です！
+                      <%= t('.accepted') %>
                     <% end %>
                   </p>
-                  <p><%= link_to 'イベント参加を取りやめる', participant_path(participant.id), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+                  <p><%= link_to t('.delete_participant'), participant_path(participant.id), method: :delete, data: { confirm: t('helpers.confirm.delete') } %></p>
 
                 <% elsif event.user == current_user %>
-                  <p class="index-status alert alert-success">あなたはオーガナイザーです！</p>
+                  <p class="index-status alert alert-success"><%= t('.organizer') %></p>
 
                 <% elsif @languages_select_list.present? %>
 
@@ -92,10 +92,10 @@
                     <% else %>
                       <div class="text-center">
                         <% if event.guest_allowed? %>
-                          <%= form.label :guest, "ゲストとして参加", value: true %>
+                          <%= form.label :guest, t('.guest'), value: true %>
                           <%= form.radio_button :guest, true %>
                         <% end %>
-                        <%= form.label :guest, "グループに登録して参加", value: false  %>
+                        <%= form.label :guest, t('.member'), value: false  %>
                         <%= form.radio_button :guest, false, checked: true %>
                       </div>
                     <% end %>

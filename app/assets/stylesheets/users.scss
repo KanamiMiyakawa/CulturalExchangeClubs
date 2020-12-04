@@ -5,10 +5,12 @@
 //general
 .user-wrapper {
   background-color: #ff7539;
+  border-top: dashed 14px #fde86e;
+  border-bottom: dashed 14px #fde86e;
 }
 .user-container {
   border-color: #aa6c64;
-  padding: 3rem 2rem;
+  padding: 2rem 2rem;
 }
 .user-new-content label, em, i {
   font-weight: bold;

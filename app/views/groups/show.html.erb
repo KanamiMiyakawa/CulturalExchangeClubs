@@ -67,9 +67,9 @@
           <h3><%= t('helpers.group.your_status') %></h3>
           <p class="text-center group-status"><%= chk_member_status(current_user.id) %></p>
           <% if @member_self.nil? %>
-            <p><%= link_to t('helpers.request.send'), members_path(group_id: @group.id), method: :post %></p>
+            <p class="text-center"><%= link_to t('helpers.request.send'), members_path(group_id: @group.id), method: :post %></p>
           <% elsif @group.owner != current_user %>
-            <p><%= link_to t('helpers.request.withdraw'), member_path(id:@member_self, group_id: @group.id), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+            <p class="text-center"><%= link_to t('helpers.request.withdraw'), member_path(id:@member_self, group_id: @group.id), method: :delete, data: { confirm: 'Are you sure?' } %></p>
           <% end %>
         </div>
 

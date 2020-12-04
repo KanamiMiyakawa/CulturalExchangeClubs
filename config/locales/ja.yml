@@ -72,7 +72,7 @@ ja:
       delete_participant: イベント参加を取りやめる
       organizer: あなたはオーガナイザーです！
       guest: ゲストとして参加
-      mamber: グループに登録して参加
+      member: グループに登録して参加
   date:
     abbr_day_names:
     - 日

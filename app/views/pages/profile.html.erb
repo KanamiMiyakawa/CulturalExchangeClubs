@@ -48,8 +48,8 @@
       </div>
 
       <div class="col-md-4">
-        <div class="side-container event-side-container">
-          <% if @user == current_user %>
+        <% if @user == current_user %>
+          <div class="side-container event-side-container">
             <h3><%= t('.coming_events') %></h3>
             <%if @events.present? %>
 
@@ -118,8 +118,10 @@
                 </table>
               <% end %>
             <% end %>
-          <% end %>
-        </div>
+          </div>
+        <% else %>
+          <div class="rem2-space"></div>
+        <% end %>
 
         <div class="side-container group-side-container">
           <h3><%= t('.groups') %></h3>

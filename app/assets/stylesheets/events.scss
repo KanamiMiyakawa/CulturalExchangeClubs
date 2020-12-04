@@ -1,4 +1,9 @@
 //index
+.events-index-title {
+  background-color: #ffdc98;
+  width: 120%;
+  padding-left: 0.4rem;
+}
 .events-index-date {
   background-color: #ffdc98;
   width: 120%;
@@ -36,8 +41,13 @@
   border-radius: 10px;
 }
 .map-side-container {
-  border-color: #93933a;
+  border-color: #69a8ee;
   padding: 1.5rem 2rem;
   margin-top: 2rem;
   height: 500px;
+}
+.index-event-side-container {
+  border-color: #93933a;
+  padding: 1.5rem 2rem;
+  margin-top: 1rem;
 }

@@ -24,10 +24,11 @@
   border-bottom: double 4px white;
   padding: 0.25rem 0;
 }
-.alert, .notice {
+.alert-space .alert, .notice {
   color: #efffff;
   font-weight: bold;
-  margin-bottom: 0;
+  margin-bottom: 0rem;
+  padding: 0 1.25rem;
 }
 .cursive {
   font-family: cursive;
@@ -55,6 +56,9 @@
   border-width: 5px;
   border-radius: 10px;
   box-shadow: 2px 2px 4px black;
+}
+.rem2-space {
+  margin-top: 2rem;
 }
 
 @import "bootstrap-custom";

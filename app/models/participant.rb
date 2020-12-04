@@ -1,6 +1,7 @@
 class Participant < ApplicationRecord
   before_create :check_pending
   before_create :check_the_rest
+  before_create :check_organizer
 
   belongs_to :user
   belongs_to :event
@@ -19,5 +20,9 @@ class Participant < ApplicationRecord
       errors.add :base, 'イベントが満席になりました'
       throw :abort
     end
+  end
+
+  def check_organizer
+    throw :abort if self.user_id == self.event.user_id
   end
 end

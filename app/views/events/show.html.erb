@@ -49,6 +49,9 @@
   <% end %>
   <p><%= link_to 'イベント参加を取りやめる', participant_path(participant.id), method: :delete, data: { confirm: 'Are you sure?' } %></p>
 
+<% elsif @event.user == current_user %>
+  <p>あなたはオーガナイザーです</p>
+
 <% else %>
 
   <% if @event.permission? %>

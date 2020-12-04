@@ -78,6 +78,9 @@
                   </p>
                   <p><%= link_to 'イベント参加を取りやめる', participant_path(participant.id), method: :delete, data: { confirm: 'Are you sure?' } %></p>
 
+                <% elsif event.user == current_user %>
+                  <p class="index-status alert alert-success">あなたはオーガナイザーです！</p>
+
                 <% elsif @languages_select_list.present? %>
 
                   <%= form_with(url: participants_path, local: true) do |form| %>

@@ -120,9 +120,78 @@
           地図を表示
         </div>
 
-        <div class="side-container index-event-side-container">
-          地図を表示
-        </div>
+        <% if user_signed_in? %>
+          <div class="side-container index-event-side-container">
+            <h3><%= t('.coming_events') %></h3>
+            <%if @coming_events.present? %>
+              <% @index_date = 0 %>
+              <% @coming_events.each do |event| %>
+                <% if event.schedule.to_date > @index_date %>
+                  <% @index_date = event.schedule.to_date %>
+                  <p class="index-date"><%= l @index_date, format: :index %></p>
+                <% end %>
+
+                <table class="table table-sm table-primary">
+                  <% participant = Participant.find_by(user_id:current_user.id, event_id:event.id) %>
+                  <caption><%= link_to "#{t('.delete_participant')}", participant_path(participant.id), method: :delete, data: { confirm: t('helpers.confirm.delete') } %></caption>
+                  <tr>
+                    <th><%= t('.event_name') %></th>
+                    <td><%= link_to "#{event.name}", event_path(event) %></td>
+                  </tr>
+                  <tr>
+                    <th><%= t('.group_name') %></th>
+                    <td><%= link_to "#{event.group.name}", group_path(event.group) %></td>
+                  </tr>
+                  <tr>
+                    <th><%= t('.date') %></th>
+                    <td><%= l event.schedule, format: :long %></td>
+                  </tr>
+                  <tr>
+                    <th><%= t('.address') %></th>
+                    <td><%= event.address %></td>
+                  </tr>
+                </table>
+              <% end %>
+            <% else %>
+              <p><%= t('.no_events') %></p>
+            <% end %>
+
+            <% if @coming_events.present? && @organizing_events.present? %>
+              <div class="border-dashed"></div>
+            <% end %>
+
+            <% if @organizing_events.present? %>
+              <h3><%= t('.organizing_events') %></h3>
+
+              <% @organizing_events.each do |event| %>
+                <% if event.schedule.to_date > @index_date %>
+                  <% @index_date = event.schedule.to_date %>
+                  <p class="index-date"><%= l @index_date, format: :index %></p>
+                <% end %>
+
+                <table class="table table-sm table-warning">
+                  <caption><%= link_to "#{t('.edit_event')}", edit_organizing_group_event_path(group_id: event.group.id, id: event.id) %></caption>
+                  <tr>
+                    <th><%= t('.event_name') %></th>
+                    <td><%= link_to "#{event.name}", event_path(event) %></td>
+                  </tr>
+                  <tr>
+                    <th><%= t('.group_name') %></th>
+                    <td><%= link_to "#{event.group.name}", group_path(event.group) %></td>
+                  </tr>
+                  <tr>
+                    <th><%= t('.date') %></th>
+                    <td><%= l event.schedule, format: :long %></td>
+                  </tr>
+                  <tr>
+                    <th><%= t('.address') %></th>
+                    <td><%= event.address %></td>
+                  </tr>
+                </table>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
 
     </div>

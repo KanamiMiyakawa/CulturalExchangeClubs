@@ -21,31 +21,31 @@
         <div class="collapse navbar-collapse" id="navbarToggler">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item font-weight-bold">
-              <%= link_to 'イベント一覧', events_path, class: "nav-link" %>
+              <%= link_to t('.events'), events_path, class: "nav-link" %>
             </li>
 
           <% if user_signed_in? %>
             <% if current_user.organizers.present? %>
               <li class="nav-item font-weight-bold">
-                <%= link_to 'オーガナイザー画面', organizing_path, class: "nav-link" %>
+                <%= link_to t('.organizing'), organizing_path, class: "nav-link" %>
               </li>
             <% else %>
               <li class="nav-item font-weight-bold">
-                <%= link_to 'グループ作成', new_group_path, class: "nav-link" %>
+                <%= link_to t('.new_group'), new_group_path, class: "nav-link" %>
               </li>
             <% end %>
             <li class="nav-item font-weight-bold">
               <%= link_to "#{current_user.name}", "/profile/#{current_user.id}", class: "nav-link" %>
             </li>
             <li class="nav-item font-weight-bold">
-              <%= link_to 'ログアウト', logout_path, method: :delete, class: "nav-link" %>
+              <%= link_to t('.logout'), logout_path, method: :delete, class: "nav-link" %>
             </li>
           <% else %>
             <li class="nav-item font-weight-bold">
-              <%= link_to 'サインアップ', signup_path, class: "nav-link" %>
+              <%= link_to t('.signup'), signup_path, class: "nav-link" %>
             </li>
             <li class="nav-item font-weight-bold">
-              <%= link_to 'ログイン', login_path, class: "nav-link" %>
+              <%= link_to t('.login'), login_path, class: "nav-link" %>
             </li>
           <% end %>
 

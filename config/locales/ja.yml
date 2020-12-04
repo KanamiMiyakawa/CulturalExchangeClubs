@@ -25,6 +25,14 @@ ja:
       member:
         name: 名前
         created_at: 加入日
+  layouts:
+    application:
+      events: イベント一覧
+      organizing: オーガナイザー画面
+      new_group: グループ作成
+      logout: ログアウト
+      signup: サインアップ
+      login: ログイン
   pages:
     profile:
       title: ユーザー詳細

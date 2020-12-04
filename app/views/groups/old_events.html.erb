@@ -1,29 +1,85 @@
-<h2>過去のイベント</h2>
+<div class="group-wrapper mb-4">
+  <div class="container">
+    <div class="row">
 
-<% @events.each do |event| %>
+      <div class="col-md-8 main-container group-container">
+        <div class="group-show-content">
+          <div class="row">
+            <div class="col-lg-10 offset-lg-1">
 
-  <% if event.schedule.to_date < @index_date %>
-    <% @index_date = event.schedule.to_date %>
-    <p><%= l @index_date, format: :index %></p>
-  <% end %>
+              <h2 class="mb-4"><%= @group.name + t('.title') %></h2>
 
-  <table>
-    <tr>
-      <th>イベント名：</th>
-      <td><%= link_to "#{event.name}", event_path(event) %></td>
-    </tr>
-    <tr>
-      <th>グループ名：</th>
-      <td><%= event.group.name %></td>
-    </tr>
-    <tr>
-      <th>日時：</th>
-      <td><%= l event.schedule, format: :long %></td>
-    </tr>
-    <tr>
-      <th>場所：</th>
-      <td><%= event.address %></td>
-    </tr>
-  </table>
-  <br>
-<% end %>
+              <% @old_events.each do |event| %>
+
+                <% if event.schedule.to_date < @index_date %>
+                  <% @index_date = event.schedule.to_date %>
+                  <p class="index-date"><%= l @index_date, format: :index %></p>
+                <% end %>
+
+                <table class="table table-secondary">
+                  <tr>
+                    <th><%= t('activerecord.attributes.event.name') %></th>
+                    <td><%= link_to "#{event.name}", event_path(event) %></td>
+                  </tr>
+                  <tr>
+                    <th><%= t('activerecord.attributes.event.schedule') %></th>
+                    <td><%= l event.schedule, format: :long %></td>
+                  </tr>
+                  <tr>
+                    <th><%= t('activerecord.attributes.event.address') %></th>
+                    <td><%= event.address %></td>
+                  </tr>
+                </table>
+                <br>
+              <% end %>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="side-container status-side-container">
+          <h3><%= t('helpers.group.your_status') %></h3>
+          <p class="text-center group-status"><%= chk_member_status(current_user.id) %></p>
+          <% if @member_self.nil? %>
+            <p><%= link_to t('helpers.request.send'), members_path(group_id: @group.id), method: :post %></p>
+          <% elsif @group.owner != current_user %>
+            <p><%= link_to t('helpers.request.withdraw'), member_path(id:@member_self, group_id: @group.id), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          <% end %>
+        </div>
+
+        <div class="side-container group-event-side-container">
+          <h3><%= @group.name %><br><%= t('helpers.event.coming') %></h3>
+          <% if @events.present? %>
+            <% @events.each do |event| %>
+              <% if event.schedule.to_date > @index_date %>
+                <% @index_date = event.schedule.to_date %>
+                <p class="index-date"><%= l @index_date, format: :index %></p>
+              <% end %>
+
+              <table class="table table-sm table-primary">
+                <tr>
+                  <th><%= t('activerecord.attributes.event.name') %></th>
+                  <td><%= link_to "#{event.name}", event_path(event) %></td>
+                </tr>
+                <tr>
+                  <th><%= t('activerecord.attributes.event.schedule') %></th>
+                  <td><%= l event.schedule, format: :long %></td>
+                </tr>
+                <tr>
+                  <th><%= t('activerecord.attributes.event.address') %></th>
+                  <td><%= event.address %></td>
+                </tr>
+              </table>
+            <% end %>
+          <% else %>
+            <p><%= t('helpers.event.nothing') %></p>
+          <% end %>
+          <p><%= link_to t('helpers.event.old'), old_events_group_path(@group) %></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

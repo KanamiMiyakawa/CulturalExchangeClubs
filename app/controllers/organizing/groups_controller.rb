@@ -35,11 +35,6 @@ class Organizing::GroupsController < ApplicationController
     redirect_to organizing_group_path(@group), notice: 'オーナーを変更しました'
   end
 
-  def old_events
-    @events = @group.events.where('schedule < ?', Time.zone.now).order(schedule: "DESC")
-    @index_date = Time.zone.today
-  end
-
   private
 
   def set_group

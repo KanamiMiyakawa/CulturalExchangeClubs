@@ -58,6 +58,8 @@ ja:
       name: 名前
       status: ステータス
       your_status: あなたのステータス
+    old_events:
+      title: の過去のイベント
   date:
     abbr_day_names:
     - 日
@@ -199,6 +201,7 @@ ja:
       create: 登録する
       submit: 保存する
       update: 更新する
+      participate: 言語を選んで参加！
     request:
       send: 参加リクエストを送る
       withdraw: このグループから脱退する
@@ -206,6 +209,8 @@ ja:
       coming: 直近のイベント
       nothing: 予定されているイベントはありません
       old: 過去のイベント
+    group:
+      your_status: あなたのステータス
   number:
     currency:
       format:

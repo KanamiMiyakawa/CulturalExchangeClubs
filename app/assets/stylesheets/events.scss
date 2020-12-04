@@ -1,0 +1,43 @@
+//index
+.events-index-date {
+  background-color: #ffdc98;
+  width: 120%;
+  padding-left: 0.4rem;
+}
+.index-main-container {
+  border: outset 2px #ffdadc;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+.index-event-name {
+  font-size: 1.5rem;
+}
+.index-language {
+  font-weight: bold;
+}
+.index-max {
+  font-weight: 400;
+  padding-left: 1rem;
+}
+.index-rest {
+  color: red;
+  padding-left: 1rem;
+}
+.index-status {
+  margin-bottom: 0.5rem;
+}
+.index-btn select {
+  line-height: 1.5rem;
+  vertical-align: middle;
+}
+.index-side-column {
+  background-color: #f9ff82;
+  border-radius: 10px;
+}
+.map-side-container {
+  border-color: #93933a;
+  padding: 1.5rem 2rem;
+  margin-top: 2rem;
+  height: 500px;
+}

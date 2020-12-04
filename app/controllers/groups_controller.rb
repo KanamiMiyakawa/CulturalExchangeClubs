@@ -34,8 +34,15 @@ class GroupsController < ApplicationController
   end
 
   def old_events
-    @events = @group.events.where('schedule < ?', Time.zone.now).order(schedule: "DESC")
-    @index_date = 0
+    @members = @group.members.includes(:user)
+    if @members.pluck(:user_id).include?(current_user.id)
+      @member_self = Member.find_by(user_id:current_user.id, group_id:@group.id)
+    end
+    @pending_users = @members.where(pending:true)
+    @organizers = @group.organized_users
+    @old_events = @group.events.where('schedule < ?', Time.zone.now).order(schedule: "DESC")
+    @events = @group.events.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(3)
+    @index_date = Time.zone.today
   end
 
   private

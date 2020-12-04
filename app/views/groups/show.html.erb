@@ -9,7 +9,7 @@
 
               <h2 class="mb-3"><%= t('.title') %></h2>
 
-              <table class="table">
+              <table class="table group-show-table">
                 <tr>
                   <th><%= t('activerecord.attributes.group.name') %></th>
                   <td><%= @group.name %></td>
@@ -64,7 +64,7 @@
 
       <div class="col-md-4">
         <div class="side-container status-side-container">
-          <h3><%= t('.your_status') %></h3>
+          <h3><%= t('helpers.group.your_status') %></h3>
           <p class="text-center group-status"><%= chk_member_status(current_user.id) %></p>
           <% if @member_self.nil? %>
             <p><%= link_to t('helpers.request.send'), members_path(group_id: @group.id), method: :post %></p>

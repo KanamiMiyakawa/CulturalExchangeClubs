@@ -1,160 +1,160 @@
-<h2>イベント詳細ページ</h2>
+<div class="event-wrapper mb-4">
+  <div class="container">
+    <div class="row">
 
-<% if @organizers.include?(current_user) %>
-  <p>
-    <%= link_to '編集', edit_organizing_group_event_path(id: @event, group_id: @group.id) %> |
-    <%= link_to '削除', organizing_group_event_path(id: @event, group_id: @group.id), method: :delete, data: { confirm: 'Are you sure?' } %>
-  </p>
-<% end %>
+      <div class="col-md-8 main-container event-container">
+        <div class="group-show-content">
+          <div class="row">
+            <div class="col-lg-10 offset-lg-1">
 
-<p>ここからの参加者ステータスや参加フォームは画面右側にまとめる</p>
+              <h2><%= @event.name %></h2>
 
-<p>グループステータス:
-  <% if current_user == @group.owner %>
-    オーナー
-  <% elsif @organizers.include?(current_user) %>
-    オーガナイザー
-  <% elsif @group.users.include?(current_user) %>
-    メンバー
-  <% else %>
-    ゲスト
-  <% end %>
-</p>
+              <% @languages_select_list = [] %>
 
-<h3>参加可能な言語</h3>
+              <div class="event-show-language-table">
+                <table class="table table-sm table-borderless">
+                  <% @event_languages.each do |event_language| %>
+                    <% language_name = event_language.language.ja_name %>
+                    <% rest = event_language.max - event_language.participants.count %>
+                    <tr>
+                      <th class="index-language">
+                        <%= event_language.language.ja_name %>
+                      </th>
+                      <td>
+                        <% if rest > 0 %>
+                          <span class="index-max"><%= "#{event_language.max}"+t('.max') %><span>/
+                          <span class="index-rest"><%= t('.rest')+"#{rest}" %></span>
+                          <% @languages_select_list.push([language_name,event_language.id]) %>
+                        <% else %>
+                          <span class="index-rest"><%= t('.no_rest') %></span>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </table>
+              </div>
 
-<% @languages_select_list = [] %>
+              <table class="table table-primary event-show-table">
+                <tr>
+                  <th><%= t('.organizer') %></th>
+                  <td><%= link_to @organizer.name, "/profile/#{@organizer.id}" %></td>
+                </tr>
+                <tr>
+                  <th><%= t('.group') %></th>
+                  <td><%= link_to @group.name, group_path(@group) %></td>
+                </tr>
+                <tr>
+                  <th><%= t('activerecord.attributes.event.content') %></th>
+                  <td><%= simple_format(@event.content) %></td>
+                </tr>
+                <tr>
+                  <th><%= t('activerecord.attributes.event.permission') %></th>
+                  <td>
+                    <% if @event.permission? %>
+                      <%= t('.permission_true') %>
+                    <% else %>
+                      <%= t('.permission_false') %>
+                    <% end %>
+                  </td>
+                </tr>
+                <tr>
+                  <th><%= t('activerecord.attributes.event.guest') %></th>
+                  <td>
+                    <% if @event.guest_allowed? %>
+                      <%= t('.guest_true') %>
+                    <% else %>
+                      <%= t('.guest_false') %>
+                    <% end %>
+                  </td>
+                </tr>
+                <tr>
+                  <th><%= t('activerecord.attributes.event.schedule') %></th>
+                  <td><%= l @event.schedule, format: :long %></td>
+                </tr>
+                <tr>
+                  <th><%= t('activerecord.attributes.event.address') %></th>
+                  <td>
+                    <% if @event.online? %>
+                      <%= t('.online') %>
+                    <% else %>
+                      <%= @event.address %>
+                    <% end %>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<% @event_languages.each do |event_language| %>
-  <p>
-    <% language_name = event_language.language.ja_name %>
-    <%= language_name %>：定員<%= event_language.max %>人
-    <% rest = event_language.max - event_language.participants.count %>
-    <% if rest > 0 %>
-    　※あと<%= rest %>人参加できます
-      <% @languages_select_list.push([language_name,event_language.id]) %>
-    <% else %>
-      現在空きがありません
-    <% end %>
-  </p>
-<% end %>
+      <div class="col-md-4">
+        <div class="side-container status-side-container">
+          <h3 class="text-center"><%= t('helpers.group.your_status') %></h3>
+          <p class="text-center"><%= t('.group') %>:<span class="group-status ml-3"><%= chk_member_status(current_user.id) %></span></p>
 
-<% if @event.users.include?(current_user) %>
+          <% if @event.users.include?(current_user) %>
 
-  <% participant = Participant.find_by(event_id:@event.id, user_id:current_user.id) %>
-  <% if participant.pending? %>
-    <p>現在、オーガナイザーの参加許可を待っています！</p>
-  <% else %>
-    <p>あなたは参加予定です！</p>
-  <% end %>
-  <p><%= link_to 'イベント参加を取りやめる', participant_path(participant.id), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+            <% participant = Participant.find_by(event_id:@event.id, user_id:current_user.id) %>
+            <p class="index-status alert alert-danger text-center">
+              <% if participant.pending? %>
+                <%= t('.pending') %>
+              <% else %>
+                <%= t('.accepted') %>
+              <% end %>
+            </p>
+            <p class="text-center"><%= link_to t('.delete_participant'), participant_path(participant.id), method: :delete, data: { confirm: t('helpers.confirm.delete') } %></p>
 
-<% elsif @event.user == current_user %>
-  <p>あなたはオーガナイザーです</p>
+          <% elsif @event.user == current_user %>
+            <p class="index-status alert alert-success"><%= t('.you_organizer') %></p>
 
-<% else %>
+          <% else %>
 
-  <% if @event.permission? %>
-    <p>※このイベントはオーガナイザーの許可のあとで参加が確定します</p>
-  <% end %>
-  <% if @event.guest_allowed? %>
-    <p>※このイベントはグループメンバー以外も参加可能です</p>
-  <% end %>
+            <div class="border-dashed"></div>
 
-  <%= form_with(url: participants_path, local: true) do |form| %>
-    <%= form.hidden_field :event_id, value: @event.id %>
-    <%= form.hidden_field :group_id, value: @event.group_id %>
-    <%= form.label :event_language_id %>
-    <%= form.select :event_language_id, @languages_select_list %>
-    <br>
+            <%= form_with(url: participants_path, local: true) do |form| %>
+              <%= form.hidden_field :event_id, value: @event.id %>
+              <%= form.hidden_field :group_id, value: @event.group_id %>
 
-    <% if @event.group.users.include?(current_user) %>
-      <%= form.hidden_field :guest, value: false %>
-    <% else %>
-      <% if @event.guest_allowed? %>
-        <%= form.label :guest, "ゲストとして参加", value: true %>
-        <%= form.radio_button :guest, true %>
-      <% end %>
-      <%= form.label :guest, "グループに登録して参加", value: false  %>
-      <%= form.radio_button :guest, false, checked: true %>
-    <% end %>
+              <% if @event.group.users.include?(current_user) %>
+                <%= form.hidden_field :guest, value: false %>
+              <% else %>
+                <div class="text-center">
+                  <% if @event.guest_allowed? %>
+                    <%= form.label :guest, t('.guest'), value: true %>
+                    <%= form.radio_button :guest, true %>
+                  <% end %>
+                  <%= form.label :guest, t('.member'), value: false  %>
+                  <%= form.radio_button :guest, false, checked: true %>
+                </div>
+              <% end %>
+              <p class="text-center mb-2 index-btn">
+                <%= form.select :event_language_id, @languages_select_list %>
+              </p>
+              <div class="text-center">
+                <%= form.submit t('helpers.submit.participate'), class: "btn btn-warning" %>
+              </div>
+            <% end %>
 
-    <%= form.submit %>
-  <% end %>
+          <% end %>
 
-<% end %>
+        </div>
 
-<table>
-  <tr>
-    <th>ID：</th>
-    <td><%= @event.id %></td>
-  </tr>
-  <tr>
-    <th>名前：</th>
-    <td><%= @event.name %></td>
-  </tr>
-  <tr>
-    <th>日時：</th>
-    <td><%= @event.schedule %></td>
-  </tr>
-  <tr>
-    <th>オーガナイザー：</th>
-    <td><%= @organizer.name %></td>
-  </tr>
-  <tr>
-    <th>グループ：</th>
-    <td><%= @group.name %></td>
-  </tr>
-  <tr>
-    <th>詳細：</th>
-    <td><%= simple_format(@event.content) %></td>
-  </tr>
-  <tr>
-    <th>オンラインイベント：</th>
-    <td>
-      <% if @event.online? %>
-        オンラインイベントです
-      <% else %>
-        オンラインじゃないです
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <th>加入許可：</th>
-    <td>
-      <% if @event.permission? %>
-        許可制
-      <% else %>
-        自由参加
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <th>非グループメンバーの参加：</th>
-    <td>
-      <% if @event.guest_allowed? %>
-        あり
-      <% else %>
-        なし
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <th>住所：</th>
-    <td><%= @event.address %></td>
-  </tr>
-  <tr>
-    <th>場所名：</th>
-    <td><%= @event.place %></td>
-  </tr>
-</table>
+        <div class="side-container participant-side-container">
+          <h3 class="mb-3 text-center"><%= t('.participants') %></h3>
 
-<br>
-<h3>現在の参加者</h3>
+          <% @event_languages.each do |event_language| %>
+            <p class="participant-language"><%= event_language.language.ja_name %></p>
+            <div>
+              <ul class="participant-list">
+                <% event_language.participants.each do |participant| %>
+                  <li><%= link_to participant.user.name, "/profile/#{participant.user_id}" %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </div>
 
-<% @event_languages.each do |event_language| %>
-  <p><%= event_language.language.ja_name %></p>
-  <% event_language.participants.each do |participant| %>
-    <p><%= participant.user.name %></p>
-  <% end %>
-<% end %>
+    </div>
+  </div>
+</div>

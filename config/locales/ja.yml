@@ -16,7 +16,10 @@ ja:
       event:
         name: イベント名
         schedule: 日付
-        address: 場所
+        address: 開催場所
+        content: 詳細
+        permission: 参加許可
+        guest: ゲスト(非メンバー)の参加
       group:
         name: グループ名
         detail: グループについて
@@ -81,6 +84,24 @@ ja:
       organizing_events: 企画中のイベント
       edit_event: このイベントを編集する
       no_events: 予定しているイベントはありません
+    show:
+      max: 人まで参加可能
+      rest: 残席
+      no_rest: 現在空きがありません
+      organizer: オーガナイザー
+      group: グループ
+      permission_true: オーガナイザーの許可が必要です
+      permission_false: 自由に参加できます
+      guest_true: あり
+      guest_false: なし
+      online: オンラインイベントです！
+      pending: オーガナイザーの参加許可を待っています！
+      accepted: あなたはこのイベントに参加予定です！
+      delete_participant: イベント参加を取りやめる
+      you_organizer: あなたはオーガナイザーです！
+      guest: ゲストとして参加
+      member: グループに登録して参加
+      participants: 参加予定
   date:
     abbr_day_names:
     - 日

@@ -15,6 +15,8 @@ class EventsController < ApplicationController
     @group = @event.group
     @organizer = @event.user
     @organizers = @group.organized_users
+    @members = @group.members.includes(:user)
+    @pending_users = @members.where(pending:true)
     @event_languages = @event.event_languages
   end
 end

@@ -51,3 +51,41 @@
   padding: 1.5rem 2rem;
   margin-top: 1rem;
 }
+
+//show
+.event-wrapper {
+  background-color: #eaea89;
+}
+.event-container {
+  border-color: #757725;
+  padding: 3rem 2rem
+}
+.event-show-language-table {
+  border: dashed 2px #8dc3ff;
+  margin: 1.5rem;
+}
+.event-show-language-table table {
+  margin-bottom: 0;
+}
+.event-show-language-table th {
+  padding-left: 1.5rem;
+}
+.event-show-table th {
+  width: 40%;
+}
+.event-show-table td {
+  width: 60%;
+  padding-left: 1rem;
+  background-color: white;
+}
+.participant-language {
+  font-weight: bold;
+}
+.participant-list {
+  list-style: none;
+}
+.participant-side-container {
+  border-color: #3b5f9c;
+  padding: 1.5rem 2rem;
+  margin-top: 1rem;
+}

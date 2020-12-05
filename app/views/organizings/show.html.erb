@@ -2,7 +2,98 @@
   <div class="container">
     <div class="row">
 
-      <p class="btn btn-success organizing-title ml-4"><%= t('.title') %></p>
+      <button type="button" class="btn btn-success organizing-title ml-4 mb-2" data-toggle="modal" data-target="#instructionModal">
+        <%= t('.title') %>
+      </button>
+
+      <div class="modal fade" id="instructionModal" tabindex="-1" role="dialog" aria-labelledby="instructionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content instruction-modal">
+            <div class="modal-header">
+              <h5 class="modal-title" id="instructionModalLabel"><%= t('.title') %></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p class="modal-title">リクエスト画面について</p>
+              <ul>
+                <li>あなたがオーガナイザーであるグループの、すべてのイベントとグループの参加のリクエストが表示されます</li>
+                <li>ゲスト不可のイベントリクエストでは、グループリクエストを先に許可する必要があります</li>
+              </ul>
+              <div class="border-dashed"></div>
+              <p class="modal-title">グループ管理について</p>
+              <ul class="mb-4">
+                <li>最初はグループ作成者がそのままオーナーになり、必要に応じてオーガナイザーを登録できます</li>
+                <li>グループにつきオーナーは１人、オーガナイザーは好きなだけ登録できます</li>
+                <li>権限に応じて可能なことは以下の通りです</li>
+              </ul>
+
+              <table class="table table-sm instruction-table">
+                <tr>
+                  <th class="top-left-th"></th>
+                  <th class="text-center top-th">オーナー</th>
+                  <th class="text-center top-th">オーガナイザー</th>
+                  <th class="text-center top-th">メンバー</th>
+                </tr>
+                <tr>
+                  <th class="action-th">イベント作成</th>
+                  <td>〇</td>
+                  <td>〇</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th class="action-th">イベント編集・削除</th>
+                  <td>〇</td>
+                  <td>〇</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th class="action-th">参加リクエストの許可</th>
+                  <td>〇</td>
+                  <td>〇</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th class="action-th">オーガナイザー権限付与</th>
+                  <td>〇</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th class="action-th">オーガナイザー権限削除</th>
+                  <td>〇</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th class="action-th">メンバー削除</th>
+                  <td>〇</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th class="action-th">グループ編集・削除</th>
+                  <td>〇</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th class="action-th">オーナー変更</th>
+                  <td>〇</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </table>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       <div class="col-md-12 organizing-request-container main-container">
         <h3 class="mb-4"><%= t('.request_title') %></h3>

@@ -4,6 +4,33 @@
 .organizing-title {
   font-size: 1.5rem;
 }
+.instruction-modal {
+  border: solid 4px #ff8425;
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+.modal-title {
+  font-weight: bold;
+}
+.instruction-table-content {
+  padding: 0 1rem;
+}
+.instruction-table td {
+  text-align: center;
+}
+.instruction-table .top-th {
+  background-color: #b1d8ff;
+  width: 22%;
+}
+.instruction-table .top-left-th {
+  background-color: #5ed098;
+  width: 22%;
+}
+.instruction-table .action-th {
+  background-color: #fbfd90;
+  width: 34%;
+  padding-left: 1rem;
+}
 .organizing-request-container {
   border-color: #720000;
   margin-top: 1rem;

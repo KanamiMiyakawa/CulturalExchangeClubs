@@ -5,12 +5,18 @@
 //general
 .user-wrapper {
   background-color: #ff7539;
-  border-top: dashed 14px #fde86e;
-  border-bottom: dashed 14px #fde86e;
+  border-top: dashed 10px #494aee;
+  border-bottom: dashed 10px #494aee;
 }
 .user-container {
   border-color: #aa6c64;
   padding: 2rem 2rem;
+}
+.user-wrapper .user-container {
+  margin-top: 1.25rem;
+}
+.user-wrapper .event-side-container {
+  margin-top: 1.25rem;
 }
 .user-new-content label, em, i {
   font-weight: bold;

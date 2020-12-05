@@ -1,0 +1,33 @@
+.organizing-wrapper {
+  background-color: #c7e6ba;
+}
+.organizing-title {
+  font-size: 1.5rem;
+}
+.organizing-request-container {
+  border-color: #720000;
+  margin-top: 1rem;
+  padding: 2rem;
+}
+.request-title {
+  font-size: 1rem;
+}
+.organizing-wrapper .organizing-group-container {
+  border-color: #004800;
+  padding: 2rem;
+  margin-top: 0;
+}
+.new-group-btn {
+  font-size: 1.5rem;
+}
+.status-owner {
+  color: red;
+  font-weight: bold;
+}
+.status-organizer {
+  color: blue;
+  font-weight: bold;
+}
+.organizing-group-container table {
+  max-width: 40rem;
+}

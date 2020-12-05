@@ -102,6 +102,22 @@ ja:
       guest: ゲストとして参加
       member: グループに登録して参加
       participants: 参加予定
+  organizings:
+    show:
+      title: オーガナイザー画面の使い方
+      request_title: リクエスト管理画面
+      accept_all_members: すべてのグループ参加リクエストを許可
+      name: 名前
+      request_group: リクエストグループ
+      request_event: リクエストイベント
+      request_date: リクエスト日時
+      accept_all_participants: すべてのイベント参加リクエストを許可
+      member_first: 先にグループ参加リクエストを許可してください
+      no_request: 現在リクエストはありません
+      group_event_title: グループ・イベント管理画面
+      coming_events: 予定中のイベント
+      old_events: 過去のイベント
+      no_coming_events: 予定中のイベントはありません
   date:
     abbr_day_names:
     - 日
@@ -236,7 +252,12 @@ ja:
         other: "%{model}に%{count}個のエラーが発生しました"
   helpers:
     btn:
+      edit: 編集
+      delete: 削除
       back: 戻る
+      new_group: 新規グループ作成
+      members: メンバー管理画面
+      new_event: 新規イベント作成
     select:
       prompt: 選択してください
     submit:
@@ -247,6 +268,8 @@ ja:
     request:
       send: 参加リクエストを送る
       withdraw: このグループから脱退する
+      accept: 許可する
+      deny: 許可しない
     event:
       coming: 直近のイベント
       nothing: 予定されているイベントはありません
@@ -255,6 +278,11 @@ ja:
       your_status: あなたのステータス
     confirm:
       delete: 本当に削除してよろしいですか？
+      member_deny: "同時に送られたイベント参加リクエストも削除されます\n削除してもよろしいですか？"
+    status:
+      base: ステータス
+      owner: オーナー
+      organizer: オーガナイザー
   number:
     currency:
       format:

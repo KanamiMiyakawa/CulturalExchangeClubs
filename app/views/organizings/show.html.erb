@@ -1,88 +1,113 @@
-<h2>オーガナイザー管理画面</h2>
+<div class="organizing-wrapper mb-4">
+  <div class="container">
+    <div class="row">
 
-<% if @pending_members.present? %>
-  <h3><%= link_to "すべてのグループ参加リクエストを許可", accept_all_members_organizing_members_path, method: :patch %></h3>
-  <table>
-    <tr>
-      <th>名前</th>
-      <th>リクエストグループ</th>
-      <th>リクエスト日時</th>
-      <th></th>
-      <th></th>
-    </tr>
-    <% @pending_members.each do |member| %>
-      <tr>
-        <td><%= link_to "#{member.user.name}", "/profile/#{member.user_id}" %></td>
-        <td><%= member.group.name %></td>
-        <td><%= member.created_at %></td>
-        <td><%= link_to '許可', organizing_member_path(member.id), method: :patch %></td>
-        <td><%= link_to '許可しない', deny_organizing_member_path(member.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </table>
-<% end %>
-<br>
-<% if @pending_participants.present? %>
-  <h3><%= link_to "すべてのイベント参加リクエストを許可", accept_all_participants_organizing_participants_path, method: :patch %></h3>
-  <table>
-    <tr>
-      <th>名前</th>
-      <th>リクエストイベント</th>
-      <th>リクエスト日時</th>
-      <th></th>
-      <th></th>
-    </tr>
-    <% @pending_participants.each do |participant| %>
-      <tr>
-        <td><%= link_to "#{participant.user.name}", "/profile/#{participant.user_id}" %></td>
-        <td><%= participant.event.name %></td>
-        <td><%= participant.created_at %></td>
-        <% if !participant.event.guest_allowed? && Member.find_by(user_id: participant.user_id, group_id: participant.group_id, pending: true) %>
-          <td></td>
-          <td>先にグループ参加リクエストを許可してください</td>
+      <p class="btn btn-success organizing-title ml-4"><%= t('.title') %></p>
+
+      <div class="col-md-12 organizing-request-container main-container">
+        <h3 class="mb-4"><%= t('.request_title') %></h3>
+        <div class="border-dashed"></div>
+        <% if @pending_members.present? || @pending_participants.present? %>
+          <% if @pending_members.present? %>
+            <p><%= link_to t('.accept_all_members'), accept_all_members_organizing_members_path, class: "btn btn-primary", method: :patch %></p>
+            <table class="table table-hover">
+              <tr>
+                <th><%= t('.name') %></th>
+                <th><%= t('.request_group') %></th>
+                <th><%= t('.request_date') %></th>
+                <th colspan="2"></th>
+              </tr>
+              <% @pending_members.each do |member| %>
+                <tr>
+                  <td><%= link_to member.user.name, "/profile/#{member.user_id}" %></td>
+                  <td><%= link_to member.group.name, group_path(member.group) %></td>
+                  <td><%= l member.created_at, format: :long %></td>
+                  <td><%= link_to t('helpers.request.accept'), organizing_member_path(member.id), method: :patch %></td>
+                  <td><%= link_to t('helpers.request.deny'), deny_organizing_member_path(member.id), method: :delete, data: { confirm: t('helpers.confirm.member_deny') } %></td>
+                </tr>
+              <% end %>
+            </table>
+          <% end %>
+          <% if @pending_members.present? && @pending_participants.present? %>
+            <div class="border-dashed mt-4 mb-4"></div>
+          <% end %>
+          <% if @pending_participants.present? %>
+            <p><%= link_to t('.accept_all_participants'), accept_all_participants_organizing_participants_path, class: "btn btn-warning", method: :patch %></p>
+            <table class="table table-hover">
+              <tr>
+                <th><%= t('.name') %></th>
+                <th><%= t('.request_event') %></th>
+                <th><%= t('.request_date') %></th>
+                <th colspan="2"></th>
+              </tr>
+              <% @pending_participants.each do |participant| %>
+                <tr>
+                  <td><%= link_to participant.user.name, "/profile/#{participant.user_id}" %></td>
+                  <td><%= link_to participant.event.name, event_path(participant.event) %></td>
+                  <td><%= l participant.created_at, format: :long %></td>
+                  <% if !participant.event.guest_allowed? && Member.find_by(user_id: participant.user_id, group_id: participant.group_id, pending: true) %>
+                    <td colspan="2"><%= t('.member_first') %></td>
+                  <% else %>
+                    <td><%= link_to t('helpers.request.accept'), organizing_participant_path(participant.id), method: :patch %></td>
+                    <td><%= link_to t('helpers.request.deny'), deny_organizing_participant_path(participant.id), method: :delete, data: { confirm: t('helpers.confirm.delete') } %></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </table>
+          <% end %>
         <% else %>
-          <td><%= link_to '許可', organizing_participant_path(participant.id), method: :patch %></td>
-          <td><%= link_to '許可しない', deny_organizing_participant_path(participant.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <p><%= t('.no_request') %></p>
         <% end %>
-      </tr>
-    <% end %>
-  </table>
-<% end %>
-<br>
+      </div>
 
-<h3><%= link_to "新規グループ作成", new_group_path %></h3>
+      <div class="col-md-12 main-container organizing-group-container">
+        <h3 class="mb-4"><%= t('.group_event_title') %></h3>
+        <p><%= link_to t('helpers.btn.new_group'), new_group_path, class: "btn btn-primary new-group-btn" %></p>
 
-<p>ここからグループごとに表示</p>
-<% @groups.each do |group| %>
-  <h3><%= group.name %></h3>
-  <% if current_user == group.owner %>
-    <p>あなたがオーナーです</p>
-    <p>
-      <%= link_to '編集', edit_organizing_group_path(group) %> |
-      <%= link_to '削除', organizing_group_path(group), method: :delete, data: { confirm: 'Are you sure?' } %>
-    </p>
-  <% end %>
-  <p><%= link_to 'メンバー管理画面へ', organizing_group_path(group) %></p>
-  <p><%= link_to '新規イベント作成', new_organizing_group_event_path(group_id:group.id) %></p>
-  <p>予定中のイベント表示 | <%= link_to '過去のイベント', old_events_group_path(group) %></p>
-  <% if group.events.present? %>
-    <table>
-      <tr>
-        <th>名前</th>
-        <th>日時</th>
-        <th></th>
-      </tr>
-      <% group.events.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").each do |event| %>
-        <tr>
-          <td><%= link_to "#{event.name}", event_path(event) %></td>
-          <td><%= event.schedule %></td>
-          <td>
-            <%= link_to '編集', edit_organizing_group_event_path(id: event.id, group_id: group.id) %> |
-            <%= link_to '削除', organizing_group_event_path(id: event.id, group_id: group.id), method: :delete, data: { confirm: 'Are you sure?' } %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
-  <% end %>
-  <br>
-<% end %>
+        <% @groups.each do |group| %>
+          <div class="border-dashed"></div>
+          <h3><%= link_to group.name, group_path(group) %></h3>
+          <p>
+            <%= t('helpers.status.base') %>:
+            <% if current_user == group.owner %>
+              <span class="status-owner"><%= t('helpers.status.owner') %></span>
+              <%= link_to t('helpers.btn.edit'), edit_organizing_group_path(group) %> |
+              <%= link_to t('helpers.btn.delete'), organizing_group_path(group), method: :delete, data: { confirm: t('helpers.confirm.delete') } %>
+            <% else %>
+              <span class="status-organizer"><%= t('helpers.status.organizer') %></span>
+            <% end %>
+          </p>
+          <p class="mt-4 mb-4">
+            <%= link_to t('helpers.btn.members'), organizing_group_path(group), class:"btn btn-info" %>
+            <%= link_to t('helpers.btn.new_event'), new_organizing_group_event_path(group_id:group.id), class: "btn btn-warning" %>
+          </p>
+          <p><%= t('.coming_events') %> | <%= link_to t('.old_events'), old_events_group_path(group) %></p>
+
+          <% coming_events = group.events.where('schedule >= ?', Time.zone.now).order(schedule: "ASC") %>
+          <% if coming_events.present? %>
+            <table class="table table-sm table-hover">
+              <tr>
+                <th><%= t('activerecord.attributes.event.name') %></th>
+                <th><%= t('activerecord.attributes.event.schedule') %></th>
+                <th></th>
+              </tr>
+              <% coming_events.each do |event| %>
+                <tr>
+                  <td><%= link_to "#{event.name}", event_path(event) %></td>
+                  <td><%= l event.schedule, format: :long %></td>
+                  <td>
+                    <%= link_to t('helpers.btn.edit'), edit_organizing_group_event_path(id: event.id, group_id: group.id) %> |
+                    <%= link_to t('helpers.btn.delete'), organizing_group_event_path(id: event.id, group_id: group.id), method: :delete, data: { confirm: t('helpers.confirm.delete') } %>
+                  </td>
+                </tr>
+              <% end %>
+            </table>
+          <% else %>
+            <p><%= t('.no_coming_events') %></p>
+          <% end %>
+          <br>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

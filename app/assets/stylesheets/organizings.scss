@@ -1,6 +1,8 @@
 .organizing-wrapper {
   background-color: #c7e6ba;
 }
+
+//show
 .organizing-title {
   font-size: 1.5rem;
 }
@@ -57,4 +59,23 @@
 }
 .organizing-group-container table {
   max-width: 40rem;
+}
+
+//member
+.organizing-member-container {
+  border-color: #205fc1;
+  padding: 2rem
+}
+.menber-ul {
+  list-style: none;
+  padding-inline-start: 1rem;
+}
+.member-table-content {
+  padding: 0 2rem;
+}
+.member-table-td1 {
+  width: 30%;
+}
+.member-table-td2 {
+  width: 20%;
 }

@@ -1,29 +1,47 @@
-<h2>グループ管理画面</h2>
+<div class="organizing-wrapper mb-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 organizing-member-container main-container">
 
-<h3><%= @group.name %></h3>
-
-<h3>オーナー</h3>
-<p><%= link_to "#{@owner.name}", "/profile/#{@owner.id}" %></p>
-
-<h3>オーガナイザー</h3>
-<table>
-  <% @organizers.each do |organizer| %>
-    <tr>
-      <td><%= link_to "#{organizer.user.name}", "/profile/#{organizer.user.id}" %></td>
-      <td><%= link_to 'オーガナイザー権限削除', delete_organizer_organizing_group_path(id:@group.id, organizer_id:organizer.id), method: :delete, data: { confirm: 'このオーガナイザーが企画中のイベントが削除されますがよろしいですか？' } %></td>
-      <td><%= link_to 'オーナー変更', give_owner_organizing_group_path(id:@group.id, user_id:organizer.user.id), method: :patch, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-</table>
-
-<h3>メンバー</h3>
-<table>
-  <% @members.each do |member| %>
-    <tr>
-      <td><%= link_to "#{member.user.name}", "/profile/#{member.user_id}" %></td>
-      <td><%= link_to 'オーガナイザー権限付与', create_organizer_organizing_group_path(id:@group.id, user_id:member.user_id), method: :post, data: { confirm: 'Are you sure?' } %></td>
-      <td><%= link_to 'オーナー変更', give_owner_organizing_group_path(id:@group.id, user_id:member.user.id), method: :patch, data: { confirm: 'Are you sure?' } %></td>
-      <td><%= link_to 'メンバー削除', organizing_member_path(member.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-</table>
+        <h2 class="mb-4"><%= link_to @group.name, group_path(@group), class: "mr-3" %><%= t('.title') %></h2>
+        <div class="border-dashed mb-4"></div>
+        <ul class="menber-ul">
+          <li>
+            <h3 class="mb-3"><%= t('helpers.status.owner') %></h3>
+            <p class="ml-3"><%= link_to @owner.name, "/profile/#{@owner.id}" %></p>
+          </li>
+          <li>
+            <h3 class="mb-3"><%= t('helpers.status.organizer') %></h3>
+            <div class="member-table-content">
+              <table class="table table-sm table-hover">
+                <% @organizers.each do |organizer| %>
+                  <tr>
+                    <td class="member-table-td1"><%= link_to organizer.user.name, "/profile/#{organizer.user.id}" %></td>
+                    <td class="member-table-td1"><%= link_to t('.delete_organizer'), delete_organizer_organizing_group_path(id:@group.id, organizer_id:organizer.id), method: :delete, data: { confirm: t('helpers.confirm.delete_organizer') } %></td>
+                    <td class="member-table-td2"><%= link_to t('.give_owner'), give_owner_organizing_group_path(id:@group.id, user_id:organizer.user.id), method: :patch, data: { confirm: t('helpers.confirm.sure') } %></td>
+                    <td class="member-table-td2"></td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
+          </li>
+          <li>
+            <h3 class="mb-3"><%= t('helpers.status.member') %></h3>
+            <div class="member-table-content">
+              <table class="table table-sm table-hover">
+                <% @members.each do |member| %>
+                  <tr>
+                    <td class="member-table-td1"><%= link_to member.user.name, "/profile/#{member.user_id}" %></td>
+                    <td class="member-table-td1"><%= link_to t('.create_organizer'), create_organizer_organizing_group_path(id:@group.id, user_id:member.user_id), method: :post, data: { confirm: t('helpers.confirm.sure') } %></td>
+                    <td class="member-table-td2"><%= link_to t('.give_owner'), give_owner_organizing_group_path(id:@group.id, user_id:member.user.id), method: :patch, data: { confirm: t('helpers.confirm.sure') } %></td>
+                    <td class="member-table-td2"><%= link_to t('.delete_member'), organizing_member_path(member.id), method: :delete, data: { confirm: t('helpers.confirm.delete') } %></td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

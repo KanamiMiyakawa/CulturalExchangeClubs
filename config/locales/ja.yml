@@ -133,6 +133,14 @@ ja:
       action6: メンバー削除
       action7: グループ編集・削除
       action8: オーナー変更
+  organizing:
+    groups:
+      show:
+        title: メンバー管理画面
+        create_organizer: オーガナイザー付与
+        delete_organizer: オーガナイザー削除
+        give_owner: オーナー譲渡
+        delete_member: メンバー削除
   date:
     abbr_day_names:
     - 日
@@ -293,8 +301,10 @@ ja:
     group:
       your_status: あなたのステータス
     confirm:
+      sure: 本当によろしいですか？
       delete: 本当に削除してよろしいですか？
       member_deny: "同時に送られたイベント参加リクエストも削除されます\n削除してもよろしいですか？"
+      delete_organizer: このオーガナイザーが企画中のイベントが削除されますがよろしいですか？
     status:
       base: ステータス
       owner: オーナー

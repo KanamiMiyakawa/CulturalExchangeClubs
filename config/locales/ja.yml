@@ -155,6 +155,8 @@ ja:
     events:
       new:
         title: イベント情報入力
+      edit:
+        title: イベント編集
       form:
         choose_organizer: オーガナイザーを選択
         online: オンライン/リアルでイベント

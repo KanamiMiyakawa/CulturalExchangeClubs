@@ -1,6 +1,11 @@
 $(function(){
   document.addEventListener("turbolinks:load", function() {
 
+  //読み込み時にオンラインが選択されていたら住所フォームをhideする
+  if(document.forms.eventForm.event_online_true.checked){
+    $('#address-form').hide();
+  };
+
   //オンラインを選ぶと住所入力欄が消えるイベント
   $( '[name="event[online]"]:radio' ).change( function() {
     var radioval = $(this).val();

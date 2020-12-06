@@ -1,9 +1,8 @@
 class Organizing::GroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :group_organizer_only, only:[:show]
 
-  before_action :set_group, only: [:show, :edit, :update, :destroy, :give_owner]
-  before_action :group_owner_only, only:[:edit, :update, :destroy, :give_owner]
+  before_action :set_group
+  before_action :group_owner_only
 
   def show
     @owner = @group.owner
@@ -32,7 +31,17 @@ class Organizing::GroupsController < ApplicationController
       @group.organizers.create!(user_id:params[:user_id])
     end
     @group.update!(owner_id:params[:user_id])
-    redirect_to organizing_group_path(@group), notice: 'オーナーを変更しました'
+    redirect_to organizing_path, notice: 'オーナーを変更しました'
+  end
+
+  def create_organizer
+    @group.organizers.create!(user_id:params[:user_id])
+    redirect_to organizing_group_path(@group), notice: 'オーガナイザー権限を付与しました'
+  end
+
+  def delete_organizer
+    Organizer.find(params[:organizer_id]).destroy!
+    redirect_to organizing_group_path(@group), notice: 'オーガナイザー権限を削除しました'
   end
 
   private
@@ -43,12 +52,6 @@ class Organizing::GroupsController < ApplicationController
 
   def group_params
     params.require(:group).permit(:name, :detail, :permission)
-  end
-
-  def group_organizer_only
-    if current_user.organizers.find_by(group_id:params[:id]).blank?
-      redirect_to "/", notice: "オーガナイザーのみアクセスできます"
-    end
   end
 
   def group_owner_only

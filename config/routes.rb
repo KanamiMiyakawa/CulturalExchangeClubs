@@ -23,12 +23,14 @@ Rails.application.routes.draw do
   resources :participants, only: [:create, :destroy]
 
   #オーガナイザー用
-  resource :organizing, only: [:show, :create, :destroy] do
+  resource :organizing, only: [:show] do
     scope module: :organizing do
 
       resources :groups, only: [:show, :edit, :update, :destroy] do
         member do
           patch :give_owner
+          post :create_organizer
+          delete :delete_organizer
         end
         resources :events, only: [:new, :create, :edit, :update, :destroy] do
           collection do

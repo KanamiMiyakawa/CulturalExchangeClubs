@@ -169,7 +169,9 @@
             <% end %>
           </p>
           <p class="mt-4 mb-4">
-            <%= link_to t('helpers.btn.members'), organizing_group_path(group), class:"btn btn-info" %>
+            <% if current_user == group.owner %>
+              <%= link_to t('helpers.btn.members'), organizing_group_path(group), class:"btn btn-info" %>
+            <% end %>
             <%= link_to t('helpers.btn.new_event'), new_organizing_group_event_path(group_id:group.id), class: "btn btn-warning" %>
           </p>
           <p><%= t('.coming_events') %> | <%= link_to t('.old_events'), old_events_group_path(group) %></p>

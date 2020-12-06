@@ -28,6 +28,9 @@ ja:
       member:
         name: 名前
         created_at: 加入日
+      event_language:
+        language_id: 言語名
+        max: 最大人数
   layouts:
     application:
       events: イベント一覧
@@ -149,6 +152,22 @@ ja:
         delete_organizer: オーガナイザー削除
         give_owner: オーナー譲渡
         delete_member: メンバー削除
+    events:
+      new:
+        title: イベント情報入力
+      form:
+        choose_organizer: オーガナイザーを選択
+        online: オンライン/リアルでイベント
+        online_true: オンラインで企画
+        online_false: リアルで企画
+        permission: イベント参加の許可
+        permission_true: 参加に許可が必要
+        permission_false: 自由に参加
+        guest: ゲスト(非メンバー)の参加
+        guest_true: ゲストも参加できる
+        guest_false: ゲストは参加できない
+        delete_language: この言語を削除
+        add_language: さらに言語を追加する
   date:
     abbr_day_names:
     - 日
@@ -292,6 +311,8 @@ ja:
       circle: 〇
       create_group: グループを作成する！
       edit_group: グループを更新する！
+      create_event: イベントを作成する！
+      edit_event: イベントを更新する！
     select:
       prompt: 選択してください
     submit:
@@ -315,12 +336,15 @@ ja:
       delete: 本当に削除してよろしいですか？
       member_deny: "同時に送られたイベント参加リクエストも削除されます\n削除してもよろしいですか？"
       delete_organizer: このオーガナイザーが企画中のイベントが削除されますがよろしいですか？
+      delete_language: この言語に登録している参加者も削除されますが、よろしいですか？
     status:
       base: ステータス
       owner: オーナー
       organizer: オーガナイザー
       member: メンバー
       guest: ゲスト(非メンバー)
+    js:
+      event_language: 参加者の言語
   number:
     currency:
       format:

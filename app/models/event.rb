@@ -2,6 +2,7 @@ class Event < ApplicationRecord
   geocoded_by :address, latitude: :lat, longitude: :lon
   after_validation :geocode, if: :address_changed?
 
+  before_validation :online_delete_address
   before_update :change_participants_not_pending, if: [:permission_changed?, Proc.new { |event| event.permission == false}]
 
   #イベントが所属するグループ
@@ -23,5 +24,9 @@ class Event < ApplicationRecord
 
   def change_participants_not_pending
     self.participants.update_all(pending:false)
+  end
+
+  def online_delete_address
+    self.address = "" if self.online == true && self.address.present?
   end
 end

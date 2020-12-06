@@ -11,87 +11,74 @@
     </div>
   <% end %>
 
-  <table class="form_table">
-    <div class="field">
-      <tr>
-        <th><%= form.label :name %></th>
-        <td><%= form.text_field :name %></td>
-      </tr>
+  <div class="event-new-content mb-5">
+    <div class="form-group">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
     </div>
-    <div class="field">
-      <tr>
-        <th><%= form.label :schedule %></th>
-        <td><%= form.datetime_field :schedule %></td>
-      </tr>
+
+    <div class="form-group">
+      <%= form.label :schedule, class: "form-label" %>
+      <%= form.datetime_field :schedule, min: Time.zone.today, class: "form-control" %>
     </div>
-    <div class="field">
-      <tr>
-        <th><%= form.label :content %></th>
-        <td><%= form.text_area :content %></td>
-      </tr>
+
+    <div class="form-group">
+      <%= form.label :content, class: "form-label" %>
+      <%= form.text_area :content, class: "form-control" %>
     </div>
-    <div class="field">
-      <tr>
-        <th>オーガナイザー選択</th>
-        <% @organizers.each do |organizer| %>
-          <td>
-            <%= form.label :organizer_id, "#{organizer.user.name}", value: "#{organizer.id}"  %>
-            <%= form.radio_button :organizer_id, "#{organizer.id}" %>
-          </td>
-        <% end %>
-      </tr>
+
+    <div class="form-group">
+      <label class="form-label"><%= t('.choose_organizer') %></label><br>
+      <% @organizers.each do |organizer| %>
+        <div class="form-check form-check-inline ml-4">
+          <%= form.radio_button :organizer_id, "#{organizer.id}", class: "form-check-input" %>
+          <%= form.label :organizer_id, "#{organizer.user.name}", value: "#{organizer.id}", class: "form-check-label"  %>
+        </div>
+      <% end %>
     </div>
-    <div class="field">
-      <tr>
-        <th>オンラインでイベント</th>
-        <td>
-          <%= form.label :online, "Yes", value: "true"  %>
-          <%= form.radio_button :online, true %>
-        </td>
-        <td>
-          <%= form.label :online, "No", value: "false"  %>
-          <%= form.radio_button :online, false %>
-        </td>
-      </tr>
+
+
+    <div class="form-group">
+      <label class="form-label"><%= t('.online') %></label><br>
+      <div class="form-check form-check-inline ml-4">
+        <%= form.radio_button :online, true, class: "form-check-input" %>
+        <%= form.label :online, t('.online_true'), value: "true", class: "form-check-label" %>
+      </div>
+      <div class="form-check form-check-inline ml-4">
+        <%= form.radio_button :online, false, class: "form-check-input" %>
+        <%= form.label :online, t('.online_false'), value: "false", class: "form-check-label" %>
+      </div>
     </div>
-    <div class="field">
-      <tr>
-        <td>
-          <%= form.label :permission, "参加に許可が必要", value: "true"  %>
-          <%= form.radio_button :permission, true %>
-        </td>
-        <td>
-          <%= form.label :permission, "自由に参加", value: "false"  %>
-          <%= form.radio_button :permission, false %>
-        </td>
-      </tr>
+
+    <div class="form-group">
+      <label class="form-label"><%= t('.permission') %></label><br>
+      <div class="form-check form-check-inline ml-4">
+        <%= form.radio_button :permission, true, class: "form-check-input" %>
+        <%= form.label :permission, t('.permission_true'), value: "true", class: "form-check-label"  %>
+      </div>
+      <div class="form-check form-check-inline ml-4">
+        <%= form.radio_button :permission, false, class: "form-check-input" %>
+        <%= form.label :permission, t('.permission_false'), value: "false", class: "form-check-label"  %>
+      </div>
     </div>
-    <div class="field">
-      <tr>
-        <th>グループ以外からも参加可能</th>
-        <td>
-          <%= form.label :guest_allowed, "Yes", value: "true"  %>
-          <%= form.radio_button :guest_allowed, true %>
-        </td>
-        <td>
-          <%= form.label :guest_allowed, "No", value: "false"  %>
-          <%= form.radio_button :guest_allowed, false %>
-        </td>
-      </tr>
+
+    <div class="form-group">
+      <label class="form-label"><%= t('.guest') %></label><br>
+      <div class="form-check form-check-inline ml-4">
+        <%= form.radio_button :guest_allowed, true, class: "form-check-input" %>
+        <%= form.label :guest_allowed, t('.guest_true'), value: "true", class: "form-check-label"  %>
+      </div>
+      <div class="form-check form-check-inline ml-4">
+        <%= form.radio_button :guest_allowed, false, class: "form-check-input" %>
+        <%= form.label :guest_allowed, t('.guest_false'), value: "false", class: "form-check-label"  %>
+      </div>
     </div>
-    <div class="field">
-      <tr>
-        <th><%= form.label :address %></th>
-        <td><%= form.text_field :address %></td>
-      </tr>
+
+    <div class="form-group" id="address-form">
+      <%= form.label :address, class: "form-label" %>
+      <%= form.text_field :address, class: "form-control" %>
     </div>
-    <div class="field">
-      <tr>
-        <th><%= form.label :place %></th>
-        <td><%= form.text_field :place %></td>
-      </tr>
-    </div>
-  </table>
+  </div>
 
   <hr>
 
@@ -100,30 +87,31 @@
     <%= form.fields_for :event_languages do |language| %>
 
       <div class="language-form">
-        <h3><%= "参加者の言語 #{language.index + 1}" %></h3>
-
-        <div class="field">
-          <%= language.label :language_id %><br>
-          <%= language.select :language_id, @languages.map { |lang| [lang.ja_name, lang.id]} %>
+        <h3 class="mb-3 mt-4 ml-3"><%= "#{t('helpers.js.event_language')} #{language.index + 1}" %></h3>
+        <div class="event-new-content mb-5">
+          <div class="form-group">
+            <%= language.label :language_id %>
+            <%= language.select :language_id, @languages.map { |lang| [lang.ja_name, lang.id]}, {}, {class: "form-control"} %>
+          </div>
+          <div class="form-group">
+            <%= language.label :max %>
+            <%= language.number_field :max, min: 1, class: "form-control" %>
+          </div>
+          <% if language.object.id.present? %>
+            <p><%= link_to t('.delete_language'), delete_language_organizing_group_events_path(lang_id:language.object.id), method: :delete, data: { confirm: t('helpers.confirm.delete_language') } %></p>
+          <% end %>
         </div>
-        <div class="field">
-          <%= language.label :max %><br>
-          <%= language.number_field :max, min: 1 %>
-        </div>
-        <% if language.object.id.present? %>
-          <p><%= link_to 'この言語を削除', delete_language_organizing_group_events_path(lang_id:language.object.id), method: :delete, data: { confirm: 'この言語に登録している参加者も削除されますが、よろしいですか？' } %></p>
-        <% end %>
       </div>
-      <br>
 
     <% end %>
+
   </div>
 
-  <p class="form-change-test">変更テスト</p>
+  <p class="add-form-btn btn btn-warning ml-4 mb-4"><%= t('.add_language') %></p>
 
-  <p class="add-form-btn">言語を追加</p>
+  <div class="border-dashed"></div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions ml-4 mt-5 text-center">
+    <%= form.submit event_submit_btn, class: "btn btn-success event-submit-btn" %>
   </div>
 <% end %>

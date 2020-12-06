@@ -1,13 +1,24 @@
 $(function(){
   document.addEventListener("turbolinks:load", function() {
 
+  //オンラインを選ぶと住所入力欄が消えるイベント
+  $( '[name="event[online]"]:radio' ).change( function() {
+    var radioval = $(this).val();
+    if(radioval == "false"){
+      $('#address-form').show();
+    }else{
+      $('#address-form').hide();
+    }
+  });
+
+  //言語フォーム追加用のhtmlを作成
   function buildField(index){
       const html = `<div class="language-form">
-                    <h3>参加者の言語 ${index+1}</h3>
-                    <div class="field">
-                      <label for="event_event_languages_attributes_${index}_language_id">Language</label>
-                      <br>
-                      <select name="event[event_languages_attributes][${index}][language_id]" id="event_event_languages_attributes_${index}_language_id">
+                    <h3 class="mb-3 mt-4 ml-3">参加者の言語 ${index+1}</h3>
+                    <div class="event-new-content mb-5">
+                    <div class="form-group">
+                      <label for="event_event_languages_attributes_${index}_language_id">言語名</label>
+                      <select class="form-control" name="event[event_languages_attributes][${index}][language_id]" id="event_event_languages_attributes_${index}_language_id">
                         <option value="557">どの言語でもOK！</option>
                         <option value="558">アイスランド語</option>
                         <option value="559">アイマラ語</option>
@@ -196,20 +207,19 @@ $(function(){
                         <option value="742">北部サーミ語</option>
                       </select>
                     </div>
-                    <div class="field">
-                      <label for="event_event_languages_attributes_${index}_max">Max</label>
-                      <br>
-                      <input type="number" name="event[event_languages_attributes][${index}][max]" id="event_event_languages_attributes_${index}_max">
+                    <div class="form-group">
+                      <label for="event_event_languages_attributes_${index}_max">最大人数</label>
+                      <input min="1" class="form-control" type="number" name="event[event_languages_attributes][${index}][max]" id="event_event_languages_attributes_${index}_max">
                     </div>
                     </div>
-                    <br>`;
+                    </div>`;
       return html;
   }
 
   let fileIndex = $(".language-form").length;
 
+  //言語フォームを追加するイベント
   $(".add-form-btn").on("click", function() {
-    $(".form-change-test").text("変更しました");
     $(".languages-form").append(buildField(fileIndex));
     fileIndex += 1;
   })

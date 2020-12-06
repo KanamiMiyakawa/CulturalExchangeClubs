@@ -15,7 +15,7 @@ ja:
         created_at: "利用開始日"
       event:
         name: イベント名
-        schedule: 日付
+        schedule: 開催日時
         address: 開催場所
         content: 詳細
         permission: 参加許可
@@ -345,6 +345,9 @@ ja:
       organizer: オーガナイザー
       member: メンバー
       guest: ゲスト(非メンバー)
+    model:
+      group: グループ
+      event: イベント
     js:
       event_language: 参加者の言語
   number:

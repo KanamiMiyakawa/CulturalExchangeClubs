@@ -1,6 +1,6 @@
 class EventLanguage < ApplicationRecord
-  before_update :participants_exist if :language_id_changed?
-  before_update :max_smaller_than_participants if :max_changed?
+  before_update :participants_exist, if: :language_id_changed?
+  before_update :max_smaller_than_participants, if: :max_changed?
 
   belongs_to :event
   belongs_to :language

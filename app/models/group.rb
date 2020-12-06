@@ -1,6 +1,9 @@
 class Group < ApplicationRecord
   before_update :change_members_not_pending, if: [:permission_changed?, Proc.new { |group| group.permission == false}]
 
+  validates :name,  presence: true
+  validates :permission, inclusion: { in: [true, false] }
+
   #一般ユーザ
   has_many :members, dependent: :destroy
   has_many :users, through: :members

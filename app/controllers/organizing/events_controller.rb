@@ -69,6 +69,6 @@ class Organizing::EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:name, :schedule, :content, :online, :permission, :guest_allowed, :address, :place, :organizer_id,
-        event_languages_attributes: [:id, :event_id, :language_id, :max]).merge(user_id:Organizer.find(params[:event][:organizer_id]).user_id)
+        event_languages_attributes: [:id, :event_id, :language_id, :max])
   end
 end

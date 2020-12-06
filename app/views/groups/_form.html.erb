@@ -1,15 +1,19 @@
 <div class="group-new-content">
 
   <%= form_with(model: group, local: true, url: group_new_or_edit) do |form| %>
-    <% if group.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
 
-        <ul>
-        <% group.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
+    <% if group.errors.any? %>
+      <div class="error-container">
+        <div id="error_explanation">
+          <h3>
+            <%= t('errors.template.header.other', count: group.errors.count, model: t('helpers.model.group')) %>
+          </h3>
+          <ul>
+          <% group.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       </div>
     <% end %>
 

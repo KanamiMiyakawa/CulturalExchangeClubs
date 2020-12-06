@@ -36,4 +36,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     "/events"
   end
 
+  def after_update_path_for(resource)
+    "/profile/#{current_user.id}"
+  end
+
 end

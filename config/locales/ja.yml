@@ -63,6 +63,12 @@ ja:
       your_status: あなたのステータス
     old_events:
       title: の過去のイベント
+    new:
+      title: 新規グループ作成
+    form:
+      permission: メンバーの参加について
+      permission_true: 許可されたあとで参加
+      permission_false: 自由に参加
   events:
     index:
       title: イベント一覧
@@ -282,6 +288,7 @@ ja:
       members: メンバー管理画面
       new_event: 新規イベント作成
       circle: 〇
+      create_group: グループを作成する！
     select:
       prompt: 選択してください
     submit:

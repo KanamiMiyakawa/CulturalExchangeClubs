@@ -16,71 +16,71 @@
               </button>
             </div>
             <div class="modal-body">
-              <p class="modal-title">リクエスト画面について</p>
+              <p class="modal-title"><%= t('.about_request') %></p>
               <ul>
-                <li>あなたがオーガナイザーであるグループの、すべてのイベントとグループの参加のリクエストが表示されます</li>
-                <li>ゲスト不可のイベントリクエストでは、グループリクエストを先に許可する必要があります</li>
+                <li><%= t('.instruction1') %></li>
+                <li><%= t('.instruction2') %></li>
               </ul>
               <div class="border-dashed"></div>
-              <p class="modal-title">グループ管理について</p>
+              <p class="modal-title"><%= t('.about_group') %></p>
               <ul class="mb-4">
-                <li>最初はグループ作成者がそのままオーナーになり、必要に応じてオーガナイザーを登録できます</li>
-                <li>グループにつきオーナーは１人、オーガナイザーは好きなだけ登録できます</li>
-                <li>権限に応じて可能なことは以下の通りです</li>
+                <li><%= t('.instruction3') %></li>
+                <li><%= t('.instruction4') %></li>
+                <li><%= t('.instruction5') %></li>
               </ul>
 
               <table class="table table-sm instruction-table">
                 <tr>
                   <th class="top-left-th"></th>
-                  <th class="text-center top-th">オーナー</th>
-                  <th class="text-center top-th">オーガナイザー</th>
-                  <th class="text-center top-th">メンバー</th>
+                  <th class="text-center top-th"><%= t('helpers.status.owner') %></th>
+                  <th class="text-center top-th"><%= t('helpers.status.organizer') %></th>
+                  <th class="text-center top-th"><%= t('helpers.status.member') %></th>
                 </tr>
                 <tr>
-                  <th class="action-th">イベント作成</th>
-                  <td>〇</td>
-                  <td>〇</td>
+                  <th class="action-th"><%= t('.action1') %></th>
+                  <td><%= t('helpers.btn.circle') %></td>
+                  <td><%= t('helpers.btn.circle') %></td>
                   <td></td>
                 </tr>
                 <tr>
-                  <th class="action-th">イベント編集・削除</th>
-                  <td>〇</td>
-                  <td>〇</td>
+                  <th class="action-th"><%= t('.action2') %></th>
+                  <td><%= t('helpers.btn.circle') %></td>
+                  <td><%= t('helpers.btn.circle') %></td>
                   <td></td>
                 </tr>
                 <tr>
-                  <th class="action-th">参加リクエストの許可</th>
-                  <td>〇</td>
-                  <td>〇</td>
+                  <th class="action-th"><%= t('.action3') %></th>
+                  <td><%= t('helpers.btn.circle') %></td>
+                  <td><%= t('helpers.btn.circle') %></td>
                   <td></td>
                 </tr>
                 <tr>
-                  <th class="action-th">オーガナイザー権限付与</th>
-                  <td>〇</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <th class="action-th">オーガナイザー権限削除</th>
-                  <td>〇</td>
+                  <th class="action-th"><%= t('.action4') %></th>
+                  <td><%= t('helpers.btn.circle') %></td>
                   <td></td>
                   <td></td>
                 </tr>
                 <tr>
-                  <th class="action-th">メンバー削除</th>
-                  <td>〇</td>
+                  <th class="action-th"><%= t('.action5') %></th>
+                  <td><%= t('helpers.btn.circle') %></td>
                   <td></td>
                   <td></td>
                 </tr>
                 <tr>
-                  <th class="action-th">グループ編集・削除</th>
-                  <td>〇</td>
+                  <th class="action-th"><%= t('.action6') %></th>
+                  <td><%= t('helpers.btn.circle') %></td>
                   <td></td>
                   <td></td>
                 </tr>
                 <tr>
-                  <th class="action-th">オーナー変更</th>
-                  <td>〇</td>
+                  <th class="action-th"><%= t('.action7') %></th>
+                  <td><%= t('helpers.btn.circle') %></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th class="action-th"><%= t('.action8') %></th>
+                  <td><%= t('helpers.btn.circle') %></td>
                   <td></td>
                   <td></td>
                 </tr>

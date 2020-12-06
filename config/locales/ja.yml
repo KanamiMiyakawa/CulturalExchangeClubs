@@ -118,6 +118,21 @@ ja:
       coming_events: 予定中のイベント
       old_events: 過去のイベント
       no_coming_events: 予定中のイベントはありません
+      about_request: リクエスト画面について
+      about_group: グループ管理画面について
+      instruction1: あなたがオーガナイザーであるグループの、すべてのイベントとグループの参加のリクエストが表示されます
+      instruction2: ゲスト不可のイベントリクエストでは、グループリクエストを先に許可する必要があります
+      instruction3: 最初はグループ作成者がそのままオーナーになり、必要に応じてオーガナイザーを登録できます
+      instruction4: グループにつきオーナーは１人、オーガナイザーは好きなだけ登録できます
+      instruction5: 権限に応じて可能なことは以下の通りです
+      action1: イベント作成
+      action2: イベント編集・削除
+      action3: 参加リクエストの許可
+      action4: オーガナイザー権限付与
+      action5: オーガナイザー権限削除
+      action6: メンバー削除
+      action7: グループ編集・削除
+      action8: オーナー変更
   date:
     abbr_day_names:
     - 日
@@ -258,6 +273,7 @@ ja:
       new_group: 新規グループ作成
       members: メンバー管理画面
       new_event: 新規イベント作成
+      circle: 〇
     select:
       prompt: 選択してください
     submit:
@@ -283,6 +299,8 @@ ja:
       base: ステータス
       owner: オーナー
       organizer: オーガナイザー
+      member: メンバー
+      guest: ゲスト(非メンバー)
   number:
     currency:
       format:

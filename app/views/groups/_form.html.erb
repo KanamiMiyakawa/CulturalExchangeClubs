@@ -1,6 +1,6 @@
 <div class="group-new-content">
 
-  <%= form_with(model: group, local: true) do |form| %>
+  <%= form_with(model: group, local: true, url: group_new_or_edit) do |form| %>
     <% if group.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
@@ -40,7 +40,7 @@
     </table>
 
     <div class="actions text-center">
-      <%= form.submit t('helpers.btn.create_group'), class: "btn btn-primary" %>
+      <%= form.submit group_submit_btn, class: "btn btn-primary" %>
     </div>
   <% end %>
 

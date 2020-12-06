@@ -141,6 +141,8 @@ ja:
       action8: オーナー変更
   organizing:
     groups:
+      edit:
+        title: グループ編集
       show:
         title: メンバー管理画面
         create_organizer: オーガナイザー付与
@@ -289,6 +291,7 @@ ja:
       new_event: 新規イベント作成
       circle: 〇
       create_group: グループを作成する！
+      edit_group: グループを更新する！
     select:
       prompt: 選択してください
     submit:

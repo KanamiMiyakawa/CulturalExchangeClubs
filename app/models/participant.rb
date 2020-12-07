@@ -3,6 +3,8 @@ class Participant < ApplicationRecord
   before_create :check_the_rest
   before_create :check_organizer
 
+  validates :user_id, uniqueness: { scope: :event_id }
+
   belongs_to :user
   belongs_to :event
   belongs_to :event_language

@@ -6,7 +6,7 @@ class Event < ApplicationRecord
   before_update :change_participants_not_pending, if: [:permission_changed?, Proc.new { |event| event.permission == false}]
   before_validation :add_user_id, if: Proc.new { |event| event.organizer_id.present? }
 
-  validates :name,  presence: true, length: { maximum: 30 }
+  validates :name,  presence: true, length: { maximum: 50 }
   validate  :date_not_before_today
   validates :content,  presence: true
   validates :online, inclusion: { in: [true, false] }

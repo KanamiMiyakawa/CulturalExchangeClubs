@@ -14,7 +14,7 @@ class Organizing::EventsController < ApplicationController
   def create
     @event = @group.events.build(event_params)
     if @event.save
-      redirect_to event_path(@event), notice: 'イベントを作成しました！'
+      redirect_to event_path(@event), notice: t('helpers.notice.create_event')
     else
       render :new
     end
@@ -25,7 +25,7 @@ class Organizing::EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      redirect_to event_path(@event), notice: 'イベントを更新しました！'
+      redirect_to event_path(@event), notice: t('helpers.notice.update_event')
     else
       render :edit
     end
@@ -33,14 +33,14 @@ class Organizing::EventsController < ApplicationController
 
   def destroy
     @event.destroy!
-    redirect_to organizing_path, notice: 'イベントを削除しました'
+    redirect_to organizing_path, notice: t('helpers.notice.delete_event')
   end
 
   def delete_language
     event_language = EventLanguage.find(params[:lang_id])
     event = event_language.event
     event_language.destroy!
-    redirect_to event_path(event), notice: '言語を削除しました'
+    redirect_to event_path(event), notice: t('helpers.notice.delete_language')
   end
 
   private
@@ -63,7 +63,7 @@ class Organizing::EventsController < ApplicationController
 
   def group_organizer_only
     if Organizer.find_by(group_id:params[:group_id], user_id:current_user.id).blank?
-      redirect_to organizing_path, notice: 'そのグループのオーガナイザーのみアクセスできます'
+      redirect_to organizing_path, notice: t('helpers.notice.group_organizer_only')
     end
   end
 

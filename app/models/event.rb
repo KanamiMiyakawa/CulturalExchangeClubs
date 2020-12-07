@@ -1,11 +1,14 @@
 class Event < ApplicationRecord
+  #geocoder
   geocoded_by :address, latitude: :lat, longitude: :lon
   after_validation :geocode, if: :address_changed?
 
+  #データ加工
   before_validation :online_delete_address
   before_update :change_participants_not_pending, if: [:permission_changed?, Proc.new { |event| event.permission == false}]
   before_validation :add_user_id, if: Proc.new { |event| event.organizer_id.present? }
 
+  #バリデーション
   validates :name,  presence: true, length: { maximum: 50 }
   validate  :date_not_before_today
   validates :content,  presence: true
@@ -13,10 +16,13 @@ class Event < ApplicationRecord
   validates :permission, inclusion: { in: [true, false] }
   validates :guest_allowed, inclusion: { in: [true, false] }
   validate  :real_need_address
-  validate  :include_organizer_ids
   validate  :has_language?
   validate  :duplicate_language?
+  validate  :include_organizer_ids
 
+  after_validation :remove_unnecessary_messages
+
+  #アソシエーション
   #イベントが所属するグループ
   belongs_to :organizer
   belongs_to :group
@@ -29,6 +35,7 @@ class Event < ApplicationRecord
   #イベント参加者
   has_many :participants, dependent: :destroy
   has_many :users, through: :participants
+
   #イベント自体の管理者
   belongs_to :user
 
@@ -43,15 +50,15 @@ class Event < ApplicationRecord
   end
 
   def real_need_address
-    errors.add(:address, "を入力してください(オンラインでない場合)") if self.online == false && self.address.blank?
+    errors.add(:address, :real_need_address) if self.online == false && self.address.blank?
   end
 
   def date_not_before_today
-    errors.add(:schedule, "は今日以降のものを選択してください") if schedule.nil? || schedule < Time.zone.now
+    errors.add(:schedule, :date_not_before_today) if schedule.nil? || schedule < Time.zone.now
   end
 
   def include_organizer_ids
-    errors.add(:organizer_id, "を選択してください") unless self.group.organizers.pluck(:id).include?(self.organizer_id)
+    errors.add(:organizer_id, :include_ids) unless self.group.organizers.pluck(:id).include?(self.organizer_id)
   end
 
   def add_user_id
@@ -59,12 +66,17 @@ class Event < ApplicationRecord
   end
 
   def has_language?
-    errors.add(:base, '少なくとも１つの言語を選択してください') if self.event_languages.blank?
+    errors.add(:base, :has_language) if self.event_languages.blank?
   end
 
   def duplicate_language?
     language_ids = self.event_languages.map(&:language_id)
-    errors.add(:base, '重複した言語を選択しています') if language_ids != language_ids.uniq
+    errors.add(:base, :duplicate_language) if language_ids != language_ids.uniq
+  end
+
+  def remove_unnecessary_messages
+    errors.messages.delete(:user)
+    errors.messages.delete(:organizer)
   end
 
 end

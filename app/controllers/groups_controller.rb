@@ -16,7 +16,7 @@ class GroupsController < ApplicationController
     if @group.save
       current_user.members.create!(group_id:@group.id)
       current_user.organizers.create!(group_id:@group.id)
-      redirect_to @group, notice: 'グループを作成しました！'
+      redirect_to @group, notice: t('helpers.notice.create_group')
     else
       render :new
     end

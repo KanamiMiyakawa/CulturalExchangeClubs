@@ -8,23 +8,23 @@ class Organizing::MembersController < ApplicationController
 
   def update
     @member.update!(pending:false)
-    redirect_to organizing_path, notice: 'グループ参加を許可しました'
+    redirect_to organizing_path, notice: t('helpers.notice.accept_request')
   end
 
   def deny
     @member.destroy!
-    redirect_to organizing_path, notice: 'グループ参加を却下しました'
+    redirect_to organizing_path, notice: t('helpers.notice.deny_request')
   end
 
   def accept_all_members
     Member.where(group_id: current_user.organizing_groups.pluck(:id), pending:true).update_all(pending:false)
-    redirect_to organizing_path, notice: 'すべてのグループ参加リクエストを許可'
+    redirect_to organizing_path, notice: t('helpers.notice.accept_all_requests')
   end
 
   def destroy
     group = @member.group
     @member.destroy!
-    redirect_to organizing_group_path(group.id), notice: 'メンバーを削除しました'
+    redirect_to organizing_group_path(group.id), notice: t('helpers.notice.delete_member')
   end
 
   private
@@ -35,13 +35,13 @@ class Organizing::MembersController < ApplicationController
 
   def group_organizer_only
     if current_user.organizers.find_by(group_id:@member.group_id).blank?
-      redirect_to "/", notice: "オーガナイザーのみアクセスできます"
+      redirect_to "/", notice: t('helpers.notice.group_owner_only')
     end
   end
 
   def group_owner_only
     unless current_user == @member.group.owner
-      redirect_to "/", notice: "オーナーのみアクセスできます"
+      redirect_to "/", notice: t('helpers.notice.group_organizer_only')
     end
   end
 

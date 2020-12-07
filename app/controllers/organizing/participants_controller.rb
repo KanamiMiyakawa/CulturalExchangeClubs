@@ -7,12 +7,12 @@ class Organizing::ParticipantsController < ApplicationController
 
   def update
     @participant.update!(pending:false)
-    redirect_to organizing_path, notice: 'イベント参加を許可しました'
+    redirect_to organizing_path, notice: t('helpers.notice.accept_request')
   end
 
   def deny
     @participant.destroy!
-    redirect_to organizing_path, notice: 'イベント参加を却下しました'
+    redirect_to organizing_path, notice: t('helpers.notice.deny_request')
   end
 
   def accept_all_participants
@@ -21,7 +21,7 @@ class Organizing::ParticipantsController < ApplicationController
       next if !participant.event.guest_allowed? && Member.find_by(user_id: participant.user_id, group_id: participant.group_id, pending: true)
       participant.update!(pending:false)
     end
-    redirect_to organizing_path, notice: 'すべてのイベント参加を許可しました'
+    redirect_to organizing_path, notice: t('helpers.notice.accept_all_requests')
   end
 
   private
@@ -32,7 +32,7 @@ class Organizing::ParticipantsController < ApplicationController
 
   def event_organizer_only
     unless @participant.event.user_id == current_user.id
-      redirect_to "/", notice: "イベントのオーガナイザーのみアクセスできます"
+      redirect_to "/", notice: t('helpers.notice.event_organizer_only')
     end
   end
 end

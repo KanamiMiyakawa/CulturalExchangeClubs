@@ -159,7 +159,8 @@
           <div class="border-dashed"></div>
           <h3><%= link_to group.name, group_path(group) %></h3>
           <p>
-            <%= t('helpers.status.base') %>:
+            <span class="mr-3"><%= t('helpers.group.number_of_members') %> : <%= group.members.count %></span>
+            <%= t('helpers.group.your_status') %>:
             <% if current_user == group.owner %>
               <span class="status-owner"><%= t('helpers.status.owner') %></span>
               <%= link_to t('helpers.btn.edit'), edit_organizing_group_path(group) %> |
@@ -182,12 +183,14 @@
               <tr>
                 <th><%= t('activerecord.attributes.event.name') %></th>
                 <th><%= t('activerecord.attributes.event.schedule') %></th>
+                <th><%= t('helpers.event.number_of_participants') %></th>
                 <th></th>
               </tr>
               <% coming_events.each do |event| %>
                 <tr>
                   <td><%= link_to "#{event.name}", event_path(event) %></td>
                   <td><%= l event.schedule, format: :long %></td>
+                  <td><span class="number-of-participants"><%= event.participants.count %></span></td>
                   <td>
                     <%= link_to t('helpers.btn.edit'), edit_organizing_group_event_path(id: event.id, group_id: group.id) %> |
                     <%= link_to t('helpers.btn.delete'), organizing_group_event_path(id: event.id, group_id: group.id), method: :delete, data: { confirm: t('helpers.confirm.delete') } %>

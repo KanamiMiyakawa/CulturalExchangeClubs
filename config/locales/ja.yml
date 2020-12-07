@@ -6,6 +6,24 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+      models:
+        event:
+          attributes:
+            base:
+              not_deleted: すでにユーザが登録されている言語は変更できません、言語かイベントを削除してください
+              max_too_small: 現在の登録人数より少ない最大登録者数は設定できません
+              has_language: 少なくとも１つの言語を選択してください
+              duplicate_language: 重複した言語を選択しています
+            schedule:
+              date_not_before_today: は今日以降のものを選択してください
+            address:
+              real_need_address: を入力してください(オンラインでない場合)
+            organizer_id:
+              include_ids: をグループ内から選ぶ必要があります
+        participant:
+          attributes:
+            base:
+              no_rest: イベントが満席になりました
     attributes:
       user:
         name: "名前"
@@ -20,6 +38,7 @@ ja:
         content: 詳細
         permission: 参加許可
         guest: ゲスト(非メンバー)の参加
+        organizer_id: オーガナイザー
       group:
         name: グループ名
         detail: グループについて
@@ -301,7 +320,7 @@ ja:
       body: 次の項目を確認してください
       header:
         one: "%{model}にエラーが発生しました"
-        other: "%{model}に%{count}個のエラーが発生しました"
+        other: "作成中の%{model}に%{count}個のエラーが発生しました"
   helpers:
     btn:
       edit: 編集
@@ -322,6 +341,32 @@ ja:
       submit: 保存する
       update: 更新する
       participate: 言語を選んで参加！
+    notice:
+      create_event: イベントを作成しました！
+      update_event: イベントを更新しました！
+      delete_evemt: イベントを削除しました！
+      delete_language: 言語を削除しました
+      create_group: グループを作成しました！
+      update_group: グループを更新しました！
+      delete_group: グループを削除しました！
+      give_owner: オーナーを変更しました
+      create_organizer: オーガナイザー権限を付与しました
+      delete_organizer: オーガナイザー権限を削除しました
+      send_group_request: グループ加入リクエストを送信しました
+      send_event_request: "イベントに参加リクエストを送りました！\n現在のステータスをご確認ください"
+      send_group_and_event_request: "イベントとグループに参加リクエストを送りました！\n現在のステータスをご確認ください"
+      cannot_send_request: "参加リクエストが送れませんでした\n再度イベント情報をご確認ください"
+      delete_member_own: グループから脱退しました
+      delete_participant_own: イベント参加を削除しました
+      accept_request: リクエストを許可しました
+      deny_request: リクエストを却下しました
+      accept_all_requests: すべてのリクエストを許可しました
+      delete_member: メンバーを削除しました
+      any_organizer: オーガナイザーのみアクセスできます
+      user_only: 当該ユーザのみ情報を編集できます
+      group_owner_only: オーナーのみアクセスできます
+      group_organizer_only: そのグループのオーガナイザーのみアクセスできます
+      event_organizer_only: そのイベントのオーガナイザーのみアクセスできます
     request:
       send: 参加リクエストを送る
       withdraw: このグループから脱退する
@@ -331,8 +376,10 @@ ja:
       coming: 直近のイベント
       nothing: 予定されているイベントはありません
       old: 過去のイベント
+      number_of_participants: 参加者
     group:
       your_status: あなたのステータス
+      number_of_members: メンバー数
     confirm:
       sure: 本当によろしいですか？
       delete: 本当に削除してよろしいですか？
@@ -343,6 +390,7 @@ ja:
       base: ステータス
       owner: オーナー
       organizer: オーガナイザー
+      pending: 参加保留中
       member: メンバー
       guest: ゲスト(非メンバー)
     model:

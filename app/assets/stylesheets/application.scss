@@ -60,6 +60,16 @@
 .rem2-space {
   margin-top: 2rem;
 }
+#error_explanation {
+  color: #f67500;
+  font-weight: bold;
+}
+#error_explanation h3 {
+  margin-bottom: 1rem;
+}
+#error_explanation ul {
+  list-style: decimal;
+}
 
 @import "bootstrap-custom";
 @import "users";

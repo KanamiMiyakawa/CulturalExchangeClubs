@@ -2,15 +2,15 @@ module ApplicationHelper
   def chk_member_status(user_id)
     case user_id
     when @group.owner.id
-      "オーナー"
+      t('helpers.status.owner')
     when *@organizers.pluck(:user_id)
-      "オーガナイザー"
+      t('helpers.status.organizer')
     when *@pending_users.pluck(:user_id)
-      "参加保留中"
+      t('helpers.status.pending')
     when *@members.pluck(:user_id)
-      "メンバー"
+      t('helpers.status.member')
     else
-      "ゲスト(非メンバー)"
+      t('helpers.status.guest')
     end
   end
 end

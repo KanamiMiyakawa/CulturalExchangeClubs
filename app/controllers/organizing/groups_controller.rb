@@ -15,7 +15,7 @@ class Organizing::GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
-      redirect_to organizing_path, notice: 'グループを更新しました'
+      redirect_to organizing_path, notice: t('helpers.notice.update_group')
     else
       render :edit
     end
@@ -23,7 +23,7 @@ class Organizing::GroupsController < ApplicationController
 
   def destroy
     @group.destroy!
-    redirect_to organizing_path, notice: 'グループを削除しました'
+    redirect_to organizing_path, notice: t('helpers.notice.delete_group')
   end
 
   def give_owner
@@ -31,17 +31,17 @@ class Organizing::GroupsController < ApplicationController
       @group.organizers.create!(user_id:params[:user_id])
     end
     @group.update!(owner_id:params[:user_id])
-    redirect_to organizing_path, notice: 'オーナーを変更しました'
+    redirect_to organizing_path, notice: t('helpers.notice.give_owner')
   end
 
   def create_organizer
     @group.organizers.create!(user_id:params[:user_id])
-    redirect_to organizing_group_path(@group), notice: 'オーガナイザー権限を付与しました'
+    redirect_to organizing_group_path(@group), notice: t('helpers.notice.create_organizer')
   end
 
   def delete_organizer
     Organizer.find(params[:organizer_id]).destroy!
-    redirect_to organizing_group_path(@group), notice: 'オーガナイザー権限を削除しました'
+    redirect_to organizing_group_path(@group), notice: t('helpers.notice.delete_organizer')
   end
 
   private
@@ -56,7 +56,7 @@ class Organizing::GroupsController < ApplicationController
 
   def group_owner_only
     unless current_user == @group.owner
-      redirect_to "/", notice: "オーナーのみアクセスできます"
+      redirect_to "/", notice: t('helpers.notice.group_owner_only')
     end
   end
 

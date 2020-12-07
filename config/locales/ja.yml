@@ -97,7 +97,7 @@ ja:
       online: オンライン
       max: 人まで参加可能
       rest: 残席
-      no_rest: 現在空きがありません
+      no_rest: 現在残席がありません
       pending: オーガナイザーの参加許可を待っています！
       accepted: あなたはこのイベントに参加予定です！
       delete_participant: イベント参加を取りやめる
@@ -115,7 +115,7 @@ ja:
     show:
       max: 人まで参加可能
       rest: 残席
-      no_rest: 現在空きがありません
+      no_rest: 現在残席がありません
       organizer: オーガナイザー
       group: グループ
       permission_true: オーガナイザーの許可が必要です

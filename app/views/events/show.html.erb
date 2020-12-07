@@ -92,6 +92,8 @@
           <h3 class="text-center"><%= t('helpers.group.your_status') %></h3>
           <p class="text-center"><%= t('.group') %>:<span class="group-status ml-3"><%= chk_member_status(current_user.id) %></span></p>
 
+          <div class="border-dashed"></div>
+
           <% if @event.users.include?(current_user) %>
 
             <% participant = Participant.find_by(event_id:@event.id, user_id:current_user.id) %>
@@ -107,9 +109,10 @@
           <% elsif @event.user == current_user %>
             <p class="index-status alert alert-success"><%= t('.you_organizer') %></p>
 
-          <% else %>
+          <% elsif @languages_select_list.blank? %>
+            <p class="side-container-no-rest text-center"><%= t('.no_rest') %></p>
 
-            <div class="border-dashed"></div>
+          <% else %>
 
             <%= form_with(url: participants_path, local: true) do |form| %>
               <%= form.hidden_field :event_id, value: @event.id %>

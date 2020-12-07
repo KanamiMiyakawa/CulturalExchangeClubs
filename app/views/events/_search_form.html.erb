@@ -1,8 +1,8 @@
 <%= search_form_for @q do |f| %>
 
 <div class="">
-  <%= f.label :name_or_content_cont, "Keyword" %>
-  <%= f.search_field :name_or_content_cont %>
+  <%= f.label :name_or_content_or_address_cont, "Keyword" %>
+  <%= f.search_field :name_or_content_or_address_cont %>
 
   <%= f.label :event_languages_language_id_eq, "言語" %>
   <%= f.select :event_languages_language_id_eq, @languages.map { |lang| [lang.ja_name, lang.id]}, include_blank: true %>

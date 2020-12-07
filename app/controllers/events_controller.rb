@@ -1,7 +1,10 @@
 class EventsController < ApplicationController
 
   def index
-    @events = Event.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(20)
+    @q = Event.ransack(params[:q])
+    @languages = Language.all
+    @events = @q.result(distinct: true).where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(20)
+    # @events = Event.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(20)
     @index_date = 0
     if user_signed_in?
       @user = current_user

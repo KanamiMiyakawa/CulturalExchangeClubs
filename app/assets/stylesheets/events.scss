@@ -28,11 +28,11 @@
 }
 .index-max {
   font-weight: 400;
-  padding-left: 1rem;
+  padding-left: 0.5rem;
 }
 .index-rest {
   color: red;
-  padding-left: 1rem;
+  padding-left: 0.5rem;
 }
 .index-status {
   margin-bottom: 0.5rem;
@@ -56,6 +56,12 @@
   padding: 1.5rem 2rem;
   margin-top: 1rem;
 }
+//search
+.search-form-container {
+  background-color: white;
+  border: solid 1px black;
+  padding: 1.5rem;
+}
 
 //show
 .event-wrapper {
@@ -63,7 +69,7 @@
 }
 .event-container {
   border-color: #757725;
-  padding: 3rem 2rem
+  padding: 1.5rem 2rem 3rem 2rem
 }
 .event-show-language-table {
   border: dashed 2px #8dc3ff;

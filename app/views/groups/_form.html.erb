@@ -34,10 +34,10 @@
         <tr>
           <th><%= t('.permission') %></th>
           <td>
+          <%= form.radio_button :permission, true %>
             <%= form.label :permission, t('.permission_true'), value: "true"  %>
-            <%= form.radio_button :permission, true, class: "mr-3" %>
+            <%= form.radio_button :permission, false, class: "ml-3" %>
             <%= form.label :permission, t('.permission_false'), value: "false"  %>
-            <%= form.radio_button :permission, false %>
           </td>
         </tr>
       </div>

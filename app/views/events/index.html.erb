@@ -4,7 +4,9 @@
 
       <div class="col-md-8 event-container index-bg">
 
-        <h2><%= t('.title') %></h2>
+        <div class="search-form-container">
+          <%= render 'search_form' %>
+        </div>
 
         <% @events.each do |event| %>
 
@@ -92,11 +94,11 @@
                     <% else %>
                       <div class="text-center">
                         <% if event.guest_allowed? %>
-                          <%= form.label :guest, t('.guest'), value: true %>
-                          <%= form.radio_button :guest, true %>
+                          <%= form.radio_button :guest, true, id: "#{event.id}_guest_true" %>
+                          <%= form.label :guest, t('.guest'), for: "#{event.id}_guest_true" %>
                         <% end %>
-                        <%= form.label :guest, t('.member'), value: false  %>
-                        <%= form.radio_button :guest, false, checked: true %>
+                        <%= form.radio_button :guest, false, checked: true, id: "#{event.id}_guest_false" %>
+                        <%= form.label :guest, t('.member'), for: "#{event.id}_guest_false"  %>
                       </div>
                     <% end %>
                     <div class="text-center mb-2 index-btn">

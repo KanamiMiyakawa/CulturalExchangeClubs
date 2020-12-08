@@ -11,7 +11,7 @@ class Member < ApplicationRecord
   private
 
   def check_pending
-    self.pending = true if self.group.permission?
+    self.pending = true if self.group.permission? && self.group.owner_id != self.user.id
   end
 
   #メンバーを削除するとき、ゲスト不可のイベント参加を削除する

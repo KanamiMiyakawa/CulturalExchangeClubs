@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_30_073035) do
+ActiveRecord::Schema.define(version: 2020_12_08_104756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,15 +27,15 @@ ActiveRecord::Schema.define(version: 2020_11_30_073035) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name", limit: 255, null: false
     t.datetime "schedule", null: false
     t.bigint "organizer_id"
     t.bigint "group_id"
-    t.text "content", null: false
+    t.string "content", limit: 800, null: false
     t.boolean "online", default: false
     t.boolean "permission", default: false
     t.boolean "guest_allowed", default: false
-    t.string "address", default: ""
+    t.string "address", limit: 255, default: ""
     t.float "lat"
     t.float "lon"
     t.string "place", default: ""
@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(version: 2020_11_30_073035) do
   end
 
   create_table "groups", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "detail", default: ""
+    t.string "name", limit: 255, null: false
+    t.string "detail", limit: 800, default: ""
     t.boolean "permission", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 2020_11_30_073035) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
+    t.string "email", limit: 255, default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -113,9 +113,9 @@ ActiveRecord::Schema.define(version: 2020_11_30_073035) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.string "name", null: false
+    t.string "name", limit: 255, null: false
     t.text "introduction", default: ""
-    t.string "address", default: ""
+    t.string "address", limit: 255, default: ""
     t.float "lat"
     t.float "lon"
     t.datetime "created_at", null: false

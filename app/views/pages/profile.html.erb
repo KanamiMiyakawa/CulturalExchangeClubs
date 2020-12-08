@@ -18,7 +18,7 @@
                 </tr>
                 <tr>
                   <th><%= t('activerecord.attributes.user.introduction') %></th>
-                  <td><%= @user.introduction %></td>
+                  <td id="wordbreak"><%= simple_format(@user.introduction) %></td>
                 </tr>
                 <tr>
                   <th><%= t('activerecord.attributes.user.created_at') %></th>

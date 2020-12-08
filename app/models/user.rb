@@ -7,9 +7,11 @@ class User < ApplicationRecord
   geocoded_by :address, latitude: :lat, longitude: :lon
   after_validation :geocode, if: :address_changed?
 
-  validates :name,  presence: true, length: { maximum: 30 }
+  validates :name,  presence: true, length: { maximum: 255 }
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true,
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+  validates :introduction, length: { maximum: 400 }
+  validates :address, length: {maximum: 255}
 
   #一般ユーザ
   has_many :members, dependent: :destroy

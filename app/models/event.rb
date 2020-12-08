@@ -9,12 +9,13 @@ class Event < ApplicationRecord
   before_validation :add_user_id, if: Proc.new { |event| event.organizer_id.present? }
 
   #バリデーション
-  validates :name,  presence: true, length: { maximum: 50 }
+  validates :name,  presence: true, length: { maximum: 255 }
   validate  :date_not_before_today
-  validates :content,  presence: true
+  validates :content,  presence: true, length: { maximum: 800 }
   validates :online, inclusion: { in: [true, false] }
   validates :permission, inclusion: { in: [true, false] }
   validates :guest_allowed, inclusion: { in: [true, false] }
+  validates :address, length: { maximum: 255 }
   validate  :real_need_address
   validate  :has_language?
   validate  :duplicate_language?

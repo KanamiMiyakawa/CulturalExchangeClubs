@@ -130,6 +130,12 @@ ja:
       guest: ゲストとして参加
       member: グループに登録して参加
       participants: 参加予定
+    search_form:
+      keyword: キーワード
+      select_language: 言語を選択！
+      online: オンラインイベント
+      real: リアルイベント
+      whichever: どちらでも
   organizings:
     show:
       title: オーガナイザー画面の使い方
@@ -326,6 +332,7 @@ ja:
       edit: 編集
       delete: 削除
       back: 戻る
+      search: 検索する！
       new_group: 新規グループ作成
       members: メンバー管理画面
       new_event: 新規イベント作成

@@ -2,7 +2,7 @@ class EventsController < ApplicationController
 
   def index
     @q = Event.ransack(params[:q])
-    @languages = Language.all
+    @languages = Language.all.map { |lang| [lang.ja_name, lang.id]}
     @events = @q.result(distinct: true).where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(20)
     # @events = Event.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(20)
     @index_date = 0

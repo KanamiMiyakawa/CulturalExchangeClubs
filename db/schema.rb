@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_08_104756) do
+ActiveRecord::Schema.define(version: 2020_12_08_161930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2020_12_08_104756) do
     t.datetime "schedule", null: false
     t.bigint "organizer_id"
     t.bigint "group_id"
-    t.string "content", limit: 800, null: false
+    t.text "content", null: false
     t.boolean "online", default: false
     t.boolean "permission", default: false
     t.boolean "guest_allowed", default: false
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2020_12_08_104756) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name", limit: 255, null: false
-    t.string "detail", limit: 800, default: ""
+    t.text "detail", default: ""
     t.boolean "permission", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

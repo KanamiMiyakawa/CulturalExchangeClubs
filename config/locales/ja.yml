@@ -403,6 +403,9 @@ ja:
     model:
       group: グループ
       event: イベント
+    map:
+      your_address: あなたの住所
+      need_address: 住所を入力してください
     js:
       event_language: 参加者の言語
   number:

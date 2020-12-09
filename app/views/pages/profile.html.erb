@@ -79,7 +79,13 @@
                   </tr>
                   <tr>
                     <th><%= t('.address') %></th>
-                    <td><%= event.address %></td>
+                    <td>
+                      <% if event.online? %>
+                        <%= t('events.index.online') %>
+                      <% else %>
+                        <%= event.address %>
+                      <% end %>
+                    </td>
                   </tr>
                 </table>
               <% end %>
@@ -116,7 +122,13 @@
                   </tr>
                   <tr>
                     <th><%= t('.address') %></th>
-                    <td><%= event.address %></td>
+                    <td>
+                      <% if event.online? %>
+                        <%= t('events.index.online') %>
+                      <% else %>
+                        <%= event.address %>
+                      <% end %>
+                    </td>
                   </tr>
                 </table>
               <% end %>
@@ -151,43 +163,52 @@
 var map;
 var marker = [];
 var infoWindow = [];
-var markerData = <%= @real_events %>;
-console.log(markerData);
-
-
-
-
+var markerData = gon.real_events;
+var homeData = gon.home;
 
 function initMap(){
+  var mapLatLng = new google.maps.LatLng({lat: homeData['lat'], lng: homeData['lng']});
 
-  var latlng = new google.maps.LatLng(<%= @user.lat %>,<%= @user.lon %>);
-
-  var map = new google.maps.Map(document.getElementById('user-show-map'), {
-  center: latlng,
-  zoom: 10
+  map = new google.maps.Map(document.getElementById('user-show-map'),{
+    center: mapLatLng,
+    zoom: 11
   });
 
-  let homeMarker = new google.maps.Marker({
-    map: map,
-    position: latlng
+  homeMarker = new google.maps.Marker({
+    position: mapLatLng,
+    map: map
   });
 
-  let homeWindow = new google.maps.InfoWindow({
-    content: '<div>あなたの住所</div>'
+  homeWindow = new google.maps.InfoWindow({
+    content: '<div>' + homeData['name'] + '</div>'
   });
 
   homeMarker.addListener('click', function(){
     homeWindow.open(map, homeMarker);
   });
 
-
-
-  function markerEvent(i){
-    markers[markIndex].addListener('click', function(){
-      markWindows[markIndex].open(map, markers[markIndex]);
+  for (var i = 0; i < markerData.length; i++){
+    markerLatLng = new google.maps.LatLng({lat: markerData[i]['lat'], lng: markerData[i]['lng']});
+    marker[i] = new google.maps.Marker({
+      position: markerLatLng,
+      map: map
     });
-  };
 
+    infoWindow[i] = new google.maps.InfoWindow({
+      content: '<div>' + markerData[i]['name'] + '</div>' +
+              '<div>' + markerData[i]['address'] + '</div>' +
+              '<div>' + markerData[i]['schedule'] + '</div>'
+    });
+
+    markerEvent(i);
+  }
 }
+
+function markerEvent(i){
+  marker[i].addListener('click', function(){
+    infoWindow[i].open(map, marker[i]);
+  });
+}
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GMAP_HTTP'] %>&callback=initMap" async defer></script>

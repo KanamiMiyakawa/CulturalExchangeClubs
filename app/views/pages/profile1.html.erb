@@ -148,16 +148,6 @@
 </div>
 
 <script>
-var map;
-var marker = [];
-var infoWindow = [];
-var markerData = <%= @real_events %>;
-console.log(markerData);
-
-
-
-
-
 function initMap(){
 
   var latlng = new google.maps.LatLng(<%= @user.lat %>,<%= @user.lon %>);
@@ -180,7 +170,24 @@ function initMap(){
     homeWindow.open(map, homeMarker);
   });
 
+  var markIndex = 0;
+  <% @real_events.each do |event| %>
+    var markers = {};
+    var markWindows = {};
 
+    markers[markIndex] = new google.maps.Marker({
+      map: map,
+      position: {lat: <%= event.lat %>, lng: <%= event.lon %>}
+    });
+
+    markWindows[markIndex] = new google.maps.InfoWindow({
+      content: '<div>いべんと</div>'
+    });
+
+    markerEvent(markIndex);
+
+    markIndex += 1
+  <% end %>
 
   function markerEvent(i){
     markers[markIndex].addListener('click', function(){

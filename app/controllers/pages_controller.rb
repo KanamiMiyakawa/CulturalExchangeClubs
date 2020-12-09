@@ -10,6 +10,7 @@ class PagesController < ApplicationController
     if @user == current_user
       @groups = @user.groups
       @events = @user.events.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(3)
+      @real_events = @events.where(online: false).map{|event| {name: event.name, schedule: "#{l event.schedule, format: :long}", address: event.address, lat: event.lat, lng: event.lon}}
       @organizing_events = @user.organizing_events.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(3)
       @index_date = 0
     end

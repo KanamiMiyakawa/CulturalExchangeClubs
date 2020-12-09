@@ -82,6 +82,11 @@
                   </td>
                 </tr>
               </table>
+
+              <% unless @event.online? %>
+                <div class="mt-5" id="event-show-map"></div>
+              <% end %>
+
             </div>
           </div>
         </div>
@@ -161,3 +166,32 @@
     </div>
   </div>
 </div>
+
+<script>
+var map;
+
+function initMap(){
+  var mapLatLng = new google.maps.LatLng({lat: gon.event.lat, lng: gon.event.lng});
+  map = new google.maps.Map(document.getElementById('event-show-map'),{
+    center: mapLatLng,
+    zoom: 15
+  });
+
+  eventMarker = new google.maps.Marker({
+    position: mapLatLng,
+    map: map
+  });
+
+  eventWindow = new google.maps.InfoWindow({
+    content: '<h4>' + gon.event.name + '</h4>' +
+            '<div>' + gon.event.address + '</div>' +
+            '<div>' + gon.event.schedule + '</div>'
+  });
+
+  eventMarker.addListener('click', function(){
+    eventWindow.open(map, eventMarker);
+  });
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GMAP_HTTP'] %>&callback=initMap" async defer></script>

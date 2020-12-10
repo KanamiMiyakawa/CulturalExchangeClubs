@@ -30,8 +30,13 @@
 
                 <div class="field">
                   <%= f.label :address %><br />
-                  <%= f.text_field :address %>
+                  <%= f.text_field :address, id: "map-input" %>
+                  <div class="text-right mr-5">
+                    <p class="btn btn-secondary" id="sign-up-map-btn" onclick="codeAddress()">表示</p>
+                  </div>
                 </div>
+
+                <div id="user-edit-map"></div>
 
                 <div class="field">
                   <%= f.label :password %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it') %>)</i>
@@ -74,3 +79,51 @@
   </div>
 
 </div>
+<script>
+var map;
+var geocoder;
+var marker;
+var mapLatLng;
+let inputAddress
+function initMap(){
+  geocoder = new google.maps.Geocoder();
+  mapLatLng = new google.maps.LatLng({lat: 35.7100069, lng: 139.8108103});
+
+  map = new google.maps.Map(document.getElementById('user-edit-map'),{
+    center: mapLatLng,
+    zoom: 12
+  });
+
+  inputAddress = document.getElementById('map-input').value;
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+      map.setCenter(results[0].geometry.location);
+      marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+    }
+  });
+}
+function codeAddress(){
+  inputAddress = document.getElementById('map-input').value;
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+
+      if(marker != null){
+       marker.setMap(null);
+      }
+      marker = null;
+
+      map.setCenter(results[0].geometry.location);
+      marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+    } else {
+      alert('該当する結果がありませんでした：' + status);
+    };
+  });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GMAP_HTTP'] %>&callback=initMap" async defer></script>

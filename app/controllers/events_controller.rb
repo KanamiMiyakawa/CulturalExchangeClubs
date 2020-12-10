@@ -1,10 +1,39 @@
 class EventsController < ApplicationController
 
   def index
-    @q = Event.ransack(params[:q])
+    if params[:commit] == "検索する！"
+      # 検索している場合の分岐
+      if params[:address].present? && params[:within].present?
+        # ransack+geocoder
+      else
+        # ransackのみ
+        @q = Event.ransack(params[:q])
+        @events = @q.result(distinct: true).where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(20)
+      end
+    else
+      # 初回表示
+      if user_signed_in? && current_user.address.present?
+        # 住所から20キロ内＋オンライン
+        @q = Event.ransack(params[:q])
+        # 以下、互換性のないActiveRelationでor条件が使えなかった
+        # @events = @q.result(distinct: true).near([current_user.lat, current_user.lon], 50)
+        #           .or(@q.result(distinct: true).where(online: true))
+        #           .where('schedule >= ?', Time.zone.now)
+        #           .order(schedule: "ASC")
+        #           .limit(20)
+        @events1 = Event.near([current_user.lat, current_user.lon], 50)
+                  .where('schedule >= ?', Time.zone.now)
+        @events2 = Event.where(online: true)
+                  .where('schedule >= ?', Time.zone.now)
+        @events = @events1 + @events2
+        @events.sort_by! {|a| a[:schedule]}
+      else
+        # 全件表示
+        @q = Event.ransack(params[:q])
+        @events = Event.where('schedule >= ?', Time.zone.now).order(schedule: "ASC")
+      end
+    end
     @languages = Language.all.map { |lang| [lang.ja_name, lang.id]}
-    @events = @q.result(distinct: true).where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(20)
-    # @events = Event.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(20)
     @index_date = 0
     if user_signed_in?
       @user = current_user

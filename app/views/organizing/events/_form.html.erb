@@ -79,7 +79,15 @@
 
     <div class="form-group" id="address-form">
       <%= form.label :address, class: "form-label" %>
-      <%= form.text_field :address, class: "form-control" %>
+      <div class="row">
+        <div class="col-md-10">
+          <%= form.text_field :address, class: "form-control", id: "map-input"%>
+        </div>
+        <div class="col-md-2">
+          <p class="btn btn-secondary" onclick="codeAddress()">表示</p>
+        </div>
+      </div>
+      <div id="event-form-map"></div>
     </div>
   </div>
 
@@ -118,3 +126,52 @@
     <%= form.submit event_submit_btn, class: "btn btn-success event-submit-btn" %>
   </div>
 <% end %>
+
+<script>
+var map;
+var geocoder;
+var marker;
+var mapLatLng;
+function initMap(){
+  geocoder = new google.maps.Geocoder();
+
+  if (gon.event != null){
+    mapLatLng = new google.maps.LatLng({lat: gon.event.lat, lng: gon.event.lng});
+  } else {
+    mapLatLng = new google.maps.LatLng({lat: 35.7100069, lng: 139.8108103});
+  }
+
+  map = new google.maps.Map(document.getElementById('event-form-map'),{
+    center: mapLatLng,
+    zoom: 13
+  });
+
+  if (gon.event != null){
+    marker = new google.maps.Marker({
+      map: map,
+      position: mapLatLng
+    });
+  }
+}
+function codeAddress(){
+  let inputAddress = document.getElementById('map-input').value;
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+
+      if(marker != null){
+       marker.setMap(null);
+      }
+      marker = null;
+
+      map.setCenter(results[0].geometry.location);
+      marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+    } else {
+      alert('該当する結果がありませんでした：' + status);
+    };
+  });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GMAP_HTTP'] %>&callback=initMap" async defer></script>

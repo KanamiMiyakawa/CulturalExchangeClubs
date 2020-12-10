@@ -9,6 +9,7 @@ class Organizing::EventsController < ApplicationController
   def new
     @event = Event.new
     2.times { @event.event_languages.build }
+    gon.event = nil
   end
 
   def create
@@ -17,10 +18,20 @@ class Organizing::EventsController < ApplicationController
       redirect_to event_path(@event), notice: t('helpers.notice.create_event')
     else
       render :new
+      if @event.online?
+        gon.event = nil
+      else
+        gon.event = { lat: @event.lat, lng: @event.lon}
+      end
     end
   end
 
   def edit
+    if @event.online?
+      gon.event = nil
+    else
+      gon.event = { lat: @event.lat, lng: @event.lon}
+    end
   end
 
   def update
@@ -28,6 +39,11 @@ class Organizing::EventsController < ApplicationController
       redirect_to event_path(@event), notice: t('helpers.notice.update_event')
     else
       render :edit
+      if @event.online?
+        gon.event = nil
+      else
+        gon.event = { lat: @event.lat, lng: @event.lon}
+      end
     end
   end
 

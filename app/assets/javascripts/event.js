@@ -1,5 +1,4 @@
 $(function(){
-  document.addEventListener("turbolinks:load", function() {
 
   //読み込み時にオンラインが選択されていたら住所フォームをhideする
   if(document.forms.eventForm.event_online_true.checked){
@@ -10,9 +9,9 @@ $(function(){
   $( '[name="event[online]"]:radio' ).change( function() {
     var radioval = $(this).val();
     if(radioval == "false"){
-      $('#address-form').show();
+      $('#address-form').slideDown('slow');
     }else{
-      $('#address-form').hide();
+      $('#address-form').hide('slow');
     }
   });
 
@@ -228,5 +227,4 @@ $(function(){
     $(".languages-form").append(buildField(fileIndex));
     fileIndex += 1;
   })
-})
 })

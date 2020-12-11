@@ -65,6 +65,9 @@ class EventsController < ApplicationController
       @coming_events = @user.events.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(3)
       @organizing_events = @user.organizing_events.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(3)
     end
+
+    # googleMap用変数
+    gon.home = {lat: @user.lat, lng: @user.lon }
   end
 
   def show

@@ -141,6 +141,7 @@ ja:
       from: 以降
       to: まで
       around: から
+      around_info: から範囲
   organizings:
     show:
       title: オーガナイザー画面の使い方

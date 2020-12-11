@@ -68,14 +68,36 @@
   padding: 0.7rem 1.5rem;
   margin-top: 1.5rem;
 }
-.searched-title {
-  font-weight: bold;
-  color: #ff3700;
-}
 .searched-contents {
-  font-weight: bold;
   font-size: 1.3rem;
-  color: #ff3700;
+}
+.search-info-box {
+  margin: 0.2rem 0.2rem 1rem 0.2rem;
+  border-radius: 4px;
+  padding: 0.2rem 0;
+}
+.search-info-box p {
+  margin-bottom: 0;
+}
+.searched-info-piece {
+  background-color: #ffe1ee;
+  border-radius: 4px;
+  padding: 0 0.3rem;
+  margin-right: 0.2rem;
+}
+//map
+.index-map-container {
+  border-color: #69a8ee;
+  padding: 0.3rem 0.5rem;
+  margin-top: 2rem;
+  height: 500px;
+}
+.index-map-info {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+#event-index-map {
+  height: 100%;
 }
 
 //show

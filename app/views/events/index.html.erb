@@ -121,10 +121,8 @@
       </div>
 
       <div class="col-lg-4 index-side-column">
-        <div class="side-container map-side-container">
-          <% if @address.present? && @within.present? %>
-            <p>"<%= @address %>"<%= t('.around') %><%= "#{@within}" %>km</p>
-          <% end %>
+        <div class="side-container index-map-container">
+          <div id="event-index-map"></div>
         </div>
 
         <% if user_signed_in? %>
@@ -204,3 +202,17 @@
     </div>
   </div>
 </div>
+
+<script>
+let map;
+function initMap(){
+  let mapLatLng = new google.maps.LatLng({lat: gon.home.lat, lng: gon.home.lng});
+  map = new google.maps.Map(document.getElementById('event-index-map'),{
+    center: mapLatLng,
+    zoom: 11
+  });
+}
+
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GMAP_HTTP'] %>&callback=initMap" async defer></script>

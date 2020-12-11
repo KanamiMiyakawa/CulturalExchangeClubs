@@ -1,36 +1,50 @@
 <%= search_form_for @q do |f| %>
 
   <% if params[:q].present? %>
-    <% if params[:q][:name_or_content_or_address_cont].present? || params[:q][:event_languages_language_id_eq].present? || params[:q][:schedule_gteq].present? || params[:q][:schedule_lteq].present? || params[:q][:online_eq].present? %>
-      <div class="row">
+    <% if params[:q][:name_or_content_or_address_cont].present? || params[:q][:event_languages_language_id_eq].present? || params[:q][:schedule_gteq].present? || params[:q][:schedule_lteq].present? || params[:q][:online_eq].present? || (@address.present? && @within.present?) %>
+      <div class="row search-info-box">
         <p class="col-md-3 searched-title d-flex align-items-center"><%= t('.searched_title') %></p>
         <div class="col-md-9">
-          <p class="searched-contents">
+          <p class="searched-contents text-danger">
             <% if params[:q][:name_or_content_or_address_cont].present? %>
-              "<%= params[:q][:name_or_content_or_address_cont] %>"
+              <span class="searched-info-piece"><%= params[:q][:name_or_content_or_address_cont] %></span>
             <% end %>
 
             <% if params[:q][:event_languages_language_id_eq].present? %>
-              "<%= Language.find(params[:q][:event_languages_language_id_eq].to_i).ja_name %>"
+              <span class="searched-info-piece"><%= Language.find(params[:q][:event_languages_language_id_eq].to_i).ja_name %></span>
             <% end %>
 
             <% if params[:q][:schedule_gteq].present? %>
-              "<%= l DateTime.parse(params[:q][:schedule_gteq]), format: :long %><%= t('.from') %>"
+              <span class="searched-info-piece"><%= l DateTime.parse(params[:q][:schedule_gteq]), format: :long %><%= t('.from') %></span>
             <% end %>
 
             <% if params[:q][:schedule_lteq].present? %>
-              "<%= l DateTime.parse(params[:q][:schedule_lteq]), format: :long %><%= t('.to') %>"
+              <span class="searched-info-piece"><%= l DateTime.parse(params[:q][:schedule_lteq]), format: :long %><%= t('.to') %></span>
             <% end %>
 
             <% if params[:q][:online_eq] == "true" %>
-              "<%= t('.online') %>"
+              <span class="searched-info-piece"><%= t('.online') %></span>
             <% elsif params[:q][:online_eq] == "false" %>
-              "<%= t('.real') %>"
+              <span class="searched-info-piece"><%= t('.real') %></span>
+            <% end %>
+
+            <% if @address.present? && @within.present? %>
+              <span class="searched-info-piece"><%= @address %><%= t('.around_info') %><%= "#{@within}" %>km</span>
             <% end %>
           </p>
         </div>
       </div>
     <% end %>
+  <% elsif @address.present? && @within.present? %>
+    <div class="row search-info-box">
+      <p class="col-md-3 searched-title d-flex align-items-center"><%= t('.searched_title') %></p>
+      <div class="col-md-9">
+        <p class="searched-contents text-danger">
+          <span class="searched-info-piece"><%= @address %><%= t('.around_info') %><%= "#{@within}" %>km</span>
+        </p>
+      </div>
+    </div>
+
   <% end %>
 
   <div class="row">

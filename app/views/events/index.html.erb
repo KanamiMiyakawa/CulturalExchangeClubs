@@ -205,14 +205,54 @@
 
 <script>
 let map;
+let marker = [];
+let infoWindow = [];
+let markerData = gon.real_events;
 function initMap(){
   let mapLatLng = new google.maps.LatLng({lat: gon.home.lat, lng: gon.home.lng});
   map = new google.maps.Map(document.getElementById('event-index-map'),{
     center: mapLatLng,
     zoom: 11
   });
+
+  if(gon.home.name != null){
+    homeMarker = new google.maps.Marker({
+      position: mapLatLng,
+      map: map
+    });
+
+    homeWindow = new google.maps.InfoWindow({
+      content: '<div>' + gon.home.name + '</div>'
+    });
+
+    homeMarker.addListener('click', function(){
+      homeWindow.open(map, homeMarker);
+    });
+  };
+
+
+  for (let i = 0; i < markerData.length; i++){
+    markerLatLng = new google.maps.LatLng({lat: markerData[i]['lat'], lng: markerData[i]['lng']});
+    marker[i] = new google.maps.Marker({
+      position: markerLatLng,
+      map: map
+    });
+
+    infoWindow[i] = new google.maps.InfoWindow({
+      content: '<h4><a href="/events/' + markerData[i]['id'] + '">' + markerData[i]['name'] + '</a></h4>' +
+              '<div>' + markerData[i]['address'] + '</div>' +
+              '<div>' + markerData[i]['schedule'] + '</div>'
+    });
+
+    markerEvent(i);
+  }
 }
 
+function markerEvent(i){
+  marker[i].addListener('click', function(){
+    infoWindow[i].open(map, marker[i]);
+  });
+}
 
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GMAP_HTTP'] %>&callback=initMap" async defer></script>

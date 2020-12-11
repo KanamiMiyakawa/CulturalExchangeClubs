@@ -131,6 +131,7 @@ ja:
       guest: ゲストとして参加
       member: グループに登録して参加
       participants: 参加予定
+      not_login: 未ログイン
     search_form:
       keyword: キーワード
       select_language: 言語を選択！

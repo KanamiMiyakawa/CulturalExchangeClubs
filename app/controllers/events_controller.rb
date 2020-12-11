@@ -67,7 +67,17 @@ class EventsController < ApplicationController
     end
 
     # googleMap用変数
-    gon.home = {lat: @user.lat, lng: @user.lon }
+    gon.real_events = @events.map do |event|
+      next if event.online
+      {name: event.name, schedule: "#{l event.schedule, format: :long}", address: event.address, lat: event.lat, lng: event.lon, id: event.id }
+    end.compact
+
+    if user_signed_in? && @user.address.present?
+      gon.home = {name: t('helpers.map.your_address'), lat: @user.lat, lng: @user.lon }
+    else
+      # デフォルト：スカイツリー
+      gon.home = {lat: 35.7100069, lng: 139.8108103}
+    end
   end
 
   def show

@@ -65,8 +65,17 @@
   border-radius: 4px;
   background-color: white;
   border: ridge 1px white;
-  padding: 1.5rem;
+  padding: 0.7rem 1.5rem;
   margin-top: 1.5rem;
+}
+.searched-title {
+  font-weight: bold;
+  color: #ff3700;
+}
+.searched-contents {
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #ff3700;
 }
 
 //show

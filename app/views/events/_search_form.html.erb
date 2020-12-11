@@ -1,5 +1,38 @@
 <%= search_form_for @q do |f| %>
 
+  <% if params[:q].present? %>
+    <% if params[:q][:name_or_content_or_address_cont].present? || params[:q][:event_languages_language_id_eq].present? || params[:q][:schedule_gteq].present? || params[:q][:schedule_lteq].present? || params[:q][:online_eq].present? %>
+      <div class="row">
+        <p class="col-md-3 searched-title d-flex align-items-center">現在の検索条件：</p>
+        <div class="col-md-9">
+          <p class="searched-contents">
+            <% if params[:q][:name_or_content_or_address_cont].present? %>
+              "<%= params[:q][:name_or_content_or_address_cont] %>"
+            <% end %>
+
+            <% if params[:q][:event_languages_language_id_eq].present? %>
+              "<%= Language.find(params[:q][:event_languages_language_id_eq].to_i).ja_name %>"
+            <% end %>
+
+            <% if params[:q][:schedule_gteq].present? %>
+              "<%= l DateTime.parse(params[:q][:schedule_gteq]), format: :long %>以降"
+            <% end %>
+
+            <% if params[:q][:schedule_lteq].present? %>
+              "<%= l DateTime.parse(params[:q][:schedule_lteq]), format: :long %>まで"
+            <% end %>
+
+            <% if params[:q][:online_eq] == "true" %>
+              "オンライン"
+            <% elsif params[:q][:online_eq] == "false" %>
+              "オフライン"
+            <% end %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
   <div class="row">
     <div class="col-md-6 form-group">
       <%= f.search_field :name_or_content_or_address_cont, class: "form-control", placeholder: t('.keyword') %>

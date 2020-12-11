@@ -3,7 +3,7 @@
   <% if params[:q].present? %>
     <% if params[:q][:name_or_content_or_address_cont].present? || params[:q][:event_languages_language_id_eq].present? || params[:q][:schedule_gteq].present? || params[:q][:schedule_lteq].present? || params[:q][:online_eq].present? %>
       <div class="row">
-        <p class="col-md-3 searched-title d-flex align-items-center">現在の検索条件：</p>
+        <p class="col-md-3 searched-title d-flex align-items-center"><%= t('.searched_title') %></p>
         <div class="col-md-9">
           <p class="searched-contents">
             <% if params[:q][:name_or_content_or_address_cont].present? %>
@@ -15,17 +15,17 @@
             <% end %>
 
             <% if params[:q][:schedule_gteq].present? %>
-              "<%= l DateTime.parse(params[:q][:schedule_gteq]), format: :long %>以降"
+              "<%= l DateTime.parse(params[:q][:schedule_gteq]), format: :long %><%= t('.from') %>"
             <% end %>
 
             <% if params[:q][:schedule_lteq].present? %>
-              "<%= l DateTime.parse(params[:q][:schedule_lteq]), format: :long %>まで"
+              "<%= l DateTime.parse(params[:q][:schedule_lteq]), format: :long %><%= t('.to') %>"
             <% end %>
 
             <% if params[:q][:online_eq] == "true" %>
-              "オンライン"
+              "<%= t('.online') %>"
             <% elsif params[:q][:online_eq] == "false" %>
-              "オフライン"
+              "<%= t('.real') %>"
             <% end %>
           </p>
         </div>
@@ -71,14 +71,14 @@
 
     <div class="row form-group mt-3">
       <div class="col-md-2">
-        <%= label :geo, "開催場所", class: "col-form-label" %>
+        <%= label :geo, t('activerecord.attributes.event.address'), class: "col-form-label" %>
       </div>
       <div class="col-md-6">
         <%= text_field :geo, "address", value: @address, class: "form-control" %>
       </div>
       <div class="col-md-4 row">
         <div class="col-md-4">
-          <%= label :geo, "から", class: "col-form-label" %>
+          <%= label :geo, t('.around'), class: "col-form-label" %>
         </div>
         <div class="col-md-6">
           <%= number_field :geo, "within", value: @within, class: "form-control" %>
@@ -99,7 +99,7 @@
 
   <div id="primal-submit" class="row">
     <div class="col-md-3 offset-md-6 text-right">
-      <span class="btn btn-secondary" id="showSearchBtn">詳細検索！</span>
+      <span class="btn btn-secondary" id="showSearchBtn"><%= t('helpers.btn.detail_search') %></span>
     </div>
     <div class="col-md-2">
       <%= f.submit t('helpers.btn.search'), class: "btn btn-primary mr-5" %>

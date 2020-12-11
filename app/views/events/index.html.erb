@@ -122,7 +122,9 @@
 
       <div class="col-lg-4 index-side-column">
         <div class="side-container map-side-container">
-          <p>"<%= @address %>"から<%= "#{@within}" %>km</p>
+          <% if @address.present? && @within.present? %>
+            <p>"<%= @address %>"<%= t('.around') %><%= "#{@within}" %>km</p>
+          <% end %>
         </div>
 
         <% if user_signed_in? %>

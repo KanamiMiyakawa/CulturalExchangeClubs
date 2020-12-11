@@ -115,11 +115,16 @@
           </div>
 
         <% end %>
+
+        <%= paginate @events %>
+
       </div>
 
       <div class="col-lg-4 index-side-column">
         <div class="side-container map-side-container">
           地図を表示
+          <p><%= @address %></p>
+          <p><%= "#{@within}" %></p>
         </div>
 
         <% if user_signed_in? %>

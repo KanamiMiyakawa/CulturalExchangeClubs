@@ -13,8 +13,7 @@ class EventsController < ApplicationController
 
         if params[:q][:online_eq] == "false"
           # リアルイベントのみ
-          @events = @q.result(distinct: true).near(latlng, @within).where('schedule >= ?', Time.zone.now).order(schedule: "ASC").page(params[:page]).per(5)
-          binding.pry
+          @events = @q.result(distinct: true).near(latlng, @within).where('schedule >= ?', Time.zone.now).order(schedule: "ASC").page(params[:page])
         else
           # リアルとオンライン両方
           @events1 = @q.result(distinct: true)
@@ -25,14 +24,12 @@ class EventsController < ApplicationController
                     .where('schedule >= ?', Time.zone.now)
           @events = @events1 + @events2
           @events.sort_by! {|a| a[:schedule]}
-          @events = Kaminari.paginate_array(@events).page(params[:page]).per(5)
-          binding.pry
+          @events = Kaminari.paginate_array(@events).page(params[:page])
         end
       else
         # オンラインのみ = ransackのみ
         @q = Event.ransack(params[:q])
-        @events = @q.result(distinct: true).where('schedule >= ?', Time.zone.now).order(schedule: "ASC").page(params[:page]).per(5)
-        binding.pry
+        @events = @q.result(distinct: true).where('schedule >= ?', Time.zone.now).order(schedule: "ASC").page(params[:page])
       end
     else
       # 初回表示
@@ -53,13 +50,11 @@ class EventsController < ApplicationController
                   .where('schedule >= ?', Time.zone.now)
         @events = @events1 + @events2
         @events.sort_by! {|a| a[:schedule]}
-        @events = Kaminari.paginate_array(@events).page(params[:page]).per(5)
-        binding.pry
+        @events = Kaminari.paginate_array(@events).page(params[:page])
       else
         # 全件表示
         @q = Event.ransack(params[:q])
-        @events = Event.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").page(params[:page]).per(5)
-        binding.pry
+        @events = Event.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").page(params[:page])
       end
     end
 

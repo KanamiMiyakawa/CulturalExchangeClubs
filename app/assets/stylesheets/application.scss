@@ -78,6 +78,11 @@ table {
 #error_explanation ul {
   list-style: decimal;
 }
+.pagination {
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 
 @import "bootstrap-custom";
 @import "users";

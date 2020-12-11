@@ -3,8 +3,14 @@ class EventsController < ApplicationController
   def index
     if params[:commit] == "検索する！"
       # 検索している場合の分岐
-      if params[:address].present? && params[:within].present?
-        # ransack+geocoder
+      if params[:geo][:address].present? && params[:geo][:within].present? && params[:q][:online_eq] != "true"
+        # ransack + geocoder
+        @q = Event.ransack(params[:q])
+        @address = params[:geo][:address]
+        results = Geocoder.search(params[:geo][:address])
+        latlng = results.first.coordinates
+        @within = params[:geo][:within].to_i
+        @events = @q.result(distinct: true).near(latlng, @within).where('schedule >= ?', Time.zone.now).order(schedule: "ASC")
       else
         # ransackのみ
         @q = Event.ransack(params[:q])
@@ -13,7 +19,7 @@ class EventsController < ApplicationController
     else
       # 初回表示
       if user_signed_in? && current_user.address.present?
-        # 住所から20キロ内＋オンライン
+        # 住所から50キロ内＋オンライン
         @q = Event.ransack(params[:q])
         # 以下、互換性のないActiveRelationでor条件が使えなかった
         # @events = @q.result(distinct: true).near([current_user.lat, current_user.lon], 50)
@@ -21,6 +27,8 @@ class EventsController < ApplicationController
         #           .where('schedule >= ?', Time.zone.now)
         #           .order(schedule: "ASC")
         #           .limit(20)
+        @address = current_user.address
+        @within = 50
         @events1 = Event.near([current_user.lat, current_user.lon], 50)
                   .where('schedule >= ?', Time.zone.now)
         @events2 = Event.where(online: true)
@@ -33,6 +41,7 @@ class EventsController < ApplicationController
         @events = Event.where('schedule >= ?', Time.zone.now).order(schedule: "ASC")
       end
     end
+
     @languages = Language.all.map { |lang| [lang.ja_name, lang.id]}
     @index_date = 0
     if user_signed_in?

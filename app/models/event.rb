@@ -20,6 +20,8 @@ class Event < ApplicationRecord
   validate  :has_language?
   validate  :duplicate_language?
   validate  :include_organizer_ids
+  # ActiveStorage
+  validate  :thumbnail_type_and_syze
 
   after_validation :remove_unnecessary_messages
 
@@ -81,6 +83,16 @@ class Event < ApplicationRecord
   def remove_unnecessary_messages
     errors.messages.delete(:user)
     errors.messages.delete(:organizer)
+  end
+
+  def thumbnail_type_and_syze
+    if !thumbnail.blob.content_type.in?(%('image/jpeg image/png'))
+      thumbnail.purge
+      errors.add(:thumbnail, :jpeg_or_png)
+    elsif thumbnail.blob.byte_size > 5.megabytes
+      thumbnail.purge
+      errors.add(:thumbnail, :under_5mb)
+    end
   end
 
 end

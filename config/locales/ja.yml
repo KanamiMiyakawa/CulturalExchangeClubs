@@ -20,6 +20,14 @@ ja:
               real_need_address: を入力してください(オンラインでない場合)
             organizer_id:
               include_ids: をグループ内から選ぶ必要があります
+            thumbnail:
+              jpeg_or_png: はjpegまたはpng形式でアップロードしてください
+              under_5mb: は1つのファイル5MB以内にしてください
+        user:
+          attributes:
+            avatar:
+              jpeg_or_png: はjpegまたはpng形式でアップロードしてください
+              under_5mb: は1つのファイル5MB以内にしてください
         participant:
           attributes:
             base:

@@ -86,7 +86,9 @@ table {
   justify-content: center;
   margin-top: 2rem;
 }
-
+.form-necessary {
+  font-weight: bold;
+}
 
 @import "bootstrap-custom";
 @import "users";

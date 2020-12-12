@@ -27,7 +27,12 @@
 
     <div class="form-group">
       <%= form.label :content, class: "form-label" %>
-      <%= form.text_area :content, class: "form-control" %>
+      <%= form.text_area :content, class: "form-control", rows: "4" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :thumbnail, class: "form-label" %>
+      <%= form.file_field :thumbnail, class: "form-control-file" %>
     </div>
 
     <div class="form-group">

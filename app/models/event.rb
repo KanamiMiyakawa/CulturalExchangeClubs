@@ -23,6 +23,9 @@ class Event < ApplicationRecord
 
   after_validation :remove_unnecessary_messages
 
+  # ActiveStorage
+  has_one_attached :thumbnail
+
   #アソシエーション
   #イベントが所属するグループ
   belongs_to :organizer

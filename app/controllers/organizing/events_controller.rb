@@ -84,7 +84,7 @@ class Organizing::EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :schedule, :content, :online, :permission, :guest_allowed, :address, :place, :organizer_id,
+    params.require(:event).permit(:name, :schedule, :content, :online, :permission, :guest_allowed, :address, :place, :thumbnail, :organizer_id,
         event_languages_attributes: [:id, :event_id, :language_id, :max])
   end
 end

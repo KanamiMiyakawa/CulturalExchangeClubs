@@ -13,8 +13,6 @@
 
                 <%= render "devise/shared/error_messages", resource: resource %>
 
-                <%= f.file_field :avatar %>
-
                 <div class="field">
                   <%= f.label :name %><br />
                   <%= f.text_field :name, placeholder: "Name",autofocus: true %>
@@ -31,7 +29,12 @@
                 </div>
 
                 <div class="field">
-                  <%= f.label :address %><br />
+                  <%= f.label :avatar %><span class="form-necessary"><%= t('helpers.form.not_necessary') %></span><br />
+                  <%= f.file_field :avatar %>
+                </div>
+
+                <div class="field">
+                  <%= f.label :address %><span class="form-necessary"><%= t('helpers.form.address') %></span><br />
                   <%= f.text_field :address, placeholder: "Adress", id: "map-input" %>
                   <div class="text-right mr-5">
                     <p class="btn btn-secondary" id="sign-up-map-btn" onclick="codeAddress()">表示</p>

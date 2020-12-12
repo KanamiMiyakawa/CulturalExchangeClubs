@@ -9,6 +9,12 @@
 
               <h2><%= @event.name %></h2>
 
+              <% if @event.thumbnail.attached? %>
+                <div class="event-show-thumbnail">
+                  <%= image_tag @event.thumbnail.variant(resize: "500x500"), class: "event-show-image" %>
+                </div>
+              <% end %>
+
               <% @languages_select_list = [] %>
 
               <div class="event-show-language-table">

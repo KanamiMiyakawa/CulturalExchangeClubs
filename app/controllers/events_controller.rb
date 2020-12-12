@@ -76,7 +76,6 @@ class EventsController < ApplicationController
     if params[:q].present? && params[:geo][:address].present? && params[:geo][:within].present? && params[:q][:online_eq] != "true"
       # geocode済み
       gon.home = {name: t('helpers.map.searched_address'), lat: latlng[0], lng: latlng[1]}
-      binding.pry
     elsif user_signed_in? && @user.address.present?
       gon.home = {name: t('helpers.map.your_address'), lat: @user.lat, lng: @user.lon }
     else

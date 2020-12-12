@@ -22,15 +22,18 @@
               <span class="searched-info-piece"><%= l DateTime.parse(params[:q][:schedule_lteq]), format: :long %><%= t('.to') %></span>
             <% end %>
 
+            <% if @address.present? && @within.present? %>
+              <span class="searched-info-piece"><%= @address %><%= t('.around_info') %><%= "#{@within}" %>km</span>
+            <% end %>
+
             <% if params[:q][:online_eq] == "true" %>
               <span class="searched-info-piece"><%= t('.online') %></span>
             <% elsif params[:q][:online_eq] == "false" %>
               <span class="searched-info-piece"><%= t('.real') %></span>
+            <% else %>
+              <span class="searched-info-piece"><%= t('.both') %></span>
             <% end %>
 
-            <% if @address.present? && @within.present? %>
-              <span class="searched-info-piece"><%= @address %><%= t('.around_info') %><%= "#{@within}" %>km</span>
-            <% end %>
           </p>
         </div>
       </div>

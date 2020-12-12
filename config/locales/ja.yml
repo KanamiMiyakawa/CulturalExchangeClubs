@@ -29,8 +29,9 @@ ja:
         name: "名前"
         email: "メールアドレス"
         introduction: "自己紹介"
-        address: "住所（イベント検索に使用します！）"
+        address: "住所"
         created_at: "利用開始日"
+        avatar: 写真
       event:
         name: イベント名
         schedule: 開催日時
@@ -39,6 +40,8 @@ ja:
         permission: 参加許可
         guest: ゲスト(非メンバー)の参加
         organizer_id: オーガナイザー
+        thumbnail: サムネイル（任意）
+        other_images: その他のファイル（任意）
       group:
         name: グループ名
         detail: グループについて
@@ -137,6 +140,7 @@ ja:
       select_language: 言語を選択！
       online: オンラインイベント
       real: リアルイベント
+      both: オンライン＋リアル
       whichever: どちらでも
       searched_title: 現在の検索条件：
       from: 以降
@@ -351,6 +355,9 @@ ja:
       edit_event: イベントを更新する！
     select:
       prompt: 選択してください
+    form:
+      address: （任意・イベント検索に使用します！）
+      not_necessary: （任意）
     submit:
       create: 登録する
       submit: 保存する

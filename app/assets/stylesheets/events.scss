@@ -132,6 +132,10 @@
 }
 .participant-list {
   list-style: none;
+  padding-inline-start: 0.2rem;
+}
+.participant-list li {
+  display: inline-block;
 }
 .participant-side-container {
   border-color: #3b5f9c;

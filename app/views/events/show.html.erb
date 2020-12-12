@@ -161,7 +161,15 @@
             <div>
               <ul class="participant-list">
                 <% event_language.participants.each do |participant| %>
-                  <li><%= link_to participant.user.name, "/profile/#{participant.user_id}" %></li>
+                  <li>
+                    <% if participant.user.avatar.attached? %>
+                      <%= link_to "/profile/#{participant.user_id}" do %>
+                        <%= image_tag participant.user.avatar.variant(resize: "100x100"), class: "header-avatar" %>
+                      <% end %>
+                    <% else %>
+                      <%= link_to participant.user.name.truncate(8, omission: '~'), "/profile/#{participant.user_id}" %>
+                    <% end %>
+                  </li>
                 <% end %>
               </ul>
             </div>

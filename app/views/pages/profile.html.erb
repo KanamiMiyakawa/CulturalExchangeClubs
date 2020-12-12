@@ -12,7 +12,9 @@
               <h2><%= t('.title') %></h2>
 
               <% if @user.avatar.attached? %>
-                <%= image_tag @user.avatar %>
+                <div class="user-show-avatar">
+                  <%= image_tag @user.avatar.variant(resize: "400x400") %>
+                </div>
               <% end %>
 
               <table class="table user-show-table">
@@ -142,9 +144,9 @@
           <div class="rem2-space"></div>
         <% end %>
 
-        <div class="side-container group-side-container">
-          <h3><%= t('.groups') %></h3>
-          <% if @user == current_user %>
+        <% if @user == current_user %>
+          <div class="side-container group-side-container">
+            <h3><%= t('.groups') %></h3>
             <% if @groups.present? %>
               <ul>
                 <% @groups.each do |group| %>
@@ -154,8 +156,8 @@
             <% else %>
               <p><%= t('.no_groups') %></p>
             <% end %>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div>
 
     </div>

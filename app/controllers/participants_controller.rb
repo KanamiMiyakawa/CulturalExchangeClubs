@@ -21,11 +21,12 @@ class ParticipantsController < ApplicationController
 
   def destroy
     participant = Participant.find(params[:id])
+    event_id = participant.event_id
     if participant.user != current_user
       redirect_to events_path, notice: t('helpers.notice.user_only')
     else
       participant.destroy!
-      redirect_to "/profile/#{current_user.id}", notice: t('helpers.notice.delete_participant_own')
+      redirect_to event_path(event_id), notice: t('helpers.notice.delete_participant_own')
     end
   end
 

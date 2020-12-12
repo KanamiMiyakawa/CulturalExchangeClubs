@@ -11,6 +11,10 @@
 
               <h2><%= t('.title') %></h2>
 
+              <% if @user.avatar.attached? %>
+                <%= image_tag @user.avatar %>
+              <% end %>
+
               <table class="table user-show-table">
                 <tr>
                   <th><%= t('activerecord.attributes.user.name') %></th>

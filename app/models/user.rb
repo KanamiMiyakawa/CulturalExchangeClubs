@@ -7,6 +7,9 @@ class User < ApplicationRecord
   geocoded_by :address, latitude: :lat, longitude: :lon
   after_validation :geocode, if: :address_changed?
 
+  # ActiveStorage
+  has_one_attached :avatar
+
   validates :name,  presence: true, length: { maximum: 255 }
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true,
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }

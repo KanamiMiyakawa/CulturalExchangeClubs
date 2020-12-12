@@ -413,6 +413,7 @@ ja:
       event: イベント
     map:
       your_address: あなたの住所
+      searched_address: 検索された住所
       need_address: 住所を入力してください
       no_result: 該当する結果がありませんでした：
     js:

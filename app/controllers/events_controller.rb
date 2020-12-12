@@ -72,7 +72,12 @@ class EventsController < ApplicationController
       {name: event.name, schedule: "#{l event.schedule, format: :long}", address: event.address, lat: event.lat, lng: event.lon, id: event.id }
     end.compact
 
-    if user_signed_in? && @user.address.present?
+    # 住所検索したか？
+    if params[:q].present? && params[:geo][:address].present? && params[:geo][:within].present? && params[:q][:online_eq] != "true"
+      # geocode済み
+      gon.home = {name: t('helpers.map.searched_address'), lat: latlng[0], lng: latlng[1]}
+      binding.pry
+    elsif user_signed_in? && @user.address.present?
       gon.home = {name: t('helpers.map.your_address'), lat: @user.lat, lng: @user.lon }
     else
       # デフォルト：スカイツリー

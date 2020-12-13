@@ -33,6 +33,9 @@ Rails.application.routes.draw do
           delete :delete_organizer
         end
         resources :events, only: [:new, :create, :edit, :update, :destroy] do
+          member do
+            delete :purge_image
+          end
           collection do
             delete :delete_language
           end

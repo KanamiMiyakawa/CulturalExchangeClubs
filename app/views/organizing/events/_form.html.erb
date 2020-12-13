@@ -37,6 +37,21 @@
 
     <div class="form-group mt-4 mb-4">
       <%= form.label :images, t('activerecord.attributes.event.images')+t('helpers.form.images'), class: "form-label" %>
+
+      <% if (action_name == 'edit' || action_name == 'update') && event.images.attached? %>
+        <p><%= t('.attached_images') %></p>
+        <table class="edit-image-table">
+          <ul class="edit-image-list">
+            <% event.images.each do |image| %>
+              <tr>
+                <th><li><%= image.blob.filename %></li></th>
+                <td><%= link_to t('helpers.btn.delete'), purge_image_organizing_group_event_path(group_id:@group.id, id: event.id, image_id: image.id ), class: "btn btn-primary image-delete-btn" , method: :delete, data: { confirm: t('helpers.confirm.delete') } %></td>
+              </tr>
+            <% end %>
+          </ul>
+        </table>
+      <% end %>
+
       <%= form.file_field :images, multiple: true, class: "form-control-file" %>
     </div>
 

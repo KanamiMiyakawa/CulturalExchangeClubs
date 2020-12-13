@@ -147,6 +147,7 @@ ja:
       member: グループに登録して参加
       participants: 参加予定
       not_login: 未ログイン
+      images: このイベントを紹介するイメージです！
     search_form:
       keyword: キーワード
       select_language: 言語を選択！
@@ -218,6 +219,7 @@ ja:
         guest_false: ゲストは参加できない
         delete_language: この言語を削除
         add_language: さらに言語を追加する
+        attached_images: 現在登録されているファイル
   date:
     abbr_day_names:
     - 日
@@ -404,6 +406,7 @@ ja:
       group_owner_only: オーナーのみアクセスできます
       group_organizer_only: そのグループのオーガナイザーのみアクセスできます
       event_organizer_only: そのイベントのオーガナイザーのみアクセスできます
+      purge_image: 紹介用のイメージを削除しました
     request:
       send: 参加リクエストを送る
       withdraw: このグループから脱退する

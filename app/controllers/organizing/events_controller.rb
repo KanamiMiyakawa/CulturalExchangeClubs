@@ -3,7 +3,7 @@ class Organizing::EventsController < ApplicationController
   before_action :set_languages, only: [:new, :create, :edit, :update]
   before_action :set_group, only: [:new, :create, :edit, :update]
   before_action :set_organizers, only: [:new, :create, :edit, :update]
-  before_action :set_event, only: [:edit, :update, :destroy]
+  before_action :set_event, only: [:edit, :update, :destroy, :purge_image]
   before_action :group_organizer_only
 
   def new
@@ -57,6 +57,12 @@ class Organizing::EventsController < ApplicationController
     event = event_language.event
     event_language.destroy!
     redirect_to event_path(event), notice: t('helpers.notice.delete_language')
+  end
+
+  def purge_image
+    image = @event.images.find(params[:image_id])
+    image.purge
+    redirect_to edit_organizing_group_event_path(group_id: params[:group_id], id: @event.id), notice: t('helpers.notice.purge_image')
   end
 
   private

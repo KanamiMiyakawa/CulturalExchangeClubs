@@ -38,7 +38,7 @@
 
 
           <% if @event.images.attached? %>
-            <p class="text-muted event-show-helptext">このイベントを紹介するイメージです！</p>
+            <p class="text-muted event-show-helptext"><%= t('.images') %></p>
             <% @event.images.each do |image| %>
               <% if image.blob.content_type == "video/mp4" %>
                 <video src="<%= rails_blob_path(image) %>" type="video/mp4" controls=true autobuffer=true class="event-show-video" ></video>

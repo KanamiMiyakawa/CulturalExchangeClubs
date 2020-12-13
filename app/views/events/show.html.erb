@@ -126,7 +126,12 @@
 
           <div class="border-dashed"></div>
 
-          <% if @event.users.include?(current_user) %>
+          <% if @event.schedule < Time.zone.now %>
+            <div class="past_event bg-warning">
+              <p class="past_event_notice"><%= t('.past_event') %></p>
+            </div>
+
+          <% elsif @event.users.include?(current_user) %>
 
             <% participant = Participant.find_by(event_id:@event.id, user_id:current_user.id) %>
             <p class="index-status alert alert-danger text-center">

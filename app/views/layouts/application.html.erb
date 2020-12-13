@@ -41,7 +41,7 @@
             <% if current_user.avatar.attached? %>
               <li class="nav-item font-weight-bold">
                 <%= link_to "/profile/#{current_user.id}" do %>
-                  <%= image_tag current_user.avatar.variant(resize: "100x100"), class: "header-avatar" %>
+                  <%= image_tag current_user.avatar.variant(combine_options:{gravity: :center, resize:"640x640^", crop:"640x640+0+0"}).processed, class: "header-avatar" %>
                 <% end %>
               </li>
             <% end %>

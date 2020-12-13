@@ -1,4 +1,6 @@
 class ParticipantsController < ApplicationController
+  before_action :connot_participate_past_event
+
   def create
     group = Group.find(params[:group_id])
     if params[:guest] == "false" && !group.users.include?(current_user)
@@ -34,5 +36,10 @@ class ParticipantsController < ApplicationController
 
   def participant_params
     params.permit(:event_id, :group_id, :event_language_id, :guest)
+  end
+
+  def connot_participate_past_event
+    event = Event.find(params[:event_id])
+    redirect_to event_path(params[:event_id]), notice: t('helpers.notice.past_event') if event.schedule < Time.zone.now
   end
 end

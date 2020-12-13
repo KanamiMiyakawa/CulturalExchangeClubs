@@ -5,6 +5,7 @@ class Participant < ApplicationRecord
 
   validates :user_id, uniqueness: { scope: :event_id }
   validate  :guest_not_allowed, if: Proc.new { |participant| participant.guest? }
+  validate  :past_event
 
   belongs_to :user
   belongs_to :event
@@ -31,5 +32,9 @@ class Participant < ApplicationRecord
 
   def guest_not_allowed
     throw :abort unless self.event.guest_allowed
+  end
+
+  def past_event
+    throw :abort if self.event.schedule < Time.zone.now
   end
 end

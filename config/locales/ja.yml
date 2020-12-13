@@ -148,6 +148,7 @@ ja:
       participants: 参加予定
       not_login: 未ログイン
       images: このイベントを紹介するイメージです！
+      past_event: このイベントは終了しました
     search_form:
       keyword: キーワード
       select_language: 言語を選択！
@@ -407,6 +408,7 @@ ja:
       group_organizer_only: そのグループのオーガナイザーのみアクセスできます
       event_organizer_only: そのイベントのオーガナイザーのみアクセスできます
       purge_image: 紹介用のイメージを削除しました
+      past_event: このイベントはすでに終了しました
     request:
       send: 参加リクエストを送る
       withdraw: このグループから脱退する

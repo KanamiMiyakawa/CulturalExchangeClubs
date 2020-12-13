@@ -9,7 +9,7 @@ class Organizing::EventsController < ApplicationController
   def new
     @event = Event.new
     2.times { @event.event_languages.build }
-    gon.event = nil
+    gon.event = { lat: 35.7100069, lng: 139.8108103 }
   end
 
   def create
@@ -17,20 +17,20 @@ class Organizing::EventsController < ApplicationController
     if @event.save
       redirect_to event_path(@event), notice: t('helpers.notice.create_event')
     else
-      render :new
-      if @event.online?
-        gon.event = nil
+      if @event.lat.present? && @event.lon.present?
+        gon.event = { lat: @event.lat, lng: @event.lon, input: true}
       else
-        gon.event = { lat: @event.lat, lng: @event.lon}
+        gon.event = { lat: 35.7100069, lng: 139.8108103 }
       end
+      render :new
     end
   end
 
   def edit
-    if @event.online?
-      gon.event = nil
+    if @event.lat.present? && @event.lon.present?
+      gon.event = { lat: @event.lat, lng: @event.lon, input: true}
     else
-      gon.event = { lat: @event.lat, lng: @event.lon}
+      gon.event = { lat: 35.7100069, lng: 139.8108103 }
     end
   end
 
@@ -38,12 +38,12 @@ class Organizing::EventsController < ApplicationController
     if @event.update(event_params)
       redirect_to event_path(@event), notice: t('helpers.notice.update_event')
     else
-      render :edit
-      if @event.online?
-        gon.event = nil
+      if @event.lat.present? && @event.lon.present?
+        gon.event = { lat: @event.lat, lng: @event.lon, input: true}
       else
-        gon.event = { lat: @event.lat, lng: @event.lon}
+        gon.event = { lat: 35.7100069, lng: 139.8108103 }
       end
+      render :edit
     end
   end
 
@@ -85,6 +85,6 @@ class Organizing::EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:name, :schedule, :content, :online, :permission, :guest_allowed, :address, :place, :thumbnail, :organizer_id,
-        event_languages_attributes: [:id, :event_id, :language_id, :max])
+        event_languages_attributes: [:id, :event_id, :language_id, :max], images: [])
   end
 end

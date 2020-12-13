@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="field">
-                  <%= f.label :avatar %><span class="form-necessary"><%= t('helpers.form.not_necessary') %></span><br />
+                  <%= f.label :avatar %><span class="form-necessary"><%= t('helpers.form.not_necessary')+t('helpers.form.thumbnail') %></span><br />
                   <%= f.file_field :avatar %>
                 </div>
 
@@ -37,7 +37,7 @@
                   <%= f.label :address %><span class="form-necessary"><%= t('helpers.form.address') %></span><br />
                   <%= f.text_field :address, placeholder: "Adress", id: "map-input" %>
                   <div class="text-right mr-5">
-                    <p class="btn btn-secondary" id="sign-up-map-btn" onclick="codeAddress()">表示</p>
+                    <p class="btn btn-secondary" id="sign-up-map-btn" onclick="codeAddress()"><%= t('helpers.btn.display') %></p>
                   </div>
                 </div>
 

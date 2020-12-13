@@ -22,11 +22,13 @@ class Event < ApplicationRecord
   validate  :include_organizer_ids
   # ActiveStorage
   validate  :thumbnail_type_and_syze
+  validate  :images_type_syze_length
 
   after_validation :remove_unnecessary_messages
 
   # ActiveStorage
   has_one_attached :thumbnail
+  has_many_attached :images
 
   #アソシエーション
   #イベントが所属するグループ
@@ -86,12 +88,33 @@ class Event < ApplicationRecord
   end
 
   def thumbnail_type_and_syze
-    if !thumbnail.blob.content_type.in?(%('image/jpeg image/png'))
-      thumbnail.purge
-      errors.add(:thumbnail, :jpeg_or_png)
-    elsif thumbnail.blob.byte_size > 5.megabytes
-      thumbnail.purge
-      errors.add(:thumbnail, :under_5mb)
+    if self.thumbnail.attached?
+      if !thumbnail.blob.content_type.in?(%('image/jpeg image/png'))
+        thumbnail.purge
+        errors.add(:thumbnail, :jpeg_or_png)
+      elsif thumbnail.blob.byte_size > 5.megabytes
+        thumbnail.purge
+        errors.add(:thumbnail, :under_5mb)
+      end
+    end
+  end
+
+  def images_type_syze_length
+    if self.images.attached?
+      if images.length > 4
+        images.purge
+        errors.add(:images, :length)
+      else
+        images.each do |image|
+          if !image.blob.content_type.in?(%('image/jpeg image/png video/mp4'))
+            image.purge
+            errors.add(:images, :jpeg_or_png_or_mp4)
+          elsif image.blob.byte_size > 30.megabytes
+            image.purge
+            errors.add(:images, :under_30mb)
+          end
+        end
+      end
     end
   end
 

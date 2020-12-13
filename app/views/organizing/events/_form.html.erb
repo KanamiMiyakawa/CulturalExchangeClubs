@@ -30,12 +30,17 @@
       <%= form.text_area :content, class: "form-control", rows: "4" %>
     </div>
 
-    <div class="form-group">
-      <%= form.label :thumbnail, class: "form-label" %>
+    <div class="form-group mt-4 mb-4">
+      <%= form.label :thumbnail, t('activerecord.attributes.event.thumbnail')+t('helpers.form.thumbnail'), class: "form-label" %>
       <%= form.file_field :thumbnail, class: "form-control-file" %>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mt-4 mb-4">
+      <%= form.label :images, t('activerecord.attributes.event.images')+t('helpers.form.images'), class: "form-label" %>
+      <%= form.file_field :images, multiple: true, class: "form-control-file" %>
+    </div>
+
+    <div class="form-group mt-4 mb-4">
       <label class="form-label"><%= t('.choose_organizer') %></label><br>
       <% @organizers.each do |organizer| %>
         <div class="form-check form-check-inline ml-4">
@@ -46,7 +51,7 @@
     </div>
 
 
-    <div class="form-group" id="onlineRadioBtn">
+    <div class="form-group mt-4 mb-4" id="onlineRadioBtn">
       <label class="form-label"><%= t('.online') %></label><br>
       <div class="form-check form-check-inline ml-4">
         <%= form.radio_button :online, true, class: "form-check-input" %>
@@ -58,7 +63,7 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mt-4 mb-4">
       <label class="form-label"><%= t('.permission') %></label><br>
       <div class="form-check form-check-inline ml-4">
         <%= form.radio_button :permission, true, class: "form-check-input" %>
@@ -70,7 +75,7 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mt-4 mb-4">
       <label class="form-label"><%= t('.guest') %></label><br>
       <div class="form-check form-check-inline ml-4">
         <%= form.radio_button :guest_allowed, true, class: "form-check-input" %>
@@ -82,7 +87,7 @@
       </div>
     </div>
 
-    <div class="form-group" id="address-form">
+    <div class="form-group mt-4" id="address-form">
       <%= form.label :address, class: "form-label" %>
       <div class="row">
         <div class="col-md-10">
@@ -133,7 +138,6 @@
 <% end %>
 
 <script>
-console.log(gon.userData)
 var map;
 var geocoder;
 var marker;
@@ -141,18 +145,14 @@ var mapLatLng;
 function initMap(){
   geocoder = new google.maps.Geocoder();
 
-  if (gon.event != null){
-    mapLatLng = new google.maps.LatLng({lat: gon.event.lat, lng: gon.event.lng});
-  } else {
-    mapLatLng = new google.maps.LatLng({lat: 35.7100069, lng: 139.8108103});
-  }
+  mapLatLng = new google.maps.LatLng({lat: gon.event.lat, lng: gon.event.lng});
 
   map = new google.maps.Map(document.getElementById('event-form-map'),{
     center: mapLatLng,
     zoom: 13
   });
 
-  if (gon.event != null){
+  if (gon.event.input == true){
     marker = new google.maps.Marker({
       map: map,
       position: mapLatLng

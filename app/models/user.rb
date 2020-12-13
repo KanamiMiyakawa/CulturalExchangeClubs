@@ -36,12 +36,14 @@ class User < ApplicationRecord
   private
 
   def avatar_type_and_syze
-    if !avatar.blob.content_type.in?(%('image/jpeg image/png'))
-      avatar.purge
-      errors.add(:avatar, :jpeg_or_png)
-    elsif avatar.blob.byte_size > 5.megabytes
-      avatar.purge
-      errors.add(:avatar, :under_5mb)
+    if avatar.attached?
+      if !avatar.blob.content_type.in?(%('image/jpeg image/png'))
+        avatar.purge
+        errors.add(:avatar, :jpeg_or_png)
+      elsif avatar.blob.byte_size > 5.megabytes
+        avatar.purge
+        errors.add(:avatar, :under_5mb)
+      end
     end
   end
 

@@ -23,6 +23,10 @@ ja:
             thumbnail:
               jpeg_or_png: はjpegまたはpng形式でアップロードしてください
               under_5mb: は1つのファイル5MB以内にしてください
+            images:
+              length: は４つまでアップロードできます
+              jpeg_or_png_or_mp4: はjpeg,pngまたはmp4形式でアップロードしてください
+              under_30mb: は1つのファイル30MB以内にしてください
         user:
           attributes:
             avatar:
@@ -49,7 +53,7 @@ ja:
         guest: ゲスト(非メンバー)の参加
         organizer_id: オーガナイザー
         thumbnail: サムネイル（任意）
-        other_images: その他のファイル（任意）
+        images: 紹介用の画像や動画（任意）
       group:
         name: グループ名
         detail: グループについて
@@ -361,11 +365,14 @@ ja:
       edit_group: グループを更新する！
       create_event: イベントを作成する！
       edit_event: イベントを更新する！
+      display: 表示
     select:
       prompt: 選択してください
     form:
       address: （任意・イベント検索に使用します！）
       not_necessary: （任意）
+      thumbnail: ~ jpeg,png
+      images: ~ jpeg,png,mp4 ; 4ファイルまで
     submit:
       create: 登録する
       submit: 保存する

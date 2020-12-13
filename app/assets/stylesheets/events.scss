@@ -115,9 +115,13 @@
   border-color: #757725;
   padding: 2rem 2rem 3rem 2rem;
 }
+.event-show-container {
+  border-color: #757725;
+  padding: 1rem 0.5rem 2rem 0.5rem;
+}
 .event-show-language-table {
   border: dashed 2px #8dc3ff;
-  margin: 1.5rem;
+  margin: 2.5rem 1.5rem 0.5rem 1.5rem;
   padding: 1rem 0;
 }
 .event-show-language-table table {
@@ -125,6 +129,9 @@
 }
 .event-show-language-table th {
   padding-left: 1.5rem;
+}
+.event-show-table {
+  margin-top: 2rem;
 }
 .event-show-table th {
   width: 40%;
@@ -154,11 +161,21 @@
   margin-bottom: 0;
 }
 .event-show-thumbnail {
-  margin: 3rem 0 4rem 0;
+  margin: 3rem 0 2rem 0;
   text-align: center;
 }
 .event-show-thumbnail img {
   max-width: 100%;
+}
+.event-show-video {
+  max-width: 100%;
+  margin: 0 0 2rem 0;
+}
+.event-show-images {
+  max-width: 49%;
+}
+.event-show-helptext {
+  margin: 2rem 0 0 1.5rem;
 }
 //map
 #event-show-map {

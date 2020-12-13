@@ -89,6 +89,9 @@ table {
 .form-necessary {
   font-weight: bold;
 }
+.form-help-text {
+  margin-bottom: 0.5rem;
+}
 
 @import "bootstrap-custom";
 @import "users";

@@ -2,19 +2,13 @@
   <div class="container">
     <div class="row">
 
-      <div class="col-md-8 main-container event-container">
+      <div class="col-md-8 main-container event-show-container">
         <div class="group-show-content">
+
+          <h2 class="ml-3"><%= @event.name %></h2>
+
           <div class="row">
             <div class="col-lg-10 offset-lg-1">
-
-              <h2><%= @event.name %></h2>
-
-              <% if @event.thumbnail.attached? %>
-                <div class="event-show-thumbnail">
-                  <%= image_tag @event.thumbnail.variant(resize: "500x500"), class: "event-show-image" %>
-                </div>
-              <% end %>
-
               <% @languages_select_list = [] %>
 
               <div class="event-show-language-table">
@@ -39,6 +33,27 @@
                   <% end %>
                 </table>
               </div>
+            </div>
+          </div>
+
+
+          <% if @event.images.attached? %>
+            <p class="text-muted event-show-helptext">このイベントを紹介するイメージです！</p>
+            <% @event.images.each do |image| %>
+              <% if image.blob.content_type == "video/mp4" %>
+                <video src="<%= rails_blob_path(image) %>" type="video/mp4" controls=true autobuffer=true class="event-show-video" ></video>
+              <% end %>
+            <% end %>
+
+            <% @event.images.each do |image| %>
+              <% if image.blob.content_type.in?(%('image/jpeg image/png')) %>
+                <%= image_tag image.variant(resize: "400x400"), class: "event-show-images" %>
+              <% end %>
+            <% end %>
+          <% end %>
+
+          <div class="row">
+            <div class="col-lg-10 offset-lg-1">
 
               <table class="table table-primary event-show-table">
                 <tr>

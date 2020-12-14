@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   #一般ユーザ用
-  resources :groups, only: [:index, :new, :create, :show] do
+  resources :groups, only: [:new, :create, :show] do
     member do
       get :old_events
     end

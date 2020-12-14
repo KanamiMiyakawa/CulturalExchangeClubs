@@ -18,6 +18,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
         # participant も同時に作成する場合
         if params[:user][:event_id].present? && params[:user][:event_language_id].present? && params[:user][:group_id].present? && params[:user][:guest].present?
+
+          cannot_participate_past_event
+          cannot_participate_full_event
+
           group = Group.find(params[:user][:group_id])
           participant_params = {event_id: params[:user][:event_id], event_language_id: params[:user][:event_language_id], group_id: params[:user][:group_id], guest: params[:user][:guest]}
           if params[:user][:guest] == "false" && !group.users.include?(current_user)
@@ -39,6 +43,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         else
           respond_with resource, location: after_sign_up_path_for(resource)
         end
+
       else
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!
@@ -84,9 +89,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
     "/profile/#{current_user.id}"
   end
 
-  def connot_participate_past_event
-    event = Event.find(params[:event_id])
-    redirect_to event_path(params[:event_id]), notice: t('helpers.notice.past_event') if event.schedule < Time.zone.now
+  def cannot_participate_past_event
+    event = Event.find(params[:user][:event_id])
+    redirect_to event_path(params[:user][:event_id]), notice: t('helpers.notice.past_event') if event.schedule < Time.zone.now
+  end
+
+  def cannot_participate_full_event
+    event_language = EventLanguage.find(params[:user][:event_language_id])
+    if event_language.max - event_language.participants.count == 0
+      redirect_to event_path(params[:user][:event_id]), notice: t('helpers.notice.full_event')
+    end
   end
 
 end

@@ -70,7 +70,7 @@
 
                 <table class="table table-sm table-primary">
                   <% participant = Participant.find_by(user_id:current_user.id, event_id:event.id) %>
-                  <caption><%= link_to "#{t('.delete_participant')}", participant_path(participant.id), method: :delete, data: { confirm: t('helpers.confirm.delete') } %></caption>
+                  <caption><%= link_to "#{t('.delete_participant')}", participant_path(id: participant.id, event_id: event.id), method: :delete, data: { confirm: t('helpers.confirm.delete') } %></caption>
                   <tr>
                     <th><%= t('.event_name') %></th>
                     <td><%= link_to "#{event.name}", event_path(event) %></td>

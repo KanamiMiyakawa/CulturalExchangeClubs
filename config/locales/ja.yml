@@ -410,6 +410,8 @@ ja:
       event_organizer_only: そのイベントのオーガナイザーのみアクセスできます
       purge_image: 紹介用のイメージを削除しました
       past_event: このイベントはすでに終了しました
+      full_event: このイベントは満席になりました
+      signup_and_join: ユーザ登録してイベント参加リクエストを送ります！
     request:
       send: 参加リクエストを送る
       withdraw: このグループから脱退する

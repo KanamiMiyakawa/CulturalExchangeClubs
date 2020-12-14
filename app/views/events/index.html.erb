@@ -92,7 +92,7 @@
 
                 <% elsif @languages_select_list.present? %>
 
-                  <%= form_with(url: participants_path, local: true) do |form| %>
+                  <%= form_with(url: login_or_not_url, local: true) do |form| %>
                     <%= form.hidden_field :event_id, value: event.id %>
                     <%= form.hidden_field :group_id, value: event.group_id %>
 
@@ -110,7 +110,7 @@
                     <% end %>
                     <div class="text-center mb-2 index-btn">
                       <%= form.select :event_language_id, @languages_select_list %>
-                      <%= form.submit t('helpers.submit.participate'), class: "btn btn-warning" %>
+                      <%= form.submit login_or_not_submit, class: "btn btn-warning" %>
                     </div>
                   <% end %>
 

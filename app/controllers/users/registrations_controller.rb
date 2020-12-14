@@ -17,7 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         sign_up(resource_name, resource)
 
         # participant も同時に作成する場合
-        if params[:user][:event_id].present? && params[:user][:event_language_id].present? && params[:user][:group_id].present? && params[:user][:guest].present?
+        if params[:user].present? && params[:user][:event_id].present? && params[:user][:event_language_id].present? && params[:user][:group_id].present? && params[:user][:guest].present?
 
           cannot_participate_past_event
           cannot_participate_full_event

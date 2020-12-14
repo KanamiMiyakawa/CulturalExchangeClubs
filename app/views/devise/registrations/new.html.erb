@@ -10,7 +10,7 @@
               <h2 class="cursive mb-4"><%= t('.sign_up') %></h2>
 
               <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-                <% if params[:user][:event_id].present? && params[:user][:event_language_id].present? && params[:user][:group_id].present? && params[:user][:guest].present? %>
+                <% if params[:user].present? && params[:user][:event_id].present? && params[:user][:event_language_id].present? && params[:user][:group_id].present? && params[:user][:guest].present? %>
                   <%= f.hidden_field :event_id, value: params[:user][:event_id].to_i %>
                   <%= f.hidden_field :event_language_id, value: params[:user][:event_language_id].to_i %>
                   <%= f.hidden_field :group_id, value: params[:user][:group_id].to_i %>

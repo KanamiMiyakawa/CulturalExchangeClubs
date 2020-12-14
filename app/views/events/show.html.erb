@@ -160,11 +160,11 @@
               <% else %>
                 <div class="text-center">
                   <% if @event.guest_allowed? %>
-                    <%= form.label :guest, t('.guest'), value: true %>
                     <%= form.radio_button :guest, true %>
+                    <%= form.label :guest, t('.guest'), value: true %><br>
                   <% end %>
-                  <%= form.label :guest, t('.member'), value: false  %>
                   <%= form.radio_button :guest, false, checked: true %>
+                  <%= form.label :guest, t('.member'), value: false  %>
                 </div>
               <% end %>
               <p class="text-center mb-2 index-btn">

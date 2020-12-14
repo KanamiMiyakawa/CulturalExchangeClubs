@@ -1,6 +1,11 @@
 class PagesController < ApplicationController
   before_action :authenticate_user!, only: [:profile]
 
+  def top
+    @q = Event.ransack(params[:q])
+    @languages = Language.all.map { |lang| [lang.ja_name, lang.id]}
+  end
+
   #開発時の暫定トップ
   def devtop
   end

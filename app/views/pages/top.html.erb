@@ -1,0 +1,26 @@
+<div class="container-fluid" id="top-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 top-container offset-md-1">
+        <h1 class="font-italic cursive top-title">Cultural Exchange Clubs</h1>
+        <h1 class="top-title2">1億人 + 300万人の出逢い！</h1>
+        <div class="top-content1">
+          <h2>CECは異なる文化を持つ人たちのための</h2>
+          <h2>イベント・プラットフォームです</h2>
+        </div>
+
+        <%= search_form_for(@q, url: events_path) do |f| %>
+          <div class="top-content2 row">
+            <div class="col-lg-6 offset-lg-2">
+              <%= f.select :event_languages_language_id_eq, @languages, {prompt: t('.your_interest')}, {class: "form-control form-control-lg top-select-language"} %>
+            </div>
+            <div class="col-lg-2">
+              <%= f.submit t('.submit'), class: "btn btn-primary", id: "top-submit" %>
+            </div>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

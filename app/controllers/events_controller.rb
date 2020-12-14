@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   def index
     if params[:q].present?
       # 検索している場合の分岐
-      if params[:geo][:address].present? && params[:geo][:within].present? && params[:q][:online_eq] != "true"
+      if params[:geo].present? && params[:geo][:address].present? && params[:geo][:within].present? && params[:q][:online_eq] != "true"
         # リアルのみかリアルとオンライン両方 = ransack + geocoder
         @q = Event.ransack(params[:q])
         @address = params[:geo][:address]
@@ -27,7 +27,7 @@ class EventsController < ApplicationController
           @events = Kaminari.paginate_array(@events).page(params[:page])
         end
       else
-        # オンラインのみ = ransackのみ
+        # ransackのみ
         @q = Event.ransack(params[:q])
         @events = @q.result(distinct: true).where('schedule >= ?', Time.zone.now).order(schedule: "ASC").page(params[:page])
       end
@@ -73,7 +73,7 @@ class EventsController < ApplicationController
     end.compact
 
     # 住所検索したか？
-    if params[:q].present? && params[:geo][:address].present? && params[:geo][:within].present? && params[:q][:online_eq] != "true"
+    if params[:q].present? && params[:geo].present? && params[:geo][:address].present? && params[:geo][:within].present? && params[:q][:online_eq] != "true"
       # geocode済み
       gon.home = {name: t('helpers.map.searched_address'), lat: latlng[0], lng: latlng[1]}
     elsif user_signed_in? && @user.address.present?

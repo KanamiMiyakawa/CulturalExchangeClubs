@@ -93,6 +93,38 @@ table {
   margin-bottom: 0.5rem;
 }
 
+//top
+#top-bg {
+  background-image: image-url("pic_top.jpg");
+  background-size: cover;
+  padding-right: 0;
+  padding-left: 0;
+}
+.top-container {
+  background: rgba(255,255,255,0.6);
+  height: 800px;
+  text-align: center;
+}
+.top-title {
+  margin: 4rem 0 3rem 0;
+  opacity: 100%;
+  font-weight: bold;
+}
+.top-title2 {
+  margin: 0 0 2rem 0;
+}
+.top-content1 {
+  margin-bottom: 3rem;
+}
+.top-select-language {
+  margin-top: 1rem;
+}
+#top-submit {
+  height: 48px;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
 @import "bootstrap-custom";
 @import "users";
 @import "groups";

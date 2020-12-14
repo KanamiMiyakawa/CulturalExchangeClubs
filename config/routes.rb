@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "pages#devtop"
+  root 'pages#top'
   get "profile/:id", to: "pages#profile"
 
   devise_for :users, controllers: {

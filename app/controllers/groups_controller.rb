@@ -27,6 +27,7 @@ class GroupsController < ApplicationController
     if @members.pluck(:user_id).include?(current_user.id)
       @member_self = Member.find_by(user_id:current_user.id, group_id:@group.id)
     end
+    @members = @members.page(params[:page])
     @pending_users = @members.where(pending:true)
     @organizers = @group.organized_users
     @events = @group.events.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(3)
@@ -40,7 +41,7 @@ class GroupsController < ApplicationController
     end
     @pending_users = @members.where(pending:true)
     @organizers = @group.organized_users
-    @old_events = @group.events.where('schedule < ?', Time.zone.now).order(schedule: "DESC")
+    @old_events = @group.events.where('schedule < ?', Time.zone.now).order(schedule: "DESC").page(params[:page])
     @events = @group.events.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(3)
     @index_date = Time.zone.today
   end

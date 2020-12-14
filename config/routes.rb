@@ -20,7 +20,12 @@ Rails.application.routes.draw do
   end
   resources :members, only: [:create, :destroy]
   resources :events, only: [:index, :show]
-  resources :participants, only: [:create, :destroy]
+  resources :participants, only: [:create, :destroy] do
+    collection do
+      post :connection
+    end
+  end
+
 
   #オーガナイザー用
   resource :organizing, only: [:show] do

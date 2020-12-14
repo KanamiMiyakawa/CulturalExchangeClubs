@@ -381,6 +381,7 @@ ja:
       submit: 保存する
       update: 更新する
       participate: 言語を選んで参加！
+      signup_and_join: ユーザ登録して参加！
     notice:
       create_event: イベントを作成しました！
       update_event: イベントを更新しました！

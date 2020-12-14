@@ -16,4 +16,19 @@ module EventsHelper
     end
   end
 
+  def login_or_not_url
+    if user_signed_in?
+      participants_path
+    else
+      connection_participants_path
+    end
+  end
+
+  def login_or_not_submit
+    if user_signed_in?
+      t('helpers.submit.participate')
+    else
+      t('helpers.submit.signup_and_join')
+    end
+  end
 end

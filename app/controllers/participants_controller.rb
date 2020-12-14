@@ -32,6 +32,11 @@ class ParticipantsController < ApplicationController
     end
   end
 
+  def connection
+    participant_infomation = {user: {event_id: params[:event_id], event_language_id: params[:event_language_id], group_id: params[:group_id], guest: params[:guest]}}
+    redirect_to new_user_registration_path(participant_infomation), notice: "ユーザ登録してイベント参加リクエストを送ります！"
+  end
+
   private
 
   def participant_params

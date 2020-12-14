@@ -7,7 +7,48 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    super
+    build_resource(sign_up_params)
+
+    resource.save
+    yield resource if block_given?
+    if resource.persisted?
+      if resource.active_for_authentication?
+        set_flash_message! :notice, :signed_up
+        sign_up(resource_name, resource)
+
+        # participant も同時に作成する場合
+        if params[:user][:event_id].present? && params[:user][:event_language_id].present? && params[:user][:group_id].present? && params[:user][:guest].present?
+          group = Group.find(params[:user][:group_id])
+          participant_params = {event_id: params[:user][:event_id], event_language_id: params[:user][:event_language_id], group_id: params[:user][:group_id], guest: params[:user][:guest]}
+          if params[:user][:guest] == "false" && !group.users.include?(current_user)
+            @participant = current_user.participants.build(participant_params)
+            if @participant.save
+              current_user.members.create!(group_id:group.id)
+              redirect_to event_path(params[:user][:event_id]), notice: t('helpers.notice.send_group_and_event_request')
+            else
+              redirect_to event_path(params[:user][:event_id]), notice: t('helpers.notice.cannot_send_request')
+            end
+          else
+            @participant = current_user.participants.build(participant_params)
+            if @participant.save
+              redirect_to event_path(params[:user][:event_id]), notice: t('helpers.notice.send_event_request')
+            else
+              redirect_to event_path(params[:user][:event_id]), notice: t('helpers.notice.cannot_send_request')
+            end
+          end
+        else
+          respond_with resource, location: after_sign_up_path_for(resource)
+        end
+      else
+        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+        expire_data_after_sign_in!
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      end
+    else
+      clean_up_passwords resource
+      set_minimum_password_length
+      respond_with resource
+    end
   end
 
   def edit
@@ -41,6 +82,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(resource)
     "/profile/#{current_user.id}"
+  end
+
+  def connot_participate_past_event
+    event = Event.find(params[:event_id])
+    redirect_to event_path(params[:event_id]), notice: t('helpers.notice.past_event') if event.schedule < Time.zone.now
   end
 
 end

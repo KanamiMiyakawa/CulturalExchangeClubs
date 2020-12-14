@@ -141,7 +141,7 @@
                 <%= t('.accepted') %>
               <% end %>
             </p>
-            <p class="text-center"><%= link_to t('.delete_participant'), participant_path(participant.id), method: :delete, data: { confirm: t('helpers.confirm.delete') } %></p>
+            <p class="text-center"><%= link_to t('.delete_participant'), participant_path(id: participant.id, event_id: @event.id), method: :delete, data: { confirm: t('helpers.confirm.delete') } %></p>
 
           <% elsif @event.user == current_user %>
             <p class="index-status alert alert-success"><%= t('.you_organizer') %></p>

@@ -16,8 +16,10 @@ end
 
 20.times do |n|
   User.create!(
+    name: "user_#{n + 1}@example.com",
     email: "user_#{n + 1}@example.com",
-    name: "user_#{n + 1}",
-    image: File.open('./app/assets/images/test.jpg')
+    introduction: "Hello!",
+    password: "user_#{n + 1}@example.com",
+    address:
   )
 end

@@ -3,7 +3,9 @@ class PagesController < ApplicationController
 
   def top
     @q = Event.ransack(params[:q])
+    @events = Event.where('schedule >= ?', Time.zone.now).order(schedule: "ASC").limit(5)
     @languages = Language.all.map { |lang| [lang.ja_name, lang.id]}
+    @index_date = 0
   end
 
   #開発時の暫定トップ

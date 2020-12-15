@@ -99,12 +99,15 @@ table {
   background-size: cover;
   padding-right: 0;
   padding-left: 0;
+  background-attachment: fixed;
 }
 .top-container {
   background: rgba(255,255,255,0.6);
-  height: 800px;
+}
+.top-container h1,h2 {
   text-align: center;
 }
+
 .top-title {
   margin: 4rem 0 3rem 0;
   opacity: 100%;
@@ -123,6 +126,16 @@ table {
   height: 48px;
   font-weight: bold;
   margin-top: 1rem;
+}
+.top-event-title {
+  padding-top: 8rem;
+}
+.top-event-container {
+  background-color: #ffffff;
+  border: outset 2px #dcdaff;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 @import "bootstrap-custom";

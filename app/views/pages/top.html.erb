@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-10 top-container offset-md-1">
-        <h1 class="font-italic cursive top-title">Cultural Exchange Clubs</h1>
+        <h1 class="font-italic cursive top-title text-centered">Cultural Exchange Clubs</h1>
         <h1 class="top-title2">1億人 + 300万人の出逢い！</h1>
         <div class="top-content1">
           <h2>CECは異なる文化を持つ人たちのための</h2>
@@ -20,6 +20,120 @@
           </div>
         <% end %>
 
+      </div>
+
+      <div class="col-md-10 top-container offset-md-1 top-event-title">
+
+        <h2 class="mb-5">本日はこのようなイベントが予定されています！</h2>
+
+        <div class="col-md-10 offset-md-1">
+
+
+          <% @events.each do |event| %>
+
+            <div class="top-event-container ml-3">
+              <div class="row">
+                <div class="col-md-5">
+
+                  <p class="index-event-name"><%= link_to "#{event.name}", event_path(event) %></p>
+
+                  <% if event.thumbnail.attached? %>
+                    <div class="event-index-thumbnail mb-2">
+                      <%= image_tag event.thumbnail.variant(resize: "200x200"), class: "event-index-image" %>
+                    </div>
+                  <% end %>
+
+                  <table class="table table-sm table-borderless ml-3">
+                    <tr>
+                      <td><%= link_to "#{event.group.name}", group_path(event.group) %></td>
+                    </tr>
+                    <tr>
+                      <td><%= l event.schedule, format: :long %></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <% if event.online? %>
+                          <%= t('.online') %>
+                        <% else %>
+                          <%= event.address %>
+                        <% end %>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div class="col-md-7">
+
+                  <% @languages_select_list = [] %>
+
+                  <table class="table table-sm table-borderless">
+                    <% event.event_languages.each do |event_language| %>
+                      <% language_name = event_language.language.ja_name %>
+                      <% rest = event_language.max - event_language.participants.count %>
+                      <tr>
+                        <th class="index-language">
+                          <%= event_language.language.ja_name %>
+                        </th>
+                        <td>
+                          <% if rest > 0 %>
+                            <span class="index-max"><%= "#{event_language.max}"+t('.max') %><span>/
+                            <span class="index-rest"><%= t('.rest')+"#{rest}" %></span>
+                            <% @languages_select_list.push([language_name,event_language.id]) %>
+                          <% else %>
+                            <span class="index-rest"><%= t('.no_rest') %></span>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </table>
+                  <% if event.users.include?(current_user) %>
+
+                    <% participant = Participant.find_by(event_id:event.id, user_id:current_user.id) %>
+                    <p class="index-status alert alert-warning">
+                      <% if participant.pending? %>
+                        <%= t('.pending') %>
+                      <% else %>
+                        <%= t('.accepted') %>
+                      <% end %>
+                    </p>
+                    <p><%= link_to t('.delete_participant'), participant_path(participant.id), method: :delete, data: { confirm: t('helpers.confirm.delete') } %></p>
+
+                  <% elsif event.user == current_user %>
+                    <p class="index-status alert alert-success"><%= t('.organizer') %></p>
+
+                  <% elsif @languages_select_list.present? %>
+
+                    <%= form_with(url: login_or_not_url, local: true) do |form| %>
+                      <%= form.hidden_field :event_id, value: event.id %>
+                      <%= form.hidden_field :group_id, value: event.group_id %>
+
+                      <% if event.group.users.include?(current_user) %>
+                        <%= form.hidden_field :guest, value: false %>
+                      <% else %>
+                        <div class="text-center">
+                          <% if event.guest_allowed? %>
+                            <%= form.radio_button :guest, true, id: "#{event.id}_guest_true" %>
+                            <%= form.label :guest, t('.guest'), for: "#{event.id}_guest_true" %>
+                          <% end %>
+                          <%= form.radio_button :guest, false, checked: true, id: "#{event.id}_guest_false" %>
+                          <%= form.label :guest, t('.member'), for: "#{event.id}_guest_false"  %>
+                        </div>
+                      <% end %>
+                      <div class="text-center mb-2 index-btn">
+                        <%= form.select :event_language_id, @languages_select_list %>
+                        <%= form.submit login_or_not_submit, class: "btn btn-warning" %>
+                      </div>
+                    <% end %>
+
+                  <% end %>
+                  <div class="border-dashed"></div>
+                  <p><%= event.content.truncate(80) %></p>
+                </div>
+              </div>
+            </div>
+
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

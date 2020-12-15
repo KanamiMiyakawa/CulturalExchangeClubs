@@ -77,6 +77,16 @@ ja:
     top:
       your_interest: 興味のある言語は何ですか？
       submit: イベント検索！
+      online: オンライン
+      max: 人まで参加可能
+      rest: 残席
+      no_rest: 現在残席がありません
+      pending: オーガナイザーの参加許可を待っています！
+      accepted: あなたはこのイベントに参加予定です！
+      delete_participant: イベント参加を取りやめる
+      organizer: あなたはオーガナイザーです！
+      guest: ゲストとして参加
+      member: グループに登録して参加
     profile:
       title: ユーザー詳細
       edit_btn: プロフィール変更

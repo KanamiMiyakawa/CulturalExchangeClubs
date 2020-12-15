@@ -13,3 +13,11 @@ CSV.foreach('db/csv/iso693-1-language-codes-ja-sorted.csv', headers: true) do |r
     ja_name: row['ja_name']
   )
 end
+
+20.times do |n|
+  User.create!(
+    email: "user_#{n + 1}@example.com",
+    name: "user_#{n + 1}",
+    image: File.open('./app/assets/images/test.jpg')
+  )
+end

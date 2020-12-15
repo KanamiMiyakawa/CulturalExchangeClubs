@@ -2,11 +2,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-10 top-container offset-md-1">
-        <h1 class="font-italic cursive top-title text-centered">Cultural Exchange Clubs</h1>
-        <h1 class="top-title2">1億人 + 300万人の出逢い！</h1>
+        <h1 class="font-italic cursive top-title text-centered"><%= t('.title1') %></h1>
+        <h1 class="top-title2"><%= t('.title2') %></h1>
         <div class="top-content1">
-          <h2>CECは異なる文化を持つ人たちのための</h2>
-          <h2>イベント・プラットフォームです</h2>
+          <h2><%= t('.content1_1') %></h2>
+          <h2><%= t('.content1_2') %></h2>
         </div>
 
         <%= search_form_for(@q, url: events_path) do |f| %>
@@ -24,7 +24,7 @@
 
       <div class="col-md-10 top-container offset-md-1 top-event-title">
 
-        <h2 class="mb-5">本日はこのようなイベントが予定されています！</h2>
+        <h2 class="mb-5"><%= t('.top_events') %></h2>
 
         <div class="col-md-10 offset-md-1">
 

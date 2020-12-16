@@ -7,7 +7,8 @@ class Organizing::GroupsController < ApplicationController
   def show
     @owner = @group.owner
     @organizers = @group.organizers.where.not(user_id:@owner.id).includes(:user)
-    @members = @group.members.where.not(user_id:@organizers.pluck(:user_id)).where.not(user_id:@owner.id).where(pending:false).includes(:user).page(params[:page])
+    #
+    @members = @group.members.where.not(user_id:@organizers.pluck(:user_id)).where.not(user_id:@owner.id).includes(:user).page(params[:page])
   end
 
   def edit

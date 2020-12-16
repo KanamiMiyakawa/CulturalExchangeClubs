@@ -27,6 +27,8 @@ class User < ApplicationRecord
   #オーナー
   has_many :own_groups, dependent: :destroy, foreign_key: :owner_id, class_name: 'Group'
 
+  before_create :default_avatar
+
   #参加者
   has_many :participants, dependent: :destroy
   has_many :events, through: :participants
@@ -44,6 +46,13 @@ class User < ApplicationRecord
         avatar.purge
         errors.add(:avatar, :under_5mb)
       end
+    end
+  end
+
+  def default_avatar
+    if !self.avatar.attached?
+      n = rand(4) + 1
+      self.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', "default_avatar#{n}.png")), filename: "default_avatar#{n}.png", content_type: 'image/png')
     end
   end
 

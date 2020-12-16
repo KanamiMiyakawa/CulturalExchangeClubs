@@ -34,24 +34,28 @@ end
 end
 
 # user6~10はそれぞれ２グループのオーガナイザーを兼ねる
-member = 0
 5.times do |n|
   2.times do |m|
-    member += 1
-    
-    g = n + m + 1
-    g = 1 if n + m + 1 > 5
-
+    g = (n + m)%5 + 1
     Member.create!(
       user_id: n + 6,
       group_id: g,
     )
-
     Organizer.create!(
       user_id: n + 6,
       group_id: g,
     )
+  end
+end
 
+# user11~20はそれぞれ２グループのメンバー
+10.times do |n|
+  2.times do |m|
+    g = (n + m)%5 + 1
+    Member.create!(
+      user_id: n + 11,
+      group_id: g,
+    )
   end
 end
 

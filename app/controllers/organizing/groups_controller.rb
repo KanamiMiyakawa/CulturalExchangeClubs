@@ -7,7 +7,6 @@ class Organizing::GroupsController < ApplicationController
   def show
     @owner = @group.owner
     @organizers = @group.organizers.where.not(user_id:@owner.id).includes(:user)
-    #
     @members = @group.members.where.not(user_id:@organizers.pluck(:user_id)).where.not(user_id:@owner.id).includes(:user).page(params[:page])
   end
 
@@ -23,8 +22,9 @@ class Organizing::GroupsController < ApplicationController
   end
 
   def destroy
+    @group.organizers.destroy_all
     @group.destroy!
-    redirect_to organizing_path, notice: t('helpers.notice.delete_group')
+    redirect_to "/profile/#{current_user.id}", notice: t('helpers.notice.delete_group')
   end
 
   def give_owner

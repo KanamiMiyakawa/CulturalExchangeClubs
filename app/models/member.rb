@@ -32,10 +32,4 @@ class Member < ApplicationRecord
     throw :abort if Organizer.find_by(user_id: self.user_id, group_id: self.group_id).present?
   end
 
-  # def owner_not_destroyed
-  #   if self.group.owner == self.user
-  #     errors.add :base, 'オーナーはメンバーから削除できません'
-  #     throw :abort
-  #   end
-  # end
 end

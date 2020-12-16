@@ -421,6 +421,7 @@ ja:
       deny_request: リクエストを却下しました
       accept_all_requests: すべてのリクエストを許可しました
       delete_member: メンバーを削除しました
+      not_delete_member: メンバーを削除できませんでした。オーガナイザーは削除できません
       any_organizer: オーガナイザーのみアクセスできます
       user_only: 当該ユーザのみ情報を編集できます
       group_owner_only: オーナーのみアクセスできます

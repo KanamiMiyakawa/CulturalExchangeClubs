@@ -23,8 +23,11 @@ class Organizing::MembersController < ApplicationController
 
   def destroy
     group = @member.group
-    @member.destroy!
-    redirect_to organizing_group_path(group.id), notice: t('helpers.notice.delete_member')
+    if @member.destroy
+      redirect_to organizing_group_path(group.id), notice: t('helpers.notice.delete_member')
+    else
+      redirect_to organizing_group_path(group.id), notice: t('helpers.notice.not_delete_member')
+    end
   end
 
   private

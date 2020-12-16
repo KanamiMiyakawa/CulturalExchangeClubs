@@ -7,7 +7,7 @@ require "csv"
 #   )
 # end
 #
-CSV.foreach('seed_data_user.csv', headers: true) do |row|
+CSV.foreach('db/csv/seed_data_user.csv', headers: true) do |row|
   User.create!(
     name: row['name'],
     email: row['name'],

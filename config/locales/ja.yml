@@ -441,6 +441,7 @@ ja:
       nothing: 予定されているイベントはありません
       old: 過去のイベント
       number_of_participants: 参加者
+      online: オンラインイベント
     group:
       your_status: あなたのステータス
       number_of_members: メンバー数

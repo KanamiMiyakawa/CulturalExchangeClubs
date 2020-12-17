@@ -27,7 +27,13 @@
                   </tr>
                   <tr>
                     <th><%= t('activerecord.attributes.event.address') %></th>
-                    <td><%= event.address %></td>
+                    <td>
+                      <% if event.online? %>
+                        <%= t('helpers.event.online') %>
+                      <% else %>
+                        <%= event.address %>
+                      <% end %>
+                    </td>
                   </tr>
                 </table>
                 <br>
@@ -69,7 +75,13 @@
                 </tr>
                 <tr>
                   <th><%= t('activerecord.attributes.event.address') %></th>
-                  <td><%= event.address %></td>
+                  <td>
+                    <% if event.online? %>
+                      <%= t('helpers.event.online') %>
+                    <% else %>
+                      <%= event.address %>
+                    <% end %>
+                  </td>
                 </tr>
               </table>
             <% end %>

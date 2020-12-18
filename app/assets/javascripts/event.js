@@ -25,7 +25,7 @@ $(function(){
 
   //言語フォーム追加用のhtmlを作成
   function buildField(index){
-      var html = `<div class="language-form">
+      const html = `<div class="language-form">
                     <h3 class="mb-3 mt-4 ml-3">参加者の言語 ${index+1}</h3>
                     <div class="event-new-content mb-5">
                     <div class="form-group">

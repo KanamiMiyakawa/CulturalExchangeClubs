@@ -24,6 +24,7 @@ gem 'image_processing', '~> 1.2'
 gem 'faker'
 gem 'unicorn'
 gem 'mini_racer', platforms: :ruby
+gem 'aws-sdk-s3'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

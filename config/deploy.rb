@@ -21,6 +21,7 @@ set :rbenv_type, :system
 # 本番環境用のものであれば、 :info程度が普通。
 # ただし挙動をしっかり確認したいのであれば :debug に設定する。
 set :log_level, :info
+append :linked_files, 'config/master.key'
 namespace :deploy do
   desc 'Restart application'
   task :restart do

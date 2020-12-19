@@ -113,7 +113,7 @@
                   <td><%= link_to member.user.name, "/profile/#{member.user_id}" %></td>
                   <td><%= link_to member.group.name, group_path(member.group) %></td>
                   <td><%= l member.created_at, format: :long %></td>
-                  <td><%= link_to t('helpers.request.accept'), organizing_member_path(member.id), method: :patch %></td>
+                  <td><%= link_to t('helpers.request.accept'), organizing_member_path(member.id), id: "accept-member#{member.id}" , method: :patch %></td>
                   <td><%= link_to t('helpers.request.deny'), deny_organizing_member_path(member.id), method: :delete, data: { confirm: t('helpers.confirm.member_deny') } %></td>
                 </tr>
               <% end %>
@@ -164,7 +164,7 @@
             <% if current_user == group.owner %>
               <span class="status-owner"><%= t('helpers.status.owner') %></span>
               <%= link_to t('helpers.btn.edit'), edit_organizing_group_path(group) %> |
-              <%= link_to t('helpers.btn.delete'), organizing_group_path(group), method: :delete, data: { confirm: t('helpers.confirm.delete') } %>
+              <%= link_to t('helpers.btn.delete'), organizing_group_path(group), id: "group#{group.id}-delete-btn" , method: :delete, data: { confirm: t('helpers.confirm.delete') } %>
             <% else %>
               <span class="status-organizer"><%= t('helpers.status.organizer') %></span>
             <% end %>

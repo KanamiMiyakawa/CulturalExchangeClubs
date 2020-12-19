@@ -36,7 +36,7 @@
               </li>
             <% end %>
             <li class="nav-item font-weight-bold">
-              <%= link_to t('.logout'), logout_path, method: :delete, class: "nav-link" %>
+              <%= link_to t('.logout'), logout_path, id: "logout-btn" , method: :delete, class: "nav-link" %>
             </li>
             <% if current_user.avatar.attached? %>
               <li class="nav-item font-weight-bold">

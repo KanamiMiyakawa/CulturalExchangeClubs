@@ -31,6 +31,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'rspec-rails', '~> 3.8'
+  gem 'factory_bot_rails'
   gem 'capistrano', '3.6.0'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
@@ -47,6 +49,7 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
+  # gem 'selenium-webdriver'
+  # gem 'chromedriver-helper'
+  gem 'webdrivers'
 end

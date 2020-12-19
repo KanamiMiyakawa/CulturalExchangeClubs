@@ -133,7 +133,7 @@
         </div>
 
         <% if user_signed_in? %>
-          <div class="side-container index-event-side-container">
+          <div class="side-container index-event-side-container side-table">
             <h3><%= t('.coming_events') %></h3>
             <%if @coming_events.present? %>
               <% @index_date = 0 %>

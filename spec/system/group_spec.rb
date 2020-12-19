@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'グループCRUD機能', type: :system do
+describe 'グループCRUD+参加機能', type: :system do
   describe 'グループ新規作成機能' do
     context 'ログイン後、グループを作成した場合' do
       before do

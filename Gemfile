@@ -52,4 +52,5 @@ group :test do
   # gem 'selenium-webdriver'
   # gem 'chromedriver-helper'
   gem 'webdrivers'
+  gem 'database_rewinder'
 end

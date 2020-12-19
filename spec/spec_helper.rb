@@ -21,7 +21,13 @@ RSpec.configure do |config|
   config.before(:each) do |example|
     driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400], options: { args: ['no-sandbox'] } if example.metadata[:type] == :system
   end
-  
+
+  # seedの読み込み
+  config.before(:suite) do
+    DatabaseRewinder.clean_all
+    require Rails.root.join("db", "seeds_test")
+  end
+
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods

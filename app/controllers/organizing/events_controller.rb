@@ -14,7 +14,6 @@ class Organizing::EventsController < ApplicationController
 
   def create
     @event = @group.events.build(event_params)
-    binding.pry
     if @event.save
       redirect_to event_path(@event), notice: t('helpers.notice.create_event')
     else

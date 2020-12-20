@@ -94,7 +94,7 @@ language_ids = [1,140,148,176,177,182]
 
 # 日時は当日から30日後まででランダム
 def time_rand from = Time.zone.now, to = Time.zone.now + 30.days
-  Time.zone.at(from + rand * (to.to_f - from.to_f))
+  Time.zone.at((from + rand * (to.to_f - from.to_f)).to_i / 60 * 60)
 end
 
 CSV.foreach('db/csv/seed_data_address.csv', headers: true) do |row|

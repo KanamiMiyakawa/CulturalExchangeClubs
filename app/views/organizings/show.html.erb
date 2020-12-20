@@ -193,7 +193,7 @@
                   <td><span class="number-of-participants"><%= event.participants.count %></span></td>
                   <td>
                     <%= link_to t('helpers.btn.edit'), edit_organizing_group_event_path(id: event.id, group_id: group.id) %> |
-                    <%= link_to t('helpers.btn.delete'), organizing_group_event_path(id: event.id, group_id: group.id), method: :delete, data: { confirm: t('helpers.confirm.delete') } %>
+                    <%= link_to t('helpers.btn.delete'), organizing_group_event_path(id: event.id, group_id: group.id), id: "delete-event#{event.id}-btn" , method: :delete, data: { confirm: t('helpers.confirm.delete') } %>
                   </td>
                 </tr>
               <% end %>

@@ -221,3 +221,19 @@ end
   )
   event.save!(validate: false)
 end
+
+
+# 卒業発表で使うデータ
+pre_user = User.create!(
+  name: "user_x@example.com",
+  email: "user_x@example.com",
+  password: "user_x@example.com",
+  address: "千葉県千葉市中央区新宿２－１",
+  introduction: "Hello! This is default introduction"
+)
+
+pre_user.own_groups.create!(
+  name: "group_x",
+  detail: "Hello! This is default detail",
+  permission: true
+)

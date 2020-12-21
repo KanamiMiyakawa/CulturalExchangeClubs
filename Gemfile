@@ -25,6 +25,8 @@ gem 'faker'
 gem 'unicorn'
 gem 'mini_racer', platforms: :ruby
 gem 'aws-sdk-s3'
+gem "google-cloud"
+gem "google-cloud-translate"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

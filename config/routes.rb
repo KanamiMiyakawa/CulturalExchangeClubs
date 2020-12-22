@@ -43,6 +43,8 @@ Rails.application.routes.draw do
             delete :purge_image
             get :translation
             post :create_translation
+            get :edit_translation
+            patch :update_translation
           end
           collection do
             delete :delete_language

@@ -5,7 +5,7 @@
 
         <h3 class="mb-4 ml-3"><%= t('.title') %></h3>
 
-        <%= form_with(url: create_translation_organizing_group_event_path(group_id: @group.id, id: @event.id), local: true ) do |form| %>
+        <%= form_with(url: update_translation_organizing_group_event_path(group_id: @group.id, id: @event.id), local: true, method: :patch ) do |form| %>
 
           <% if @event.errors.any? %>
             <div class="error-container">
@@ -50,9 +50,9 @@
             <span class="text-danger"><%= t('.to_translate') %></span>
 
             <%= form.submit t('helpers.btn.translate'), class: "btn btn-danger" %>
-          <% end %>
+          </div>
+        <% end %>
 
-        </div>
       </div>
     </div>
   </div>

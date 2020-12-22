@@ -239,6 +239,16 @@ ja:
         delete_language: この言語を削除
         add_language: さらに言語を追加する
         attached_images: 現在登録されているファイル
+        make_translations: この内容の自動翻訳を作成する
+        display: 表示
+      translation:
+        title: 翻訳作成フォーム
+        no_translation: 自動翻訳に未対応の言語です。作成する場合は、保存したい言語で入力してください。
+        to_translate: この翻訳でよければ！⇒
+      edit_translation:
+        title: 翻訳更新フォーム
+        no_translation: 自動翻訳に未対応の言語です。作成する場合は、保存したい言語で入力してください。
+        to_translate: この翻訳でよければ！⇒
   date:
     abbr_day_names:
     - 日
@@ -387,6 +397,7 @@ ja:
       create_event: イベントを作成する！
       edit_event: イベントを更新する！
       display: 表示
+      translate: 翻訳する！
     select:
       prompt: 選択してください
     form:
@@ -431,6 +442,8 @@ ja:
       past_event: このイベントはすでに終了しました
       full_event: このイベントは満席になりました
       signup_and_join: ユーザ登録してイベント参加リクエストを送ります！
+      created_translation: 翻訳を作成しました！
+      updated_translation: 翻訳を更新しました！
     request:
       send: 参加リクエストを送る
       withdraw: このグループから脱退する

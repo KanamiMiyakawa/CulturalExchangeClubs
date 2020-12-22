@@ -1,9 +1,9 @@
 class Organizing::EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_languages, only: [:new, :create, :edit, :update]
-  before_action :set_group, only: [:new, :create, :edit, :update, :translation, :create_translation]
+  before_action :set_group, only: [:new, :create, :edit, :update, :translation, :create_translation, :edit_translation, :update_translation]
   before_action :set_organizers, only: [:new, :create, :edit, :update]
-  before_action :set_event, only: [:edit, :update, :destroy, :purge_image, :translation, :create_translation]
+  before_action :set_event, only: [:edit, :update, :destroy, :purge_image, :translation, :create_translation, :edit_translation, :update_translation]
   before_action :group_organizer_only
 
   def new
@@ -40,7 +40,11 @@ class Organizing::EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      redirect_to event_path(@event), notice: t('helpers.notice.update_event')
+      if params[:event][:translate] == "1"
+        redirect_to edit_translation_organizing_group_event_path(group_id: @group.id, id: @event.id), notice: t('helpers.notice.update_event')
+      else
+        redirect_to event_path(@event), notice: t('helpers.notice.update_event')
+      end
     else
       if @event.lat.present? && @event.lon.present?
         gon.event = { lat: @event.lat, lng: @event.lon, input: true}
@@ -101,36 +105,9 @@ class Organizing::EventsController < ApplicationController
         s = "translation_#{n}".intern
         n += 1
         next if params[s][:content].blank?
-
-        # "どの言語でもOK！"で翻訳作成時、入力内容から言語コードを識別する
-        if params[s][:code] == "xx"
-          project_id = ENV['CLOUD_PROJECT_ID']
-          begin
-            client = Google::Cloud::Translate.new version: :v2, project_id: project_id
-            code = (client.detect params[s][:content]).language
-          rescue
-            code = "xx"
-          end
-        else
-          code = params[s][:code]
-        end
-
-        unless @event.translations.create(content: params[s][:content], code: code)
-          # リダイレクト処理、↓と共通化できるか
-          @original_content = params[:original_content]
-          @original_language = params[:original_language]
-          @translation = {}
-          while n <= count do
-            s = "translation_#{n}".intern
-            n += 1
-            @translation.store(params[s][:code], params[s][:content])
-          end
-          render :translation
-        end
-
+        @event.translations.create!(content: params[s][:content], code: params[s][:code])
       end
-
-      redirect_to event_path(@event), notice: "翻訳を作成しました！"
+      redirect_to event_path(@event), notice: t('helpers.notice.created_translation')
 
     else
       # リダイレクト処理
@@ -143,6 +120,78 @@ class Organizing::EventsController < ApplicationController
         @translation.store(params[s][:code], params[s][:content])
       end
       render :translation
+    end
+  end
+
+  # translationとほぼ同じなので統一できる
+  def edit_translation
+    project_id = ENV['CLOUD_PROJECT_ID']
+    client = Google::Cloud::Translate.new version: :v2, project_id: project_id
+
+    # 入力元のcontentの変数化
+    @original_content = @event.content
+    @original_language = (client.detect @original_content).language
+
+    # 翻訳後の変数化
+    @translation = {}
+    @event.event_languages.each do |lang|
+      target = lang.language.code
+      next if target == @original_language
+
+      # すでに翻訳があるか確認
+      old_translation = Translation.find_by(event_id: @event.id, code: target)
+
+      begin
+        result = client.translate @original_content, to: target
+        @translation.store(target, CGI.unescapeHTML(result.text))
+      rescue
+        if old_translation.present?
+          result = old_translation.content
+        else
+          result = nil
+        end
+        @translation.store(target, result)
+      end
+    end
+  end
+
+  # create_translationとほぼ同じなので統一できる
+  def update_translation
+    n = 0
+    count = params[:translation_count].to_i
+    if @event.update(content: params[:original_content])
+
+      while n <= count do
+        s = "translation_#{n}".intern
+        n += 1
+
+        # すでに翻訳がある
+        if @event.translations.pluck(:code).include?(params[s][:code])
+          old_translation = Translation.find_by(event_id: @event.id, code: params[s][:code])
+          if params[s][:content].blank?
+            old_translation.destroy!
+          else
+            old_translation.update!(content: params[s][:content])
+          end
+        else
+        # 未翻訳
+          next if params[s][:content].blank?
+          @event.translations.create!(content: params[s][:content], code: params[s][:code])
+        end
+      end
+      redirect_to event_path(@event), notice: t('helpers.notice.updated_translation')
+
+    else
+      # リダイレクト処理
+      @original_content = params[:original_content]
+      @original_language = params[:original_language]
+      @translation = {}
+      while n <= count do
+        s = "translation_#{n}".intern
+        n += 1
+        @translation.store(params[s][:code], params[s][:content])
+      end
+      render :edit_translation
     end
   end
 

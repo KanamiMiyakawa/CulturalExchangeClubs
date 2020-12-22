@@ -47,6 +47,9 @@ class Event < ApplicationRecord
   #イベント自体の管理者
   belongs_to :user
 
+  #翻訳
+  has_many :translations
+
   private
 
   def change_participants_not_pending

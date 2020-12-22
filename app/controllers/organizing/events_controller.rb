@@ -1,9 +1,9 @@
 class Organizing::EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_languages, only: [:new, :create, :edit, :update]
-  before_action :set_group, only: [:new, :create, :edit, :update, :translation]
+  before_action :set_group, only: [:new, :create, :edit, :update, :translation, :create_translation]
   before_action :set_organizers, only: [:new, :create, :edit, :update]
-  before_action :set_event, only: [:edit, :update, :destroy, :purge_image, :translation]
+  before_action :set_event, only: [:edit, :update, :destroy, :purge_image, :translation, :create_translation]
   before_action :group_organizer_only
 
   def new
@@ -93,6 +93,27 @@ class Organizing::EventsController < ApplicationController
   end
 
   def create_translation
+    n = 0
+    count = params[:translation_count].to_i
+    if @event.update(content: params[:original_content])
+      while n <= count do
+        s = "translation_#{n}".intern
+        n += 1
+        next if params[s][:content].blank?
+        @event.translations.create!(content: params[s][:content], code: params[s][:code])
+      end
+      redirect_to event_path(@event), notice: "翻訳を作成しました！"
+    else
+      @original_content = params[:original_content]
+      @original_language = params[:original_language]
+      @translation = {}
+      while n <= count do
+        s = "translation_#{n}".intern
+        n += 1
+        @translation.store(params[s][:code], params[s][:content])
+      end
+      render :translation
+    end
   end
 
   private

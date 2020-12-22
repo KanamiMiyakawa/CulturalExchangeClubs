@@ -7,6 +7,39 @@
 
           <h2 class="ml-5"><%= @event.name %></h2>
 
+
+          <div class="row">
+            <div class="col-lg-10 offset-lg-1 mt-4">
+
+              <ul class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                  <a href="#content-1" class="nav-link active" data-toggle="tab">このイベントについて</a>
+                </li>
+                <% n = 1 %>
+                <% @event.translations.each do |translation| %>
+                  <% n += 1 %>
+                  <li class="nav-item">
+                    <a href=<%="\#content-#{n}"%> class="nav-link" data-toggle="tab"><%= Language.find_by(code:translation.code).ja_name %></a>
+                  </li>
+                <% end %>
+              </ul>
+
+              <div class="tab-content event-show-tab-contents">
+                <div id="content-1" class="tab-pane active">
+                  <%= simple_format(@event.content, class: "p-3") %>
+                </div>
+                <% n = 1 %>
+                <% @event.translations.each do |translation| %>
+                  <% n += 1 %>
+                  <div id=<%="content-#{n}"%> class="tab-pane">
+                    <%= simple_format(translation.content, class: "p-3") %>
+                  </div>
+                <% end %>
+              </div>
+
+            </div>
+          </div>
+
           <div class="row">
             <div class="col-lg-10 offset-lg-1">
               <% @languages_select_list = [] %>
@@ -65,10 +98,6 @@
                 <tr>
                   <th><%= t('.group') %></th>
                   <td><%= link_to @group.name, group_path(@group) %></td>
-                </tr>
-                <tr>
-                  <th><%= t('activerecord.attributes.event.content') %></th>
-                  <td><%= simple_format(@event.content) %></td>
                 </tr>
                 <tr>
                   <th><%= t('activerecord.attributes.event.permission') %></th>

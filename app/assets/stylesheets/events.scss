@@ -115,7 +115,7 @@
 
 //show
 .event-wrapper {
-  background-color: #f8f789;
+  background-color: #f8ff8d;
 }
 .event-container {
   border-color: #757725;
@@ -192,6 +192,15 @@
   font-weight: 600;
   font-size: 1.2rem;
   padding: 0.5rem 0;
+}
+.event-show-tab-contents {
+  border: outset 2px #3393ff;
+  box-shadow: 1px 1px 1px #335c85;
+}
+.nav .active {
+  background-color: white;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 //map
 #event-show-map {

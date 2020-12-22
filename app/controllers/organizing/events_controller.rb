@@ -96,14 +96,44 @@ class Organizing::EventsController < ApplicationController
     n = 0
     count = params[:translation_count].to_i
     if @event.update(content: params[:original_content])
+
       while n <= count do
         s = "translation_#{n}".intern
         n += 1
         next if params[s][:content].blank?
-        @event.translations.create!(content: params[s][:content], code: params[s][:code])
+
+        # "どの言語でもOK！"で翻訳作成時、入力内容から言語コードを識別する
+        if params[s][:code] == "xx"
+          project_id = ENV['CLOUD_PROJECT_ID']
+          begin
+            client = Google::Cloud::Translate.new version: :v2, project_id: project_id
+            code = (client.detect params[s][:content]).language
+          rescue
+            code = "xx"
+          end
+        else
+          code = params[s][:code]
+        end
+
+        unless @event.translations.create(content: params[s][:content], code: code)
+          # リダイレクト処理、↓と共通化できるか
+          @original_content = params[:original_content]
+          @original_language = params[:original_language]
+          @translation = {}
+          while n <= count do
+            s = "translation_#{n}".intern
+            n += 1
+            @translation.store(params[s][:code], params[s][:content])
+          end
+          render :translation
+        end
+
       end
+
       redirect_to event_path(@event), notice: "翻訳を作成しました！"
+
     else
+      # リダイレクト処理
       @original_content = params[:original_content]
       @original_language = params[:original_language]
       @translation = {}

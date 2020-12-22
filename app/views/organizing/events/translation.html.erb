@@ -37,7 +37,7 @@
               <div class="form-group">
                 <%= form.label "translation_#{@translation_count}[content]".intern , "#{Language.find_by(code: code).ja_name}" , class: "form-label" %>
                 <% if content == nil %>
-                  <%= form.text_area "translation_#{@translation_count}[content]".intern , class: "form-control", placeholder: "自動翻訳未対応", rows: "4" %>
+                  <%= form.text_area "translation_#{@translation_count}[content]".intern , class: "form-control", placeholder: "自動翻訳に未対応の言語です。作成する場合は、保存したい言語で入力してください。", rows: "4" %>
                 <% else %>
                   <%= form.text_area "translation_#{@translation_count}[content]".intern , class: "form-control", value: content, rows: "4" %>
                 <% end %>

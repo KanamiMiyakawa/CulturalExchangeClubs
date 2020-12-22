@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'pages#top'
   get "profile/:id", to: "pages#profile"
+  get "devtop", to: "pages#devtop"
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',
@@ -40,6 +41,8 @@ Rails.application.routes.draw do
         resources :events, only: [:new, :create, :edit, :update, :destroy] do
           member do
             delete :purge_image
+            get :translation
+            post :create_translation
           end
           collection do
             delete :delete_language

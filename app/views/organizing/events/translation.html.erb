@@ -1,0 +1,41 @@
+<div class="event-wrapper mb-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2 main-container event-container">
+
+        <h3 class="mb-4 ml-3">イベント内容の翻訳作成フォーム</h3>
+
+        <%= form_with(url: create_translation_organizing_group_event_path(group_id: @group.id, id: @event.id), local: true ) do |form| %>
+
+          <div class="event-new-content mb-5">
+            <div class="form-group">
+              <%= form.label :original_content, "#{Language.find_by(code: @original_language).ja_name}", class: "form-label" %>
+              <%= form.text_area :original_content, class: "form-control", value: @original_content, rows: "4" %>
+            </div>
+
+            <% @translation_count = 0 %>
+            <% @translation.each do |code, content| %>
+
+              <% form.hidden_field "code_#{@translation_count}".intern , value: code %>
+              <div class="form-group">
+                <%= form.label "translated_content_#{@translation_count}".intern , "#{Language.find_by(code: code).ja_name}" , class: "form-label" %>
+                <% if content == nil %>
+                  <%= form.text_area "translated_content_#{@translation_count}".intern , class: "form-control", placeholder: "自動翻訳未対応", rows: "4" %>
+                <% else %>
+                  <%= form.text_area "translated_content_#{@translation_count}".intern , class: "form-control", value: content, rows: "4" %>
+                <% end %>
+              </div>
+
+              <% @translation_count += 1 %>
+            <% end %>
+
+            <span>この翻訳でよければ！⇒</span>
+
+            <%= form.submit %>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

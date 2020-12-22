@@ -30,6 +30,11 @@
       <%= form.text_area :content, class: "form-control", rows: "4" %>
     </div>
 
+    <div class="form-group form-check ml-3">
+      <%= form.check_box :translate, class: "form-check-input" %>
+      <%= form.label :translate, "この内容の自動翻訳を作成する" , class: "form-label" %>
+    </div>
+
     <div class="form-group mt-4 mb-4">
       <%= form.label :thumbnail, t('activerecord.attributes.event.thumbnail')+t('helpers.form.thumbnail'), class: "form-label" %>
       <%= form.file_field :thumbnail, class: "form-control-file" %>

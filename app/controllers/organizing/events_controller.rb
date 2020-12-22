@@ -1,9 +1,9 @@
 class Organizing::EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_languages, only: [:new, :create, :edit, :update]
-  before_action :set_group, only: [:new, :create, :edit, :update]
+  before_action :set_group, only: [:new, :create, :edit, :update, :translation]
   before_action :set_organizers, only: [:new, :create, :edit, :update]
-  before_action :set_event, only: [:edit, :update, :destroy, :purge_image]
+  before_action :set_event, only: [:edit, :update, :destroy, :purge_image, :translation]
   before_action :group_organizer_only
 
   def new
@@ -15,7 +15,11 @@ class Organizing::EventsController < ApplicationController
   def create
     @event = @group.events.build(event_params)
     if @event.save
-      redirect_to event_path(@event), notice: t('helpers.notice.create_event')
+      if params[:event][:translate] == "1"
+        redirect_to translation_organizing_group_event_path(group_id: @group.id, id: @event.id), notice: t('helpers.notice.create_event')
+      else
+        redirect_to event_path(@event), notice: t('helpers.notice.create_event')
+      end
     else
       if @event.lat.present? && @event.lon.present?
         gon.event = { lat: @event.lat, lng: @event.lon, input: true}
@@ -63,6 +67,32 @@ class Organizing::EventsController < ApplicationController
     image = @event.images.find(params[:image_id])
     image.purge
     redirect_to edit_organizing_group_event_path(group_id: params[:group_id], id: @event.id), notice: t('helpers.notice.purge_image')
+  end
+
+  def translation
+    project_id = ENV['CLOUD_PROJECT_ID']
+    client = Google::Cloud::Translate.new version: :v2, project_id: project_id
+
+    # 入力元のcontentの変数化
+    @original_content = @event.content
+    @original_language = (client.detect @original_content).language
+
+    # 翻訳後の変数化
+    @translation = {}
+    @event.event_languages.each do |lang|
+      target = lang.language.code
+      next if target == @original_language
+      begin
+        result = client.translate @original_content, to: target
+        @translation.store(target, CGI.unescapeHTML(result.text))
+      rescue
+        result = nil
+        @translation.store(target, result)
+      end
+    end
+  end
+
+  def create_translation
   end
 
   private

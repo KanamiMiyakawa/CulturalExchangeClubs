@@ -1,13 +1,13 @@
 <%= search_form_for @q do |f| %>
 
   <% if params[:q].present? %>
-    <% if params[:q][:name_or_content_or_address_cont].present? || params[:q][:event_languages_language_id_eq].present? || params[:q][:schedule_gteq].present? || params[:q][:schedule_lteq].present? || params[:q][:online_eq].present? || (@address.present? && @within.present?) %>
+    <% if params[:q][:name_or_content_or_address_or_translations_content_cont].present? || params[:q][:event_languages_language_id_eq].present? || params[:q][:schedule_gteq].present? || params[:q][:schedule_lteq].present? || params[:q][:online_eq].present? || (@address.present? && @within.present?) %>
       <div class="row search-info-box">
         <p class="col-md-3 searched-title d-flex align-items-center"><%= t('.searched_title') %></p>
         <div class="col-md-9">
           <p class="searched-contents text-danger">
-            <% if params[:q][:name_or_content_or_address_cont].present? %>
-              <span class="searched-info-piece"><%= params[:q][:name_or_content_or_address_cont] %></span>
+            <% if params[:q][:name_or_content_or_address_or_translations_content_cont].present? %>
+              <span class="searched-info-piece"><%= params[:q][:name_or_content_or_address_or_translations_content_cont] %></span>
             <% end %>
 
             <% if params[:q][:event_languages_language_id_eq].present? %>
@@ -52,7 +52,7 @@
 
   <div class="row">
     <div class="col-md-6 form-group">
-      <%= f.search_field :name_or_content_or_address_cont, class: "form-control", placeholder: t('.keyword') %>
+      <%= f.search_field :name_or_content_or_address_or_translations_content_cont, class: "form-control", placeholder: t('.keyword') %>
     </div>
     <div class="col-md-6 form-group">
       <%= f.select :event_languages_language_id_eq, @languages, {prompt: t('.select_language')}, {class: "form-control"} %>

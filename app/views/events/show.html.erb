@@ -6,20 +6,28 @@
         <div class="group-show-content">
 
           <h2 class="ml-5"><%= @event.name %></h2>
-
+          <hr>
 
           <div class="row">
             <div class="col-lg-10 offset-lg-1 mt-4">
 
-              <ul class="nav nav-pills nav-fill">
+              <ul class="nav nav-fill">
                 <li class="nav-item">
-                  <a href="#content-1" class="nav-link active" data-toggle="tab">このイベントについて</a>
+                  <a href="#content-1" class="nav-link text-danger active" data-toggle="tab"><%= t('helpers.js.top_tab') %></a>
                 </li>
                 <% n = 1 %>
                 <% @event.translations.each do |translation| %>
                   <% n += 1 %>
+                  <% language = Language.find_by(code:translation.code) %>
+
+                  <% if language.blank? || language.code == "xx" %>
+                    <% language_tab = t('helpers.js.other_tab') %>
+                  <% else %>
+                    <% language_tab = language.ja_name %>
+                  <% end %>
+
                   <li class="nav-item">
-                    <a href=<%="\#content-#{n}"%> class="nav-link" data-toggle="tab"><%= Language.find_by(code:translation.code).ja_name %></a>
+                    <a href=<%="\#content-#{n}"%> class="nav-link text-danger" data-toggle="tab"><%= language_tab %></a>
                   </li>
                 <% end %>
               </ul>

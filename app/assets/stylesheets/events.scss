@@ -17,7 +17,6 @@
   background-color: #ffffff;
   border: outset 2px #ffdadc;
   border-radius: 4px;
-  padding: 1rem;
   margin-bottom: 0.5rem;
 }
 .index-event-name {
@@ -36,7 +35,8 @@
   padding-left: 0.5rem;
 }
 .index-status {
-  margin-bottom: 0.5rem;
+  margin: 0 1rem 0.5rem 1rem;
+  text-align: center;
 }
 .index-btn select {
   line-height: 1.5rem;
@@ -97,6 +97,21 @@
 }
 .event-index-thumbnail img {
   max-width: 100%;
+}
+.event-index-tab-contents {
+  padding: 0.5rem;
+}
+.event-index-tab-contents p {
+  margin-bottom: 0;
+}
+.event-index-content-area .nav-item .nav-link {
+  padding: 0.2rem 0.5rem;
+}
+.event-index-content-area ul {
+  margin-left: 1rem;
+}
+.event-index-language-table {
+  margin: 0.5rem 0;
 }
 //map
 .index-map-container {
@@ -194,13 +209,19 @@
   padding: 0.5rem 0;
 }
 .event-show-tab-contents {
-  border: outset 2px #3393ff;
-  box-shadow: 1px 1px 1px #335c85;
+  border-top: dashed 2px #fa99c7;
+  border-bottom: dashed 2px #fa99c7;
 }
-.nav .active {
-  background-color: white;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+.event-show-tab-contents .tab-pane {
+  padding: 0 2rem;
+}
+.nav .nav-item .active {
+  background-color: #fa99c7;
+  color: #7c0000 !important;
+  border-radius: 8px 8px 0 0 ;
+}
+.nav .nav-link {
+  font-weight: 600;
 }
 //map
 #event-show-map {

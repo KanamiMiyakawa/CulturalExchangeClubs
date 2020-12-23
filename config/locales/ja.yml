@@ -481,6 +481,9 @@ ja:
       no_result: 該当する結果がありませんでした：
     js:
       event_language: 参加者の言語
+      top_tab: このイベントについて
+      top_tab_index: 詳細
+      other_tab: その他
   number:
     currency:
       format:

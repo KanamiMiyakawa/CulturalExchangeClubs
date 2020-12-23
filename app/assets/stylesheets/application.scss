@@ -11,7 +11,7 @@
  * It is generally better to create a new file per style scope.
  *
  */
- 
+
 table {
   word-break: break-all;
 }
@@ -49,6 +49,9 @@ table {
   border-bottom: 2px dashed #fff169;
   width: 100%;
   margin-bottom: 1rem;
+}
+.index-border-dashed {
+  margin-bottom: 0.5rem !important;
 }
 .index-date {
   font-weight: bold;

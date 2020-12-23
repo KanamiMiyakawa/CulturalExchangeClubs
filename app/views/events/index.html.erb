@@ -21,7 +21,7 @@
 
               <div class="col-md-5">
 
-                <p class="index-event-name"><%= link_to "#{event.name}", event_path(event) %></p>
+                <p class="index-event-name ml-4"><%= link_to "#{event.name}", event_path(event) %></p>
 
                 <% if event.thumbnail.attached? %>
                   <div class="event-index-thumbnail mb-2">
@@ -54,7 +54,7 @@
 
                 <% @languages_select_list = [] %>
 
-                <table class="table table-sm table-borderless">
+                <table class="table table-sm table-borderless event-index-language-table">
                   <% event.event_languages.each do |event_language| %>
                     <% language_name = event_language.language.ja_name %>
                     <% rest = event_language.max - event_language.participants.count %>
@@ -115,8 +115,45 @@
                   <% end %>
 
                 <% end %>
-                <div class="border-dashed"></div>
-                <p><%= event.content.truncate(80) %></p>
+                <div class="border-dashed index-border-dashed"></div>
+                <div class="event-index-content-area">
+                  <% if event.translations.present? %>
+
+                    <ul class="nav nav-tabs">
+                      <li class="nav-item">
+                        <a href=<%="\#event-#{event.id}-content-1"%> class="nav-link text-danger active" data-toggle="tab"><%= t('helpers.js.top_tab_index') %></a>
+                      </li>
+                      <% n = 1 %>
+                      <% event.translations.each do |translation| %>
+                        <% n += 1 %>
+                        <% language = Language.find_by(code:translation.code) %>
+                        <% if language.blank? || language.code == "xx" %>
+                          <% language_tab = t('helpers.js.other_tab') %>
+                        <% else %>
+                          <% language_tab = language.ja_name %>
+                        <% end %>
+                        <li class="nav-item">
+                          <a href=<%="\#event-#{event.id}-content-#{n}"%> class="nav-link text-danger" data-toggle="tab"><%= language_tab %></a>
+                        </li>
+                      <% end %>
+                    </ul>
+                    <div class="tab-content event-index-tab-contents">
+                      <div id=<%="event-#{event.id}-content-1"%> class="tab-pane active">
+                        <%= truncate(simple_format(event.content), escape: false, length: 80) %>
+                      </div>
+                      <% n = 1 %>
+                      <% event.translations.each do |translation| %>
+                        <% n += 1 %>
+                        <div id=<%="event-#{event.id}-content-#{n}"%> class="tab-pane">
+                          <%= truncate(simple_format(translation.content), escape: false, length: 80) %>
+                        </div>
+                      <% end %>
+                    </div>
+                  <% else %>
+                    <%= truncate(simple_format(event.content, class: "p-2"), escape: false, length: 80) %>
+                  <% end %>
+                </div>
+
               </div>
             </div>
           </div>

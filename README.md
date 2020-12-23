@@ -45,6 +45,7 @@ PostgreSQL
   - 開催場所を、各詳細ページにおいて地図上で表示する
   - 対象言語と上限人数を設定可能
   - ユーザ参加にオーガナイザーの許可を必須にすることができる
+  - イベント詳細のテキストを、選択言語ごとに自動翻訳して保存できる
 - イベント参加機能（ユーザ側）
   - 自分が話す言語を選択して参加可能
   - グループ加入とイベント参加のリクエストを同時に送信できる
@@ -60,6 +61,7 @@ https://docs.google.com/spreadsheets/d/14cne6lTpEx5Xq9UEWc3DybaPvamztQaa3jEkLzOU
 ### 使用技術
 - ActiveStorage + S3サーバ
 - GoogleMaps
+- GoogleCloudTranslation
 - AWS(EC2)にデプロイ
 - devise
 - geocoder

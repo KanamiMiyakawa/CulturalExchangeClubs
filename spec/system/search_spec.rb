@@ -24,7 +24,7 @@ describe 'イベント検索機能', type: :system do
       click_on 'logout-btn'
 
       visit events_path
-      fill_in 'q[name_or_content_or_address_cont]', with: 'まんぼう'
+      fill_in 'q[name_or_content_or_address_or_translations_content_cont]', with: 'まんぼう'
       click_on 'search-submit-1'
       expect(page).to have_content 'test_event_1'
     end

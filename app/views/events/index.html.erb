@@ -78,7 +78,7 @@
                 <% if event.users.include?(current_user) %>
 
                   <% participant = Participant.find_by(event_id:event.id, user_id:current_user.id) %>
-                  <p class="index-status alert alert-warning">
+                  <p class="event-index-status alert alert-warning">
                     <% if participant.pending? %>
                       <%= t('.pending') %>
                     <% else %>
@@ -88,7 +88,7 @@
                   <p><%= link_to t('.delete_participant'), participant_path(participant.id), method: :delete, data: { confirm: t('helpers.confirm.delete') } %></p>
 
                 <% elsif event.user == current_user %>
-                  <p class="index-status alert alert-success"><%= t('.organizer') %></p>
+                  <p class="event-index-status alert alert-success"><%= t('.organizer') %></p>
 
                 <% elsif @languages_select_list.present? %>
 

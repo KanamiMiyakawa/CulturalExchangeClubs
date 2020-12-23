@@ -144,11 +144,14 @@ CSV.foreach('db/csv/seed_data_address.csv', headers: true) do |row|
   when 0
     event.images.attach(io: File.open(Rails.root.join('app', 'assets', 'images', "seed_conversation.mp4")), filename: "seed_conversation.mp4", content_type: 'video/mp4')
   when 1
-    event.thumbnail.attach(io: File.open(Rails.root.join('app', 'assets', 'images', "seed_flower.jpg")), filename: "seed_flower.jpg", content_type: 'image/mp4')
+    event.thumbnail.attach(io: File.open(Rails.root.join('app', 'assets', 'images', "seed_flower.jpg")), filename: "seed_flower.jpg", content_type: 'image/jpg')
   when 2
-    event.thumbnail.attach(io: File.open(Rails.root.join('app', 'assets', 'images', "seed_coffee.jpg")), filename: "seed_coffee.jpg", content_type: 'image/mp4')
+    event.thumbnail.attach(io: File.open(Rails.root.join('app', 'assets', 'images', "seed_coffee.jpg")), filename: "seed_coffee.jpg", content_type: 'image/jpg')
   when 4
     event.images.attach(io: File.open(Rails.root.join('app', 'assets', 'images', "seed_bbq.mp4")), filename: "seed_bbq.mp4", content_type: 'video/mp4')
+    event.thumbnail.attach(io: File.open(Rails.root.join('app', 'assets', 'images', "seed_bbq_thombnail.jpg")), filename: "seed_bbq_thombnail.jpg", content_type: 'image/jpg')
+  when 5
+    event.thumbnail.attach(io: File.open(Rails.root.join('app', 'assets', 'images', "seed_game.jpg")), filename: "seed_game.jpg", content_type: 'image/jpg')
   end
 
   s += 1
@@ -175,7 +178,7 @@ end
 
   max = rand(10..20)
 
-  Event.create!(
+  event = Event.create!(
     name: "オンラインお茶会！",
     schedule: time_rand,
     organizer_id: on_n%5 +1,
@@ -196,6 +199,9 @@ end
       }
     ]
   )
+
+  event.thumbnail.attach(io: File.open(Rails.root.join('app', 'assets', 'images', "seed_online.jpg")), filename: "seed_online.jpg", content_type: 'image/jpg')
+
 end
 
 # 過去のイベント5件

@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
+  template: template0
   database: CulturalExchangeClubs_production
   username: CulturalExchangeClubs
   password: <%= ENV['CULTURALEXCHANGECLUBS_DATABASE_PASSWORD'] %>

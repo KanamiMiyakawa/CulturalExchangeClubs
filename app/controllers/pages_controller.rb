@@ -9,18 +9,18 @@ class PagesController < ApplicationController
   end
 
   #開発時の暫定トップ
-  def devtop
-    project_id = ENV['CLOUD_PROJECT_ID']
-    client = Google::Cloud::Translate.new version: :v2, project_id: project_id
-    @text = "おいしいコーヒーはお好きですか？\nお洒落なカフェでみんなでおしゃべりしましょう!"
-    target = "ja"
-    begin
-      @translation = client.translate @text, to: "cu"
-    rescue
-      @translation = "翻訳未対応"
-    end
-    binding.pry
-  end
+  # def devtop
+  #   project_id = ENV['CLOUD_PROJECT_ID']
+  #   client = Google::Cloud::Translate.new version: :v2, project_id: project_id
+  #   @text = "おいしいコーヒーはお好きですか？\nお洒落なカフェでみんなでおしゃべりしましょう!"
+  #   target = "ja"
+  #   begin
+  #     @translation = client.translate @text, to: "cu"
+  #   rescue
+  #     @translation = "翻訳未対応"
+  #   end
+  #   binding.pry
+  # end
 
   def profile
     @user = User.find(params[:id])

@@ -55,6 +55,16 @@
             <li class="nav-item font-weight-bold">
               <%= link_to t('.login'), login_path, class: "nav-link" %>
             </li>
+
+            <li class="nav-item font-weight-bold">
+              <%= link_to t('.guest_member'), users_guest_sign_in_path(role: "member"), class: "nav-link", method: :post %>
+            </li>
+            <li class="nav-item font-weight-bold">
+              <%= link_to t('.guest_organizer'), users_guest_sign_in_path(role: "organizer"), class: "nav-link", method: :post %>
+            </li>
+            <li class="nav-item font-weight-bold">
+              <%= link_to t('.guest_owner'), users_guest_sign_in_path(role: "owner"), class: "nav-link", method: :post %>
+            </li>
           <% end %>
 
           </ul>

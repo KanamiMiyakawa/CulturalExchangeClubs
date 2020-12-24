@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'pages#top'
   get "profile/:id", to: "pages#profile"
-  get "devtop", to: "pages#devtop"
+  # get "devtop", to: "pages#devtop"
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',
@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get "signup", to: "users/registrations#new"
     get "login", to: "users/sessions#new"
     delete "logout", to: "users/sessions#destroy"
+    post 'users/guest_sign_in', to: 'users/sessions#new_guest'
   end
 
   #一般ユーザ用

@@ -73,6 +73,9 @@ ja:
       logout: ログアウト
       signup: サインアップ
       login: ログイン
+      guest_member: ゲストログイン(一般ユーザ)
+      guest_organizer: ゲストログイン(オーガナイザー)
+      guest_owner: ゲストログイン(オーナー)
   pages:
     top:
       title1: Cultural Exchange Clubs
@@ -444,6 +447,7 @@ ja:
       signup_and_join: ユーザ登録してイベント参加リクエストを送ります！
       created_translation: 翻訳を作成しました！
       updated_translation: 翻訳を更新しました！
+      guest_login: ゲスト(%{role})としてログインしました
     request:
       send: 参加リクエストを送る
       withdraw: このグループから脱退する

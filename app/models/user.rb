@@ -18,6 +18,9 @@ class User < ApplicationRecord
   # ActiveStorage
   validate  :avatar_type_and_syze
 
+  # 初期のゲストユーザは削除されない
+  before_destroy :not_destroy_guest_users
+
   #一般ユーザ
   has_many :members, dependent: :destroy
   has_many :groups, through: :members
@@ -54,6 +57,10 @@ class User < ApplicationRecord
       n = rand(4) + 1
       self.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', "default_avatar#{n}.png")), filename: "default_avatar#{n}.png", content_type: 'image/png')
     end
+  end
+
+  def not_destroy_guest_users
+    throw(:abort) if self.id <= 30
   end
 
 end

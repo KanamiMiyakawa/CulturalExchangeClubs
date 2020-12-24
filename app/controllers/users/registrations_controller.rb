@@ -1,6 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
+  before_action :check_guest, only: :destroy
 
   def new
     super
@@ -98,6 +99,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     event_language = EventLanguage.find(params[:user][:event_language_id])
     if event_language.max - event_language.participants.count == 0
       redirect_to event_path(params[:user][:event_id]), notice: t('helpers.notice.full_event')
+    end
+  end
+
+  def check_guest
+    if resource.id <= 30
+      redirect_to root_path, notice: t('helpers.notice.not_destroy_guest')
     end
   end
 

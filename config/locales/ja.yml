@@ -448,6 +448,7 @@ ja:
       created_translation: 翻訳を作成しました！
       updated_translation: 翻訳を更新しました！
       guest_login: ゲスト(%{role})としてログインしました
+      not_destroy_guest: ゲストユーザーは削除できません
     request:
       send: 参加リクエストを送る
       withdraw: このグループから脱退する

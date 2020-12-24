@@ -1,6 +1,6 @@
 //index
 .index-bg {
-  background-color: #fff4e2;
+  background: rgba(255,244,226,1);
   border-radius: 5px;
 }
 .events-index-title {
@@ -10,7 +10,7 @@
 }
 .events-index-date {
   background-color: #f9a63e;
-  width: 120%;
+  width: calc(100% + 2rem);
   padding-left: 0.4rem;
 }
 .index-main-container {
@@ -47,8 +47,12 @@
   vertical-align: middle;
 }
 .index-side-column {
-  background-color: #f9ff82;
+  background: rgba(249,255,130,1);
   border-radius: 10px;
+  padding: 5px 15px 15px 15px;
+}
+.padding-clear{
+  padding: 0;
 }
 .map-side-container {
   border-color: #69a8ee;
@@ -131,10 +135,17 @@
 #event-index-map {
   height: 100%;
 }
+//bg
+#event-bg {
+  background-image: image-url("pic_index1.jpg");
+  background-size: cover;
+  padding-right: 0;
+  padding-left: 0;
+  background-attachment: fixed;
+}
 
 //show
 .event-wrapper {
-  background-color: #f8ff8d;
 }
 .event-container {
   border-color: #757725;

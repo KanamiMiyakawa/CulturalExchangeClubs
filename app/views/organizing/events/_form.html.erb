@@ -136,7 +136,7 @@
           </div>
           <div class="form-group">
             <%= language.label :max %>
-            <%= language.number_field :max, min: 1, class: "form-control" %>
+            <%= language.number_field :max, min: 1, max:500, class: "form-control" %>
           </div>
           <% if language.object.id.present? %>
             <p><%= link_to t('.delete_language'), delete_language_organizing_group_events_path(lang_id:language.object.id), method: :delete, data: { confirm: t('helpers.confirm.delete_language') } %></p>

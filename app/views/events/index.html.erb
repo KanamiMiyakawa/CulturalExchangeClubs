@@ -60,7 +60,7 @@
                     <% rest = event_language.max - event_language.participants.count %>
                     <tr>
                       <th class="index-language">
-                        <%= event_language.language.ja_name %>
+                        <p class="event-index-language-name"><%= event_language.language.ja_name %></p>
                       </th>
                       <td>
                         <% if rest > 0 %>

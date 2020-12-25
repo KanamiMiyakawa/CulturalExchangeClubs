@@ -80,7 +80,7 @@ def time_rand from = Time.zone.now, to = Time.zone.now + 30.days
 end
 
 # developmentではgoogleMapsが使えないことを想定
-if !Rails.env == "development"
+if Rails.env == "production"
   # リアルイベント30件
   # イベント個数
   s = 0

@@ -3,6 +3,13 @@
   background: rgba(255,244,226,1);
   border-radius: 5px;
 }
+#event-bg {
+  background-image: image-url("pic_index_2020winter.jpg");
+  background-size: cover;
+  padding-right: 0;
+  padding-left: 0;
+  background-attachment: fixed;
+}
 .events-index-title {
   background-color: #ffdc98;
   width: 120%;
@@ -148,14 +155,6 @@
 }
 #event-index-map {
   height: 100%;
-}
-//bg
-#event-bg {
-  background-image: image-url("pic_index1.jpg");
-  background-size: cover;
-  padding-right: 0;
-  padding-left: 0;
-  background-attachment: fixed;
 }
 
 //show

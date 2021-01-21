@@ -1,12 +1,14 @@
 $(function(){
 
-  //イベントindexの詳細検索操作
-  $('#extended-search').hide();
+  if(document.getElementById('extended-search')){
+    //イベントindexの詳細検索操作
+    $('#extended-search').hide();
 
-  $('#showSearchBtn').on('click', function() {
-    $('#extended-search').slideDown('slow');
-    $('#primal-submit').hide();
-  });
+    $('#showSearchBtn').on('click', function() {
+      $('#extended-search').slideDown('slow');
+      $('#primal-submit').hide();
+    });
+  }
 
   //読み込み時にオンラインが選択されていたら住所フォームをhideする
   if(document.forms.eventForm.event_online_true.checked){

@@ -20,54 +20,62 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarToggler">
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item font-weight-bold">
-              <%= link_to t('.events'), events_path, class: "nav-link" %>
-            </li>
 
           <% if user_signed_in? %>
-            <% if current_user.organizers.present? %>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
               <li class="nav-item font-weight-bold">
-                <%= link_to t('.organizing'), organizing_path, class: "nav-link" %>
+                <%= link_to t('.events'), events_path, class: "nav-link" %>
               </li>
-            <% else %>
+              <% if current_user.organizers.present? %>
+                <li class="nav-item font-weight-bold">
+                  <%= link_to t('.organizing'), organizing_path, class: "nav-link" %>
+                </li>
+              <% else %>
+                <li class="nav-item font-weight-bold">
+                  <%= link_to t('.new_group'), new_group_path, class: "nav-link" %>
+                </li>
+              <% end %>
               <li class="nav-item font-weight-bold">
-                <%= link_to t('.new_group'), new_group_path, class: "nav-link" %>
+                <%= link_to t('.logout'), logout_path, id: "logout-btn" , method: :delete, class: "nav-link" %>
               </li>
-            <% end %>
-            <li class="nav-item font-weight-bold">
-              <%= link_to t('.logout'), logout_path, id: "logout-btn" , method: :delete, class: "nav-link" %>
-            </li>
-            <% if current_user.avatar.attached? %>
+              <% if current_user.avatar.attached? %>
+                <li class="nav-item font-weight-bold">
+                  <%= link_to "/profile/#{current_user.id}" do %>
+                    <%= image_tag current_user.avatar.variant(combine_options:{gravity: :center, resize:"640x640^", crop:"640x640+0+0"}).processed, class: "header-avatar" %>
+                  <% end %>
+                </li>
+              <% end %>
               <li class="nav-item font-weight-bold">
-                <%= link_to "/profile/#{current_user.id}" do %>
-                  <%= image_tag current_user.avatar.variant(combine_options:{gravity: :center, resize:"640x640^", crop:"640x640+0+0"}).processed, class: "header-avatar" %>
-                <% end %>
+                <%= link_to "#{current_user.name}", "/profile/#{current_user.id}", class: "nav-link" %>
               </li>
-            <% end %>
-            <li class="nav-item font-weight-bold">
-              <%= link_to "#{current_user.name}", "/profile/#{current_user.id}", class: "nav-link" %>
-            </li>
+            </ul>
           <% else %>
-            <li class="nav-item font-weight-bold">
-              <%= link_to t('.signup'), signup_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item font-weight-bold">
-              <%= link_to t('.login'), login_path, class: "nav-link" %>
-            </li>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item font-weight-bold">
+                <%= link_to t('.events'), events_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item font-weight-bold">
+                <%= link_to t('.signup'), signup_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item font-weight-bold">
+                <%= link_to t('.login'), login_path, class: "nav-link" %>
+              </li>
+            </ul>
 
-            <li class="nav-item font-weight-bold">
-              <%= link_to t('.guest_member'), users_guest_sign_in_path(role: "member"), class: "nav-link", method: :post %>
-            </li>
-            <li class="nav-item font-weight-bold">
-              <%= link_to t('.guest_organizer'), users_guest_sign_in_path(role: "organizer"), class: "nav-link", method: :post %>
-            </li>
-            <li class="nav-item font-weight-bold">
-              <%= link_to t('.guest_owner'), users_guest_sign_in_path(role: "owner"), class: "nav-link", method: :post %>
-            </li>
+            <ul class="navbar-nav mt-2 mt-lg-0">
+              <li class="nav-item font-weight-bold dropdown" id="navbarDropdownBtn">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%= t('.guest_login') %>
+                </a>
+                <div class="dropdown-menu pl-3 pl-lg-0" id="navbarDropdownMenu" aria-labelledby="navbarDropdown">
+                  <%= link_to t('.guest_member'), users_guest_sign_in_path(role: "member"), class: "nav-link", method: :post %>
+                  <%= link_to t('.guest_organizer'), users_guest_sign_in_path(role: "organizer"), class: "nav-link", method: :post %>
+                  <%= link_to t('.guest_owner'), users_guest_sign_in_path(role: "owner"), class: "nav-link", method: :post %>
+                </div>
+              </li>
+            </ul>
           <% end %>
 
-          </ul>
         </div>
       </div>
     </nav>

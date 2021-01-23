@@ -73,9 +73,10 @@ ja:
       logout: ログアウト
       signup: サインアップ
       login: ログイン
-      guest_member: ゲストログイン(一般ユーザ)
-      guest_organizer: ゲストログイン(オーガナイザー)
-      guest_owner: ゲストログイン(オーナー)
+      guest_login: 簡単ゲストログイン！
+      guest_member: 一般ユーザ
+      guest_organizer: オーガナイザー
+      guest_owner: オーナー
   pages:
     top:
       title1: Cultural Exchange Clubs
@@ -83,7 +84,7 @@ ja:
       content1_1: CECは異なる文化を持つ人たちのための
       content1_2: イベント・プラットフォームです
       top_events: 本日はこのようなイベントが予定されています！
-      your_interest: 興味のある言語は何ですか？
+      your_interest: あなたの興味のある言語は何ですか？
       submit: イベント検索！
       online: オンライン
       max: 人まで参加可能

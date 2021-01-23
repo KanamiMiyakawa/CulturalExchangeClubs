@@ -95,6 +95,19 @@ table {
 .form-help-text {
   margin-bottom: 0.5rem;
 }
+#navbarDropdownBtn {
+  margin-right: 4rem;
+}
+#navbarDropdown {
+  border: solid 2px #ffba55;
+  border-radius: 6px;
+  padding-left: 1rem;
+  color: #a75500;
+  background-color: #fff6d9;
+}
+#navbarDropdownMenu {
+  background-color: #fff6d9;
+}
 
 //top
 #top-bg {

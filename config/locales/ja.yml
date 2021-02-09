@@ -171,6 +171,7 @@ ja:
       not_login: 未ログイン
       images: このイベントを紹介するイメージです！
       past_event: このイベントは終了しました
+      share_twitter: Twitterでシェア
     search_form:
       keyword: キーワード
       select_language: 言語を選択！
@@ -547,6 +548,7 @@ ja:
     am: 午前
     formats:
       default: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
+      twitter: "%m月%d日(%a) %H時%M分から！"
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
       index: "%m月%d日(%a)"

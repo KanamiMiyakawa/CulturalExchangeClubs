@@ -31,4 +31,12 @@ module EventsHelper
       t('helpers.submit.signup_and_join')
     end
   end
+
+  def online_or_address
+    if @event.online?
+      t('.online')
+    else
+      @event.address
+    end
+  end
 end

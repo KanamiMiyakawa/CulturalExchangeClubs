@@ -9,8 +9,12 @@
           <h2 class="ml-5"><%= @event.name %></h2>
           <div class="ml-5 sharing-btns">
             <%= link_to "https://twitter.com/share?url=#{request.url}&text=#{@event.name} #{l @event.schedule, format: :twitter} #{online_or_address}%0A", class: "btn btn-outline-primary", title: 'Twitter', target: '_blank' do %>
-              <i class="fab fa-twitter twitter-btn-fa"></i>
-              <p class="twitter-btn-text"><%= t('.share_twitter') %></p>
+              <i class="fab fa-twitter"></i>
+              <p class="sharing-btn-text"><%= t('.share_twitter') %></p>
+            <% end %>
+            <%= link_to "https://www.facebook.com/share.php?u=#{request.url}", class: "btn btn-outline-danger ml-2" do %>
+              <i class="fab fa-facebook"></i>
+              <p class="sharing-btn-text"><%= t('.share_facebook') %></p>
             <% end %>
           </div>
           <hr>

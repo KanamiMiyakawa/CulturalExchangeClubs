@@ -172,6 +172,7 @@ ja:
       images: このイベントを紹介するイメージです！
       past_event: このイベントは終了しました
       share_twitter: Twitterでシェア
+      share_facebook: facebookでシェア
     search_form:
       keyword: キーワード
       select_language: 言語を選択！

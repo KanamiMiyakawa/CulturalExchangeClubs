@@ -17,7 +17,7 @@ set :environment, ENV['RAILS_ENV']
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
 # end
-every 1.minute do
-  rake "whenever_test:test"
-end
+# every 1.minute do
+#   rake "whenever_test:test"
+# end
 # Learn more: http://github.com/javan/whenever

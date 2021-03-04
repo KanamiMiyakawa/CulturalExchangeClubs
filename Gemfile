@@ -28,6 +28,7 @@ gem 'aws-sdk-s3'
 gem "google-cloud"
 gem "google-cloud-translate"
 gem 'font-awesome-sass'
+gem 'whenever'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

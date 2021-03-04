@@ -5,7 +5,8 @@
 
 # Example:
 #
-# set :output, "/path/to/my/cron_log.log"
+set :output, 'log/crontab.log'
+set :environment, ENV['RAILS_ENV']
 #
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
@@ -16,5 +17,7 @@
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
 # end
-
+every 1.minute do
+  rake "whenever_test:test"
+end
 # Learn more: http://github.com/javan/whenever

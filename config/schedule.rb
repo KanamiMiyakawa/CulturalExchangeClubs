@@ -8,6 +8,11 @@
 require File.expand_path(File.dirname(__FILE__) + "/environment")
 set :output, 'log/crontab.log'
 set :environment, ENV['RAILS_ENV']
+
+every '5 0 7 * *' do
+  rake "initializing_data:monthly"
+end
+
 #
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
